@@ -54,6 +54,8 @@ public class MainActivity extends Activity
 
     public SharedPreferences _familypopSetting;
 
+    //debug
+    public String _deviceRole;
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------
 	@Override
@@ -61,6 +63,7 @@ public class MainActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
         Log.i("[J2Y]", "MainActivity:onCreate");
+
 
         _familypopSetting = getSharedPreferences("familypopSetting",0);
 
@@ -206,5 +209,23 @@ public class MainActivity extends Activity
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private static long _debug_timecount;
+    private static String _debug_name;
+    public static void Debug_begin_timecount(String name)
+    {
+        _debug_timecount = 0;
+        _debug_name = name;
+        _debug_timecount = System.currentTimeMillis();
+
+        Log.i("[J2Y]", _debug_name + "_Start timecount : " + _debug_timecount);
+    }
+    public static void Debug_end_timecount()
+    {
+        long end = System.currentTimeMillis();
+
+        Log.i("[J2Y]", _debug_name + "_End timecount : " + _debug_timecount);
+        Log.i("[J2Y]", _debug_name + "_"+(end -_debug_timecount )  +" milliseconds");
     }
 }

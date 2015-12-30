@@ -973,7 +973,8 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
                         {
                             Bitmap image_bitmap 	= MediaStore.Images.Media.getBitmap(getContentResolver(), imageData.getData());
                             FpNetFacade_client.Instance.SendPacket_req_shareImage(image_bitmap);
-                        } catch (IOException e)
+                        }
+                        catch (IOException e)
                         {
                             e.printStackTrace();
                         }
@@ -986,13 +987,17 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
     // 공유 이미지를 설정한다.
     public void SetupSharedImage(byte[] image)
     {
-        if(null == image) {
+
+        if(null == image)
+        {
             SetupSharedImage((Bitmap)null);
         }
-        else {
+        else
+        {
             Bitmap selectedImage = FpNetUtil.ByteArrayToBitmap(image);
             SetupSharedImage(selectedImage);
         }
+
     }
     public void SetupSharedImage(Bitmap selectedImage) {
 
@@ -1225,9 +1230,6 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         _button_ttt_localization.setOnClickListener(this);
         _button_ttt_throwback.setOnClickListener(this);
         _button_ttt_Style.setOnClickListener(this);
-
-
-
 
         // layout
 

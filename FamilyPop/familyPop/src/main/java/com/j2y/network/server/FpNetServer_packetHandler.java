@@ -2,7 +2,9 @@ package com.j2y.network.server;
 
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.j2y.familypop.MainActivity;
 import com.j2y.familypop.activity.Activity_serverMain;
 import com.j2y.familypop.activity.server.Activity_serverCalibration;
 import com.j2y.familypop.client.FpcRoot;
@@ -454,11 +456,19 @@ public class FpNetServer_packetHandler
             FpNetDataReq_shareImage data = new FpNetDataReq_shareImage();
             data.Parse(inMsg);
 
+
+            //debug
+            MainActivity.Debug_begin_timecount(MainActivity.Instance._deviceRole+"_onCSC_shareimage");
+
             if(FpsScenarioDirector.Instance.GetActiveScenarioType() == FpNetConstants.SCENARIO_RECORD)
             {
                 FpsScenario_record scenario_record = ((FpsScenario_record)FpsScenarioDirector.Instance.GetActiveScenario());
                 scenario_record.SetShareImage(data._bitMapByteArray);
             }
+
+            MainActivity.Debug_end_timecount();
+
+            Toast.makeText(MainActivity.Instance, "SHareImage_2", Toast.LENGTH_LONG).show();
             _net_server.BroadcastPacket(FpNetConstants.CSC_ShareImage, data);
         }
     };

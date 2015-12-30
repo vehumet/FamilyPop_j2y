@@ -75,4 +75,4 @@
         android:background="@drawable/text_calibration_choose_the_location_for_the_locator_of_cellphone"
         android:layout_centerHorizontal="true" />
 
-</RelativeLayout><!-- From: file:/D:/J2YSoft/LG/FamilyPop/familyPop/src/main/res/layout/activity_calibration_location.xml -->
+</RelativeLayout><!-- From: file:/D:/J2YSoft/familypop/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/activity_calibration_location.xml -->

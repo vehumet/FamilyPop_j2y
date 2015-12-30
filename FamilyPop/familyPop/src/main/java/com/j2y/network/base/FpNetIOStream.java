@@ -6,7 +6,9 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 
 import android.os.Handler;
+import android.util.Log;
 
+import com.j2y.familypop.MainActivity;
 import com.j2y.network.base.FpNetConstants;
 import com.j2y.network.base.FpNetFacade_base;
 import com.j2y.network.base.FpNetIncomingMessage;
@@ -85,6 +87,10 @@ public class FpNetIOStream extends Thread
         packet._data = new byte[header._size];
         int read_bytes = 0;
 
+        Log.i("[J2Y]", "SendPacket_image read");
+
+        MainActivity.Debug_begin_timecount(MainActivity.Instance._deviceRole+"_ReadPacket");
+
         while(header._size > read_bytes)
         {
             try
@@ -102,12 +108,16 @@ public class FpNetIOStream extends Thread
             }
         }
 
+        MainActivity.Debug_end_timecount();
+        Log.i("[J2Y]", "SendPacket_image read _ end");
+
         return packet;
     }
 		
 	//------------------------------------------------------------------------------------------------------------------------------------------------------
 	public void run()
 	{
+
         while (_running)
         {
             try 
@@ -150,10 +160,14 @@ public class FpNetIOStream extends Thread
     {
         try
         {
+            MainActivity.Debug_begin_timecount(MainActivity.Instance._deviceRole+"_SendPacket");
+
             _outputStream.write(FpNetUtil.IntToByte(packet._header._size));
             _outputStream.write(FpNetUtil.IntToByte(packet._header._type));
             _outputStream.write(packet._data);
             _outputStream.flush();
+
+            MainActivity.Debug_end_timecount();
         }
         catch (IOException e)
         {

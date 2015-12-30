@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.j2y.familypop.MainActivity;
 import com.j2y.familypop.activity.Activity_clientMain;
 import com.j2y.familypop.activity.Activity_serverMain;
 import com.j2y.familypop.client.FpcRoot;

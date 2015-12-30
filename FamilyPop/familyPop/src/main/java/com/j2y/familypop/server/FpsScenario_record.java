@@ -193,7 +193,8 @@ public class FpsScenario_record extends FpsScenario_base
     //final static int SPAKER_BUF_SIZE = 7;
 
     @Override
-    public void OnTurnDataReceived(int speakerID) {
+    public void OnTurnDataReceived(int speakerID)
+    {
         //Log.i("[J2Y]", "OnTurnDataReceived: " + speakerID[0]);
         //Log.i("[J2Y]", "ThreadID:[OnTurn]" + (int) Thread.currentThread().getId());
 
@@ -490,7 +491,8 @@ public class FpsScenario_record extends FpsScenario_base
     */
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     // 새로운 버블 생성
-    public FpsBubble create_new_bubble(int current_speaker) {
+    public FpsBubble create_new_bubble(int current_speaker)
+    {
 
 //        if(prev_speaker <= 1) {
 //            prev_speaker = current_speaker;
@@ -520,7 +522,8 @@ public class FpsScenario_record extends FpsScenario_base
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     // 스마일 버블 생성
     @Override
-    public void  Create_smile_bubble() {
+    public void  Create_smile_bubble()
+    {
 
         for (FpsTalkUser user : Activity_serverMain.Instance._talk_users.values()) {
             if (user == null)

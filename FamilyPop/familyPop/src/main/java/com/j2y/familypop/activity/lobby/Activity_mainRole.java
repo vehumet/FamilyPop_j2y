@@ -121,6 +121,10 @@ public class Activity_mainRole extends BaseActivity implements View.OnClickListe
                 check_role_allNotSelect();
                 check_role(_roleButtons[eRoleButtons.CLIENT.getValue()], true);
                 _selectRoleButton = eRoleButtons.CLIENT;
+
+                //debug
+                MainActivity.Instance._deviceRole = "client";
+
                 break;
 
             case R.id.button_role_locator:
@@ -138,6 +142,9 @@ public class Activity_mainRole extends BaseActivity implements View.OnClickListe
                 check_role_allNotSelect();
                 check_role(_roleButtons[eRoleButtons.SERVER.getValue()], true);
                 _selectRoleButton = eRoleButtons.SERVER;
+
+                //debug
+                MainActivity.Instance._deviceRole = "server";
                 break;
 
             case R.id.button_start_role_next:
