@@ -64,7 +64,6 @@ public class MainActivity extends Activity
 		super.onCreate(savedInstanceState);
         Log.i("[J2Y]", "MainActivity:onCreate");
 
-
         _familypopSetting = getSharedPreferences("familypopSetting",0);
 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);

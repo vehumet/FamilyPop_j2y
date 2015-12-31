@@ -188,7 +188,6 @@ public class RecordProcessThread extends Thread
             //window process
             if (!volume)
             {
-
                 continue;
             }
             else if (warm)
@@ -228,7 +227,6 @@ public class RecordProcessThread extends Thread
         {
             e.printStackTrace();
         }
-
 //		if(os != null) {
 //			try {
 //				os.flush();

@@ -61,7 +61,6 @@ public class ProcessingBody_base
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     public boolean CreateMover(Box2DProcessing box2d, float rad, float x, float y, int color, float density)
     {
-
         try
         {
             _parent_box2d = box2d;
@@ -79,7 +78,7 @@ public class ProcessingBody_base
             // Make the _body's shape a circle
             CircleShape cs_ = new CircleShape();
             cs_.m_radius = _parent_box2d.scalarPixelsToWorld(this._rad);
-
+            //cs_.computeMass();
             // Define a fixture
             FixtureDef fd_ = new FixtureDef();
             fd_.shape = cs_;
@@ -97,10 +96,10 @@ public class ProcessingBody_base
         {
             return false;
         }
-
         return true;
     }
-    public boolean CreateMover(Box2DProcessing box2d, float rad, float x, float y, int color) {
+    public boolean CreateMover(Box2DProcessing box2d, float rad, float x, float y, int color)
+    {
         return CreateMover(box2d, rad, x, y, color, 0.0001f);
     }
 
@@ -108,9 +107,6 @@ public class ProcessingBody_base
     {
         _body.destroyFixture(_fixture);
     }
-
-
-
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // 렌더링

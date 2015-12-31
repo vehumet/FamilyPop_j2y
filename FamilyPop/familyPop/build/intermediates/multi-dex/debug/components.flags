@@ -1,5 +1,5 @@
--injars 'D:\J2YSoft\LG\FamilyPop\familyPop\build\intermediates\multi-dex\debug\allclasses.jar'
--outjars 'D:\J2YSoft\LG\FamilyPop\familyPop\build\intermediates\multi-dex\debug\componentClasses.jar'
+-injars 'D:\J2YSoft\familypop\FamilyPop_j2y\FamilyPop\familyPop\build\intermediates\multi-dex\debug\allclasses.jar'
+-outjars 'D:\J2YSoft\familypop\FamilyPop_j2y\FamilyPop\familyPop\build\intermediates\multi-dex\debug\componentClasses.jar'
 
 -libraryjars 'F:\sdk\android-sdk_r24.4.1-windows\android-sdk-windows\build-tools\22.0.1\lib\shrinkedAndroid.jar'
 
@@ -8,7 +8,7 @@
 -dontobfuscate
 -dontpreverify
 -dontwarn
--printconfiguration 'D:\J2YSoft\LG\FamilyPop\familyPop\build\intermediates\multi-dex\debug\components.flags'
+-printconfiguration 'D:\J2YSoft\familypop\FamilyPop_j2y\FamilyPop\familyPop\build\intermediates\multi-dex\debug\components.flags'
 
 
 -keep class null {

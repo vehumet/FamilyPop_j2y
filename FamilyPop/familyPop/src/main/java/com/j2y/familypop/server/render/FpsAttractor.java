@@ -34,7 +34,8 @@ public class FpsAttractor
         _box2d = box2d;
 		_color = tempC;
 		rad = _rad;
-    
+
+		//body.setType(BodyType.STATIC);
 		// Define a _body
 		BodyDef bd_ = new BodyDef();
 		bd_.type = BodyType.STATIC;
