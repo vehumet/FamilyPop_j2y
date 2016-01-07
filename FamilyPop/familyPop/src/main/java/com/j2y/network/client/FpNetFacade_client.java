@@ -22,6 +22,7 @@ import com.j2y.network.base.FpPacketData;
 import com.j2y.network.base.FpPacketHeader;
 import com.j2y.network.base.data.FpNetDataNoti_changeScenario;
 import com.j2y.network.base.data.FpNetDataNoti_roomInfo;
+import com.j2y.network.base.data.FpNetDataNoti_serverInfo;
 import com.j2y.network.base.data.FpNetDataReq_TicTacToe_Start;
 import com.j2y.network.base.data.FpNetDataReq_TicTacToe_index;
 import com.j2y.network.base.data.FpNetDataReq_changeScenario;
@@ -117,6 +118,8 @@ public class FpNetFacade_client extends FpNetFacade_base
     {
         RegisterMessageCallBack(FpNetConstants.Connected, onConnected);
         RegisterMessageCallBack(FpNetConstants.ServerDisconnected, onDisConnected);
+
+        //RegisterMessageCallBack(FpNetConstants.SCNoti_getServerState, onServerState);
         //RegisterMessageCallBack(FpNetConstants.SCNoti_OnStartScenario, onNotiStartScenario
         // SCNoti_roomUserInfo);
         RegisterMessageCallBack(FpNetConstants.SCNoti_startGame, onNoti_start_game);
@@ -170,9 +173,22 @@ public class FpNetFacade_client extends FpNetFacade_base
         }
     };
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------
+    // 서버의 현재 상태를 받는다.
 
+    FpNetMessageCallBack onServerState = new FpNetMessageCallBack()
+    {
+        @Override
+        public void CallBack(FpNetIncomingMessage inMsg)
+        {
+            // server state
+            FpNetDataNoti_serverInfo msg = new FpNetDataNoti_serverInfo();
+            msg.Parse(inMsg);
 
-
+            //MainActivity.Instance._curServerScenario = msg._curScenario;
+           // MainActivity.Instance._ready = true;
+        }
+    };
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     // 게임 시작
@@ -235,14 +251,8 @@ public class FpNetFacade_client extends FpNetFacade_base
                     Activity_clientMain.Instance._button_ttt_Style.setBackgroundResource(R.drawable.image_ttt_active_x);
                     break;
             }
-
-
-
             Activity_clientMain.Instance._selectScenario = FpNetConstants.SCENARIO_TIC_TAC_TOE;
             FpcRoot.Instance._scenarioDirectorProxy.ChangeScenario(FpNetConstants.SCENARIO_NONE);
-
-
-
         }
     };
     // 틱텍토 종료
@@ -306,6 +316,10 @@ public class FpNetFacade_client extends FpNetFacade_base
 
             FpcRoot.Instance._scenarioDirectorProxy.ChangeScenario(data._changeScenario);
 
+//            if( Activity_clientMain.Instance._selectScenario !=  data._changeScenario)
+//            {
+//                FpcRoot.Instance._scenarioDirectorProxy.ChangeScenario(data._changeScenario);
+//            }
         }
     };
 
@@ -404,11 +418,6 @@ public class FpNetFacade_client extends FpNetFacade_base
         }
     };
 
-
-
-
-
-
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // 메시지 보내기
     //
@@ -437,9 +446,6 @@ public class FpNetFacade_client extends FpNetFacade_base
 //        reqPaket._eventType = eventType;
 //        sendMessage(FpNetConstants.CSReq_smileEvent, reqPaket);
 //    }
-
-
-
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     // 게임 시작 요청
@@ -477,8 +483,6 @@ public class FpNetFacade_client extends FpNetFacade_base
         FpNetData_base reqPaket = new FpNetData_base();
         sendMessage(FpNetConstants.CSReq_throwback_Tic_Tac_Toe, reqPaket );
     }
-
-
     public void SendPacket_req_end_Tic_Tac_Toe()
     {
 
@@ -494,10 +498,13 @@ public class FpNetFacade_client extends FpNetFacade_base
     {
         Log.i("[J2Y]", "[C->S] 시나리오 변경 요청");
 
-        FpNetDataReq_changeScenario reqPaket = new FpNetDataReq_changeScenario();
-        reqPaket._changeScenario = changeScenarioType;
+        //if( changeScenarioType != FpNetConstants.SCENARIO_NONE)
+        {
+            FpNetDataReq_changeScenario reqPaket = new FpNetDataReq_changeScenario();
+            reqPaket._changeScenario = changeScenarioType;
 
-        sendMessage(FpNetConstants.CSReq_ChangeScenario, reqPaket);
+            sendMessage(FpNetConstants.CSReq_ChangeScenario, reqPaket);
+        }
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------

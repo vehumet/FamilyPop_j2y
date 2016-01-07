@@ -43,12 +43,15 @@ public class FpsBubble
 	//------------------------------------------------------------------------------------------------------------------------------------------------------
 	public boolean CreateMover(PApplet applet, Box2DProcessing box2d, float rad, float x, float y, int tempC, int colorId, int type)
 	{
+        //setContinuousPhysics
 		try 
-		{
+        {
             _box2d = box2d;
             _color = tempC;
             _colorId = colorId;
             _rad = rad;
+
+
 
 			// Define a _body
 			BodyDef bd_ = new BodyDef();
@@ -101,6 +104,11 @@ public class FpsBubble
 
                 _image_bubble.SetPosition(new Vec2(x, y));
             }
+
+            _box2d.setContinuousPhysics(true);
+            _box2d.setWarmStarting(true);
+            _box2d.world.setContinuousPhysics(true);
+            _box2d.world.setWarmStarting(true);
         }
 		catch (NullPointerException e) 
 		{

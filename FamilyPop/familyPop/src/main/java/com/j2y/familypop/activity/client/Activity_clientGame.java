@@ -23,7 +23,7 @@ public class Activity_clientGame extends Activity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        super.onCreate(savedInstanceState);;
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 

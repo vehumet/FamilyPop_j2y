@@ -23,6 +23,10 @@ public class FpNetConstants
     public final static int CSReq_setUserInfo = 500;
     public final static int SCNoti_roomUserInfo = 501;
 
+	//----------------------------------------------------------------------------
+	//public final static int SCNoti_getServerState = 502;
+
+	//----------------------------------------------------------------------------
     public final static int CSReq_OnStartGame = 1000;
     public final static int SCNoti_startGame = 1001;
 	public final static int SCNoti_OnStartScenario = 1101;

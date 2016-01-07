@@ -69,7 +69,8 @@ public class RecordProcessThread extends Thread
     {
         super.run();
         Log.i("MYTAG", "Recorder Thread is running");
-        while (audioRecord.getState() == AudioRecord.STATE_UNINITIALIZED) {
+        while (audioRecord.getState() == AudioRecord.STATE_UNINITIALIZED)
+        {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -132,7 +133,6 @@ public class RecordProcessThread extends Thread
             if( read>0)
             {
             }
-
             if( AudioRecord.ERROR_INVALID_OPERATION != read )
             {
                 try
@@ -156,6 +156,12 @@ public class RecordProcessThread extends Thread
             {
                 //averageSoundLevel += Math.abs(buffer[i]);
                 averageSoundLevel += Math.abs(buffer[i]);
+            }
+            if( averageSoundLevel == 0 ||
+                received == 0 )
+            {
+                float error = 0;
+                error++;
             }
             averageSoundLevel /= received;
             _sound_amplitude = (averageSoundLevel / 1);
@@ -260,7 +266,8 @@ public class RecordProcessThread extends Thread
         stopRecording();
     }
 
-    public byte[] shortToBytes(short[] shortsA, int sizeInShorts) {
+    public byte[] shortToBytes(short[] shortsA, int sizeInShorts)
+    {
         byte[] bytes2 = new byte[sizeInShorts * 2];
         ByteBuffer.wrap(bytes2).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().put(shortsA);
         return bytes2;
@@ -285,7 +292,8 @@ public class RecordProcessThread extends Thread
     }
 
     private String _wav_fileName = "";
-    private String makeWavFileName() {
+    private String makeWavFileName()
+    {
         _wav_fileName = mFilename + "_" + convertToHRF(System.currentTimeMillis() + SocioPhoneConstants.deviceTimeOffset) + "_" + (SocioPhone.isServer ? "B" : "A") + ".wav";
         return _wav_fileName;
     }

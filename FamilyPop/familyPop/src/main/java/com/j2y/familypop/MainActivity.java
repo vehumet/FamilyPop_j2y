@@ -7,6 +7,8 @@ import com.j2y.familypop.activity.lobby.Activity_title;
 import com.j2y.familypop.client.FpcRoot;
 import com.j2y.familypop.client.FpcTalkRecord;
 import com.j2y.familypop.server.FpsRoot;
+import com.j2y.familypop.server.FpsScenarioDirector;
+import com.j2y.network.base.FpNetConstants;
 import com.nclab.familypop.R;
 import com.nclab.sociophone.SocioPhone;
 import com.nclab.sociophone.interfaces.DisplayInterface;
@@ -57,6 +59,10 @@ public class MainActivity extends Activity
     //debug
     public String _deviceRole;
 
+    //client init info
+    //public boolean _ready;
+    //public int _curServerScenario;  // server -> client
+
     //------------------------------------------------------------------------------------------------------------------------------------------------------
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -91,6 +97,10 @@ public class MainActivity extends Activity
         // calibration
         _calibration_width_length = 130;
         _calibration_height_length = 90;
+
+        //client init info
+        //_ready = false;
+        //_curServerScenario = FpNetConstants.SCENARIO_NONE;
     }
 
 
@@ -218,13 +228,13 @@ public class MainActivity extends Activity
         _debug_name = name;
         _debug_timecount = System.currentTimeMillis();
 
-        Log.i("[J2Y]", _debug_name + "_Start timecount : " + _debug_timecount);
+        Log.i("[SI]", _debug_name + "_Start timecount : " + _debug_timecount);
     }
     public static void Debug_end_timecount()
     {
         long end = System.currentTimeMillis();
 
-        Log.i("[J2Y]", _debug_name + "_End timecount : " + _debug_timecount);
-        Log.i("[J2Y]", _debug_name + "_"+(end -_debug_timecount )  +" milliseconds");
+        Log.i("[SI]", _debug_name + "_End timecount : " + _debug_timecount);
+        Log.i("[SI]", _debug_name + "_"+(end -_debug_timecount )  +" milliseconds");
     }
 }

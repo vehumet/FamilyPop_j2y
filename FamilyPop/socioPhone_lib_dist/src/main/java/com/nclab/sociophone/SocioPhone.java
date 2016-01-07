@@ -148,12 +148,14 @@ public class SocioPhone {
      * @param time     Start time of record.
      * @param filename Filename of the recorded file.
      */
-    public void startRecord(long time, String filename) {
+    public void startRecord(long time, String filename)
+    {
         Log.i("[J2Y]", "[SocioPhone] startRecord ");
 
 
         long ctime;
-        if (isServer) {
+        if (isServer)
+        {
             SocioPhoneConstants.id = 1;
 
             //Initialize process Manager
@@ -164,7 +166,9 @@ public class SocioPhone {
             displayInterface.onDisplayMessageArrived(0, "TS Server: " + System.currentTimeMillis());
             sendMessage("/1:" + ctime + "," + filename);
 
-        } else {
+        }
+        else
+        {
             ctime = time;
             displayInterface.onDisplayMessageArrived(0, "TS Client: " + (System.currentTimeMillis() + SocioPhoneConstants.deviceTimeOffset));
         }

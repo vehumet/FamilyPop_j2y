@@ -22,6 +22,7 @@ import com.j2y.network.base.data.FpNetData_base;
 
 public class FpNetServer_client extends FpNetFacade_base
 {
+
 	public static int _index;
 	public int _clientID;
 	public String _user_name;

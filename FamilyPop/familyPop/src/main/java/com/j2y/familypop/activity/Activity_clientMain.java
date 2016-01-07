@@ -185,7 +185,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 
-        super.onCreate(savedInstanceState);;
+        super.onCreate(savedInstanceState);
         Log.i("[J2Y]", "Activity_clientMain:onCreate");
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -194,13 +194,10 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_client_mode);
 
-
         Instance = this;
         _plugVisibleInfo = false;
 
-
         init_guiWidgets();
-
 
         _selectScenario = FpNetConstants.SCENARIO_NONE;
 
@@ -220,12 +217,9 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         {
             StrictMode.enableDefaults();
         }
-
         // # localization  클라이언트용 접속.
         FpcRoot.Instance.InitLocalization();
 	}
-
-
     @Override
     protected void onDestroy()
     {

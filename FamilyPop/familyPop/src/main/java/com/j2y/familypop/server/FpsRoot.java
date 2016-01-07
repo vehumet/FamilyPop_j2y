@@ -33,7 +33,7 @@ public class FpsRoot implements TurnDataListener, DisplayInterface, EventDataLis
     public static FpsRoot Instance;
     public static FpNetFacade_server _server;
 
-    public FpsMobileDeviceManager _mobileDeviceManager;
+    public FpsMobileDeviceManager _mobileDeviceManager;  // 사용안하남 ?
     public FpsScenarioDirector _scenarioDirector;
     public FpsTableDisplyer _tableDisplayer;
     public SocioPhone _socioPhone;
@@ -92,8 +92,6 @@ public class FpsRoot implements TurnDataListener, DisplayInterface, EventDataLis
         //MainActivity.Sleep(500);
         _room_user_names = "";
         _scenarioDirector.ChangeScenario(FpNetConstants.SCENARIO_NONE);
-
-
         _exitServer = true;
         //if(Activity_serverMain.Instance != null)
         //    Activity_serverMain.Instance.CloseServer();

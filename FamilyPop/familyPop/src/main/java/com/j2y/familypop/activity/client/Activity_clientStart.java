@@ -79,7 +79,6 @@ public class Activity_clientStart extends Activity implements View.OnClickListen
             }
             return eCheckBoxPosColor.NON;
          }
-
     }
 
     private EditText _ipText;
@@ -97,7 +96,6 @@ public class Activity_clientStart extends Activity implements View.OnClickListen
     {
         super.onCreate(savedInstanceState);
         Log.i("[J2Y]", "Activity_clientStart:onCreate");
-
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_dialogue_start_client);
@@ -245,14 +243,21 @@ public class Activity_clientStart extends Activity implements View.OnClickListen
                 {
                     if(FpNetFacade_client.Instance.IsConnected() && FpNetFacade_client.Instance._recv_connected_message)
                     {
-                        Log.i("[J2Y]", "userPosID" + FpcRoot.Instance._user_posid);
+                        //if( MainActivity.Instance._ready)
+                        {
+                            Log.i("[J2Y]", "userPosID" + FpcRoot.Instance._user_posid);
+                            FpNetFacade_client.Instance.SendPacket_setUserInfo(_user_name.getText().toString(), FpcRoot.Instance._bubble_color_type, FpcRoot.Instance._user_posid);
+                            startActivity(new Intent(MainActivity.Instance, Activity_clientMain.class));
 
-                        FpNetFacade_client.Instance.SendPacket_setUserInfo(_user_name.getText().toString(), FpcRoot.Instance._bubble_color_type, FpcRoot.Instance._user_posid);
+//                            //server state 시나리오 선택
+//                            startActivity(new Intent(MainActivity.Instance, Activity_clientMain.class));
+//                            FpNetFacade_client.Instance.SendPacket_req_changeScenario(MainActivity.Instance._curServerScenario);
 
-                        startActivity(new Intent(MainActivity.Instance, Activity_clientMain.class));
-                        _onceClick_connectToServer = false;
-                        finish();
-                        return;
+                            _onceClick_connectToServer = false;
+                            //MainActivity.Instance._ready = false;
+                            finish();
+                            return;
+                        }
                     }
                 }
 

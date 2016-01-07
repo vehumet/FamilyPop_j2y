@@ -52,6 +52,9 @@ public class FpsTalkUser
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     public void ResetMovers()
     {
+        if( _bubble == null) return;
+        if( _bubble.size() == 0 ) return;
+
         for(FpsBubble move : _bubble)
             move.DestroyMover();
         _bubble.clear();

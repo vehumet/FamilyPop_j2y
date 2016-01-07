@@ -76,6 +76,7 @@ cps/mobilemaestro/library/MMRecorder.class
 com/j2y/familypop/activity/server/Activity_serverCalibrationLocation$Location.class
 com/j2y/familypop/server/FpsTicTacToe$eTictactoeImageIndex.class
 com/j2y/network/base/FpNetUtil.class
+org/jbox2d/dynamics/World.class
 processing/opengl/PGraphicsOpenGL.class
 com/j2y/familypop/server/FpsScenario_base.class
 com/j2y/familypop/activity/server/Activity_serverStart$1.class

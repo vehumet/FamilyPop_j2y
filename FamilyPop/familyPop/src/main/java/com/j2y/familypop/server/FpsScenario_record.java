@@ -1,8 +1,10 @@
 package com.j2y.familypop.server;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import org.jbox2d.callbacks.DebugDraw;
 import org.jbox2d.common.Vec2;
 
 import com.j2y.familypop.activity.Activity_serverMain;
@@ -16,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.logging.Handler;
 
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -511,6 +514,10 @@ public class FpsScenario_record extends FpsScenario_base
         FpsBubble bubble = new FpsBubble();
         boolean res = bubble.CreateMover(_applet, _box2d, 20.0f, _applet.width/2, _applet.height/2, bubble_color, _current_bubble_color_type, FpsBubble.Type_Normal);
 
+        _box2d.world.setAllowSleep(true);
+//        _box2d.world.setSubStepping(true);
+//        _box2d.world.setSleepingAllowed(true);
+
         if(res)
         {
             bubble._start_time = (int)FpsRoot.Instance._socioPhone.GetRecordTime();
@@ -554,7 +561,7 @@ public class FpsScenario_record extends FpsScenario_base
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------
     // [렌더링 쓰레드]
-	@Override
+    @Override
 	public void OnDraw()
 	{
 		super.OnDraw();
@@ -580,12 +587,15 @@ public class FpsScenario_record extends FpsScenario_base
 
 
 
-        if(_shareImage != null) {
+        if(_shareImage != null)
+        {
             float aspect_ratio = (float)_shareImage.height / (float)_shareImage.width;
             float width = 600;
             float height = width * aspect_ratio;
 
             _applet.image(_shareImage, (_applet.width - width) / 2, (_applet.height - height) / 2, width, height);
+
+
         }
 
         for (FpsTalkUser user : Activity_serverMain.Instance._talk_users.values())
@@ -633,6 +643,8 @@ public class FpsScenario_record extends FpsScenario_base
     // [메인쓰레드]
     public void SetShareImage(byte[] bitmapByteArray)
     {
+
+
         if(bitmapByteArray != null)
         {
             Bitmap shareBitmap = FpNetUtil.ByteArrayToBitmap(bitmapByteArray);
@@ -641,13 +653,19 @@ public class FpsScenario_record extends FpsScenario_base
 
             PImage shareImage = _applet.createImage(nWidth, nHeight, _applet.ARGB);
 
-            for (int y = 0; y < nHeight; y++)
-            {
-                for (int x = 0; x < nWidth; x++)
-                {
-                    shareImage.pixels[y * nWidth + x] = shareBitmap.getPixel(x, y);
-                }
-            }
+//            _applet.
+
+//            for (int y = 0; y < nHeight; y++)
+//            {
+//                for (int x = 0; x < nWidth; x++)
+//                {
+//                    shareImage.pixels[y * nWidth + x] = shareBitmap.getPixel(x, y);
+//                }
+//            }
+
+            int imagebuffer[] = new int[nWidth * nHeight];
+            shareBitmap.getPixels(imagebuffer, 0, nWidth, 0, 0, nWidth, nHeight );
+            System.arraycopy(imagebuffer, 0, shareImage.pixels, 0, nWidth * nHeight);
             shareImage.updatePixels();
 
             _shareImage = shareImage;
@@ -657,5 +675,4 @@ public class FpsScenario_record extends FpsScenario_base
             _shareImage = null;
         }
     }
-
 }

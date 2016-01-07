@@ -8,6 +8,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import com.j2y.familypop.activity.Activity_clientMain;
 import com.j2y.familypop.activity.Activity_serverMain;
 import com.j2y.familypop.server.FpsRoot;
 import com.j2y.familypop.server.FpsScenarioDirector;
@@ -35,7 +36,12 @@ public class FpNetFacade_server extends FpNetFacade_base
 	private FpTCPAccepter _accepter;
 	private ServerSocket _serverSocket;
     private FpNetServer_packetHandler _packet_handler;
+    //
+
+
 	public ArrayList<FpNetServer_client> _clients = new ArrayList<FpNetServer_client>();
+
+    //private HashMap<int, FpNetServer_client> _clientsTest;
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------
 	public FpNetFacade_server()
@@ -100,15 +106,14 @@ public class FpNetFacade_server extends FpNetFacade_base
 		}
 	}
     //------------------------------------------------------------------------------------------------------------------------------------------------------
-    private void send_quitRoom() {
-
+    private void send_quitRoom()
+    {
         Log.i("[J2Y]", "FpNetFacade_server:send_quitRoom");
         BroadcastPacket(FpNetConstants.SCNoti_quitRoom);
         SystemClock.sleep(50); // 기다려야 하나??
 
         //if(Activity_serverMain.Instance != null)
         //     Activity_serverMain.Instance.CloseRoom();
-
         FpNetServer_client._index = 0; // 임시
     }
     //------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -233,29 +238,17 @@ public class FpNetFacade_server extends FpNetFacade_base
     // 클라이언트 관리
     //
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
     public void AddClient(Socket socket)
     {
-
         FpNetServer_client client = new FpNetServer_client(socket, _messageHandler, FpsRoot.Instance._scenarioDirector.GetActiveScenario());
         _clients.add(client);
 
         if(Activity_serverMain.Instance != null)
             Activity_serverMain.Instance.AddTalkUser(client);
     }
-
-    public FpNetServer_client GetClientByIndex(int index)
-    {
-        if((index < 0) || (index >= _clients.size()))
-            return null;
-        return _clients.get(index);
-    }
-
     public void RemoveClient(FpNetServer_client client)
     {
-
         // todo: 클라이언트 한명만 나가기
-
         if(Activity_serverMain.Instance != null)
             FpNetFacade_server.Instance.Send_talk_record_info();
 
@@ -266,4 +259,20 @@ public class FpNetFacade_server extends FpNetFacade_base
             Activity_serverMain.Instance.CloseServer();
     }
 
+    public FpNetServer_client GetClientByIndex(int index)
+    {
+        if((index < 0) || (index >= _clients.size()))
+            return null;
+        return _clients.get(index);
+    }
+
+    // 서버의 정보를 클라이언트에게 전송한다.
+    public void Send_ServerState( FpNetServer_client client )
+    {
+//        // test
+//        FpNetDataNoti_serverInfo outMsg = new FpNetDataNoti_serverInfo();
+//        outMsg._curScenario = FpsScenarioDirector.Instance.GetActiveScenarioType();
+//        client.SendPacket(FpNetConstants.SCNoti_getServerState, outMsg);
+
+    }
 }

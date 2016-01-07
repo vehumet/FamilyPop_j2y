@@ -19,7 +19,6 @@ public class FpNetDataReq_changeScenario extends FpNetData_base
     public void Parse(FpNetIncomingMessage inMsg)
     {
         super.Parse(inMsg);
-
         _changeScenario = inMsg.ReadInt();
     }
 
@@ -29,7 +28,6 @@ public class FpNetDataReq_changeScenario extends FpNetData_base
     public void Packing(FpNetOutgoingMessage outMsg)
     {
         super.Packing(outMsg);
-
         outMsg.Write(_changeScenario);
     }
 }

@@ -37,9 +37,18 @@ import com.j2y.network.server.FpNetServer_client;
 import com.nclab.familypop.R;
 import com.nclab.sociophone.interfaces.MeasurementCallback;
 
-import org.jbox2d.common.Vec2;
+
 
 import cps.mobilemaestro.library.MMServer;
+
+// box2d
+import org.jbox2d.callbacks.DebugDraw;
+import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.World;
+
+
+
+
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
@@ -136,6 +145,9 @@ public class Activity_serverMain extends PApplet
         super.onCreate(savedInstanceState);
         Instance = this;
 
+        //PApplet.
+
+
         // 사이즈 변경됨
 //        WindowManager.LayoutParams params = getWindow().getAttributes();
 //        params.x = -100;
@@ -200,16 +212,30 @@ public class Activity_serverMain extends PApplet
     }
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     // [렌더링 쓰레드??]
+
     @Override
 	public void setup()
 	{
         Log.i("[J2Y]", "Activity_serverMain:setup");
 		//size(1920, 1080);
 
+        boolean bSleep = true;
 		_box2d = new Box2DProcessing(this);
-        _box2d.createWorld();
-		_box2d.setGravity(0, 0);
+        _box2d.createWorld(new Vec2(0, 0), false, false);
 
+        _box2d.world.setSleepingAllowed(false);
+        _box2d.world.setSubStepping(false);
+        _box2d.world.setAllowSleep(false);
+
+//		_box2d.setGravity(0, 0);
+//        _box2d.setContinuousPhysics(false);
+//        _box2d.setWarmStarting(false);
+
+
+
+
+
+        requestImageMax = 1;
 
         _smile_image = this.loadImage("image_bubble_grey_smile.png");
         _bomb_runningMsg_image = this.loadImage("image_bomb_is_running.png");
@@ -325,6 +351,7 @@ public class Activity_serverMain extends PApplet
                     //if (user._attractor == null)
                     if( user._user_posid != -1)
                         user.CreateAttractor(_box2d, this.width, this.height);
+
                 }
 
                 FpsScenario_base activeScenario = FpsRoot.Instance._scenarioDirector.GetActiveScenario();

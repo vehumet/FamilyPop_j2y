@@ -59,7 +59,6 @@ public class FpNetServer_packetHandler
     {
         _net_server.RegisterMessageCallBack(FpNetConstants.ClientAccepted, onConnected);
         _net_server.RegisterMessageCallBack(FpNetConstants.CSReq_setUserInfo, onReq_setUserInfo);
-
         //RegisterMessageCallBack(FpNetConstants.ClientDisconnected, onDisConnected);
         _net_server.RegisterMessageCallBack(FpNetConstants.CSReq_ChangeScenario, onReq_changeScenario);
         _net_server.RegisterMessageCallBack(FpNetConstants.CSReq_OnStartGame, onReq_startGame);
@@ -83,7 +82,40 @@ public class FpNetServer_packetHandler
         _net_server.RegisterMessageCallBack(FpNetConstants.CSReq_regulation_Info,onReq_regulation_info);
         _net_server.RegisterMessageCallBack(FpNetConstants.CSReq_clearBubble, onReq_clearBubble);
     }
+    //------------------------------------------------------------------------------------------------------------------------------------------------------
+    // 클라 연결
+    FpNetMessageCallBack onConnected = new FpNetMessageCallBack()
+    {
+        @Override
+        public void CallBack(FpNetIncomingMessage inMsg)
+        {
+            Log.i("[J2Y]", "[Network] 클라 연결");
+            _net_server.AddClient(inMsg._socket);
 
+            Object a = Activity_serverMain.Instance;
+
+//            //접속한 client 에게 지금 서버상태를 전송해준다.
+//            //FpNetServer_client client = new FpNetServer_client(inMsg, _messageHandler, FpsRoot.Instance._scenarioDirector.GetActiveScenario());
+//
+//            int clientIndex = _net_server._clients.size()-1;
+//            _net_server.Send_ServerState(_net_server.GetClientByIndex((clientIndex)));
+        }
+    };
+    //------------------------------------------------------------------------------------------------------------------------------------------------------
+    // 방 나가기 ( 종료.)
+    FpNetMessageCallBack onReq_exit_room = new FpNetMessageCallBack()
+    {
+        @Override
+        public void CallBack(FpNetIncomingMessage inMsg)
+        {
+            Log.i("[J2Y]", "[패킷수신] 방 나가기");
+
+            FpsRoot.Instance._exitServer = true;
+            FpNetServer_client client = (FpNetServer_client)inMsg._obj;
+
+            _net_server.RemoveClient(client);
+        }
+    };
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     // 클라 연결끊김
 //    FpNetMessageCallBack onDisConnected = new FpNetMessageCallBack()
@@ -96,19 +128,6 @@ public class FpNetServer_packetHandler
 //            _clients.remove(client);
 //        }
 //    };
-
-    //------------------------------------------------------------------------------------------------------------------------------------------------------
-    // 클라 연결
-    FpNetMessageCallBack onConnected = new FpNetMessageCallBack()
-    {
-        @Override
-        public void CallBack(FpNetIncomingMessage inMsg)
-        {
-            Log.i("[J2Y]", "[Network] 클라 연결");
-            _net_server.AddClient(inMsg._socket);
-        }
-    };
-
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     // 클라 정보 세팅
@@ -189,22 +208,7 @@ public class FpNetServer_packetHandler
 
 
 
-    //------------------------------------------------------------------------------------------------------------------------------------------------------
-    // 방 나가기
-    FpNetMessageCallBack onReq_exit_room = new FpNetMessageCallBack()
-    {
-        @Override
-        public void CallBack(FpNetIncomingMessage inMsg)
-        {
 
-            Log.i("[J2Y]", "[패킷수신] 방 나가기");
-
-            FpsRoot.Instance._exitServer = true;
-            FpNetServer_client client = (FpNetServer_client)inMsg._obj;
-
-            _net_server.RemoveClient(client);
-        }
-    };
 
 
 
@@ -449,13 +453,11 @@ public class FpNetServer_packetHandler
         @Override
         public void CallBack(FpNetIncomingMessage inMsg)
         {
-
             Log.i("[J2Y]", "[패킷수신] 이미지 공유");
 
             //FpNetServer_client client = (FpNetServer_client)inMsg._obj;
             FpNetDataReq_shareImage data = new FpNetDataReq_shareImage();
             data.Parse(inMsg);
-
 
             //debug
             MainActivity.Debug_begin_timecount(MainActivity.Instance._deviceRole+"_onCSC_shareimage");
