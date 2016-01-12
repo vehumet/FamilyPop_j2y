@@ -93,7 +93,7 @@ public class Activity_talkHistoryPlayback extends BaseActivity implements View.O
 
         _button_home = (ImageButton) findViewById(R.id.button_playback_home);
         _button_home.setOnClickListener(this);
-        ((ImageButton) findViewById(R.id.button_play_record)).setOnClickListener(this);
+        findViewById(R.id.button_play_record).setOnClickListener(this);
 
 
 
@@ -115,7 +115,7 @@ public class Activity_talkHistoryPlayback extends BaseActivity implements View.O
                 //item._radius = 100; // 임시
                 //int bubble_size = (int)(item._radius * 1.8f);
                 int bubble_size = (int)(item._radius * 1.8f);
-                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams((int) bubble_size, (int) bubble_size);
+                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(bubble_size, bubble_size);
 
                 Button bbt = bubbleButtons_Create(item);
 
@@ -235,7 +235,7 @@ public class Activity_talkHistoryPlayback extends BaseActivity implements View.O
         _textview_maxPlayTime = (TextView) findViewById(R.id.textView_max_playtime);
         _textview_seekbar = (TextView) findViewById(R.id.textView_seekbar);
 
-        _textview_maxPlayTime.setText(Activity_talkHistory.Instance.CalculatePlayTime(talk_record));
+        _textview_maxPlayTime.setText(Activity_talkHistory.CalculatePlayTime(talk_record));
         _textview_seekbar.setText("0:00:00");
 
 

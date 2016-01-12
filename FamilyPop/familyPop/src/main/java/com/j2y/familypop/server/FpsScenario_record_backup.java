@@ -14,6 +14,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PImage;
 import shiffman.box2d.Box2DProcessing;
 
@@ -197,7 +198,7 @@ public class FpsScenario_record_backup extends FpsScenario_base
         int nHeight = shareBitmap.getHeight();
         int nWidth = shareBitmap.getWidth();
 
-        PImage shareImage = _applet.createImage(nWidth, nHeight, _applet.ARGB);
+        PImage shareImage = _applet.createImage(nWidth, nHeight, PConstants.ARGB);
 
         for(int y = 0; y < nHeight; y++)
         {

@@ -587,7 +587,7 @@ public class SoundProcessManager {
 
     }
 
-    private ArrayList<Double> mListSilenceVolVar = new ArrayList<Double>();;
+    private ArrayList<Double> mListSilenceVolVar = new ArrayList<Double>();
     boolean isMeasuringSilenceVolVarThreshold = false;
     public void measureSilenceVolVar(int timeInMs, final MeasurementCallback callback) {
         isMeasuringSilenceVolVarThreshold = true;

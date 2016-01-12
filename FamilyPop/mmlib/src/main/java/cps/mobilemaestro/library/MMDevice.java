@@ -6,8 +6,8 @@ import android.os.Handler;
 
 public interface MMDevice
 {
-	public void start();
-	public void stop();
-	public boolean doMeasure(long startTime, int playId);
+	void start();
+	void stop();
+	boolean doMeasure(long startTime, int playId);
 }
 

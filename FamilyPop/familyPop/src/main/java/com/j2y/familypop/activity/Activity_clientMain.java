@@ -1047,11 +1047,11 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     private void init_guiWidgets() {
-        ((Button) findViewById(R.id.button_client_featuremenu_familybomb)).setOnClickListener(this);
-        ((Button) findViewById(R.id.button_client_featuremenu_talk)).setOnClickListener(this);
-        ((Button) findViewById(R.id.button_client_featuremenu_smile_event)).setOnClickListener(this);
-        ((Button) findViewById(R.id.button_client_featuremenu_savedialogue)).setOnClickListener(this);
-        ((Button) findViewById(R.id.button_client_featuremenu_bubbleclear)).setOnClickListener(this);
+        findViewById(R.id.button_client_featuremenu_familybomb).setOnClickListener(this);
+        findViewById(R.id.button_client_featuremenu_talk).setOnClickListener(this);
+        findViewById(R.id.button_client_featuremenu_smile_event).setOnClickListener(this);
+        findViewById(R.id.button_client_featuremenu_savedialogue).setOnClickListener(this);
+        findViewById(R.id.button_client_featuremenu_bubbleclear).setOnClickListener(this);
 
         _button_redbubble = (ImageButton) findViewById(R.id.button_client_redbubble);
         _button_redbubble.setOnClickListener(this);
@@ -1377,7 +1377,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         _accelerDelayTime = 0;
         _lastPos = new Vec3(0, 0, 0);
 
-        SensorManager sensorManager = (SensorManager) activity.getSystemService(activity.SENSOR_SERVICE);
+        SensorManager sensorManager = (SensorManager) activity.getSystemService(SENSOR_SERVICE);
         _accelerormeterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         _oriSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
 

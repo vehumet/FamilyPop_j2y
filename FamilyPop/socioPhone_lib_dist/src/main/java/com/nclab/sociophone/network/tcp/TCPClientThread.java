@@ -43,7 +43,6 @@ class TCPClientThread extends Thread {
                 bytes = mInput.read(buffer);
                 if (bytes <= 0) // [J2Y]
                     continue;
-                ;
                 String data = new String(buffer, 0, bytes);
                 PacketProcessor.processPacketOnClient(data, mHandler);
 

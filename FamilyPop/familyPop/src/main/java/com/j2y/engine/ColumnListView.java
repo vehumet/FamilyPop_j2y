@@ -543,10 +543,7 @@ public class ColumnListView extends AdapterView<ListAdapter> {
     private boolean hasMovedFarEnoughForScroll(MotionEvent event) {
         int x = (int) event.getX();
         int y = (int) event.getY();
-        if ((mTouchDownX - mTouchSlop < x && x < mTouchDownX + mTouchSlop) && (mTouchDownY - mTouchSlop < y && y < mTouchDownY + mTouchSlop)) {
-            return false;
-        }
-        return true;
+        return !((mTouchDownX - mTouchSlop < x && x < mTouchDownX + mTouchSlop) && (mTouchDownY - mTouchSlop < y && y < mTouchDownY + mTouchSlop));
     }
 
     private void startScrolling(MotionEvent event) {

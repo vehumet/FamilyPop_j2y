@@ -109,7 +109,7 @@ public class FpcRoot implements TurnDataListener, DisplayInterface, EventDataLis
         _socioPhone.setNetworkMode(true);
         _socioPhone.setVolumeOrderMode(true);
 
-        _socioPhone.isServer = false;
+        SocioPhone.isServer = false;
     }
     // # localization (client) 생성.
     public void InitLocalization()

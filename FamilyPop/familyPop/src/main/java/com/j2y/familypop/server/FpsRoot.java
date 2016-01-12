@@ -1,15 +1,8 @@
 package com.j2y.familypop.server;
 
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import com.j2y.familypop.MainActivity;
-import com.j2y.familypop.activity.Activity_clientMain;
 import com.j2y.familypop.activity.Activity_serverMain;
 import com.j2y.network.base.FpNetConstants;
 import com.j2y.network.base.data.FpNetData_smileEvent;
@@ -113,7 +106,7 @@ public class FpsRoot implements TurnDataListener, DisplayInterface, EventDataLis
         _socioPhone.setNetworkMode(true);
         _socioPhone.setVolumeOrderMode(true);
 
-        _socioPhone.isServer = true;
+        SocioPhone.isServer = true;
         _socioPhone.openServer();
     }
 

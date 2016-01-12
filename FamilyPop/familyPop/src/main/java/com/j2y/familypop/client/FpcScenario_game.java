@@ -6,6 +6,7 @@ import com.j2y.network.base.FpNetConstants;
 import com.j2y.network.client.FpNetFacade_client;
 
 import android.app.Activity;
+import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -55,7 +56,7 @@ public class FpcScenario_game extends FpcScenario_base implements SensorEventLis
 	{	
 		super.OnCreate(activity);
 		
-		SensorManager sensorManager = (SensorManager) activity.getSystemService(activity.SENSOR_SERVICE);
+		SensorManager sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
 		_accelerormeterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		_oriSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
   

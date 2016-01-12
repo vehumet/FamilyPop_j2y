@@ -370,7 +370,7 @@ public class MMServer implements MMDevice
                     tmp_i_j = (double) (res_i.getPeak(cnt2).getIdx() - res_i.getPeak(cnt).getIdx()) / (double) MMCtrlParam.recordRate * 1000.f;
                     tmp_j_i = (double) (res_j.getPeak(cnt2).getIdx() - res_j.getPeak(cnt).getIdx()) / (double) MMCtrlParam.recordRate * 1000.f;
 
-                    distanceResult[cnt][cnt2] = (double) (tmp_i_j - tmp_j_i) / 2.f * (double) MMCtrlParam.sound_cm_to_ms + (double) MMCtrlParam.spk_mic_cm;
+                    distanceResult[cnt][cnt2] = (tmp_i_j - tmp_j_i) / 2.f * MMCtrlParam.sound_cm_to_ms + MMCtrlParam.spk_mic_cm;
                 }
             }
         }

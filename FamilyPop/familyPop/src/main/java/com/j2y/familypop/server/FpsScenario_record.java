@@ -21,6 +21,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Handler;
 
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PImage;
 import shiffman.box2d.Box2DProcessing;
 
@@ -651,7 +652,7 @@ public class FpsScenario_record extends FpsScenario_base
             int nHeight = shareBitmap.getHeight();
             int nWidth = shareBitmap.getWidth();
 
-            PImage shareImage = _applet.createImage(nWidth, nHeight, _applet.ARGB);
+            PImage shareImage = _applet.createImage(nWidth, nHeight, PConstants.ARGB);
 
 //            _applet.
 

@@ -35,16 +35,14 @@ public class MMUtils
 		send(out, cmd);
 	}
 	
-	public static JSONObject receive(BufferedReader in) throws JSONException, IOException, SocketTimeoutException
-	{ 
+	public static JSONObject receive(BufferedReader in) throws JSONException, IOException {
     	JSONObject jsonCmd = new JSONObject(in.readLine());    
 		jsonCmd.put("receiveTimestamp", gettime());
 	 
 		return jsonCmd;
 	}
 	
-	public static MMCommands receiveOnce(Socket socket) throws JSONException, IOException, SocketTimeoutException
-	{
+	public static MMCommands receiveOnce(Socket socket) throws JSONException, IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		return new MMCommands(receive(in));
 	}
@@ -55,10 +53,10 @@ public class MMUtils
 		{ 
 			for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) 
 			{
-				NetworkInterface intf = ( NetworkInterface ) en.nextElement();
+				NetworkInterface intf = en.nextElement();
 				for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) 
 				{
-					InetAddress inetAddress = ( InetAddress ) enumIpAddr.nextElement();
+					InetAddress inetAddress = enumIpAddr.nextElement();
 					if (!inetAddress.isLoopbackAddress()) 
 					{
 							if (inetAddress instanceof Inet4Address)

@@ -1,2 +1,2 @@
-include ':socioPhone_lib_dist', ':mmlib', ':mmlib'
+include ':socioPhone_lib_dist', ':mmlib'
 include ':familyPop'

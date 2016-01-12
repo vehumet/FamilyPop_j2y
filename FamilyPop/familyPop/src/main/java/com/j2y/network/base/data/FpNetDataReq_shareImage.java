@@ -34,7 +34,7 @@ public class FpNetDataReq_shareImage extends FpNetData_base
         super.Packing(outMsg);
 
         if(null == _bitMapByteArray)
-            outMsg.Write((int)0);
+            outMsg.Write(0);
         else {
             outMsg.Write(_bitMapByteArray.length);
             if (_bitMapByteArray.length > 0)

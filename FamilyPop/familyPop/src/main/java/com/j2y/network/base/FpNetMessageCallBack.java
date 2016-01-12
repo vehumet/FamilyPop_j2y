@@ -9,5 +9,5 @@ package com.j2y.network.base;
 
 public interface FpNetMessageCallBack
 {
-    public void CallBack(FpNetIncomingMessage inMsg);
+    void CallBack(FpNetIncomingMessage inMsg);
 }

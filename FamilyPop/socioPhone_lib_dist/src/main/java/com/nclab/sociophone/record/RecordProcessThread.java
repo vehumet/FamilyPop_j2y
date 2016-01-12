@@ -686,10 +686,10 @@ public class RecordProcessThread extends Thread
         return (short) ( (buffer[offset+1]&0xff)<<8 | (buffer[offset]&0xff) );
     }
     public static final int byte1ToInt(byte b){
-        return (int)(b&0xff);
+        return b&0xff;
     }
     public static final int byte1ToInt(byte[] b, int offset){
-        return (int)(b[offset]&0xff);
+        return b[offset]&0xff;
     }
     public static final int byte2ToInt(byte[] buffer, int offset){
         return (buffer[offset+1]&0xff)<<8 | (buffer[offset]&0xff);

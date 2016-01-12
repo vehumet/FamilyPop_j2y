@@ -27,7 +27,7 @@ public class Activity_serverCalibrationLocation extends Activity implements View
         NON(-1),LEFT(0), TOP(1), RIGHT(2), BOTTOM(3),MAX(4);
 
         private int value;
-        private eLocationButtons(int i){value = i;}
+        eLocationButtons(int i){value = i;}
 
         public int getValue(){return value;}
         public String getValuetoString(int value)

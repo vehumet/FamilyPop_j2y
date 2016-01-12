@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.nclab.sociophone.handler.DisplayHandler;
 import com.nclab.sociophone.handler.SignalHandler;
@@ -82,6 +81,8 @@ public class SocioPhone {
 
         }
 
+        ContextAPI CAPI = new ContextAPI(mContext);
+        boolean issuceed = CAPI.registerQuery("DISTANCE 10000 16000 6000");
     }
 
     /**
@@ -172,6 +173,8 @@ public class SocioPhone {
             ctime = time;
             displayInterface.onDisplayMessageArrived(0, "TS Client: " + (System.currentTimeMillis() + SocioPhoneConstants.deviceTimeOffset));
         }
+
+
         recordThread = new RecordProcessThread(sHandler, true, filename);
         recordThread.setCheckPoint(ctime);
         recordThread.start();
@@ -212,7 +215,7 @@ public class SocioPhone {
      * @param isServer true if this device is server
      */
     public void setIsServer(boolean isServer) {
-        this.isServer = isServer;
+        SocioPhone.isServer = isServer;
     }
 
     /*
