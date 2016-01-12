@@ -82,7 +82,7 @@ public class SocioPhone {
         }
 
         ContextAPI CAPI = new ContextAPI(mContext);
-        boolean issuceed = CAPI.registerQuery("DISTANCE 10000 16000 6000");
+        boolean issuceed = CAPI.registerQuery("GetVolume 10000 16000 6000");
     }
 
     /**
