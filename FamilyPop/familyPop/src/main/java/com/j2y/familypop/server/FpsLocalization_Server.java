@@ -38,7 +38,6 @@ public class FpsLocalization_Server
     public void StartServer(Context context, MMDeviceLayout layout)
     {
         _server = new MMServer(context, _messageHandler, layout);
-
         _server.start();
     }
     //------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -76,6 +75,7 @@ public class FpsLocalization_Server
     {
         public void handleMessage(Message msg)
         {
+            //Log.i("[J2Y]","getLocator : "+_server.getLocator());
             if( FpsRoot.Instance._exitServer) return;
 
             switch(msg.what)

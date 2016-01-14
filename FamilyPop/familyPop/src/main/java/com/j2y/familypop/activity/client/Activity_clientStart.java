@@ -4,23 +4,30 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.j2y.familypop.MainActivity;
 import com.j2y.familypop.activity.Activity_clientMain;
+import com.j2y.familypop.activity.Activity_serverMain;
 import com.j2y.familypop.activity.server.Activity_serverCalibration;
 import com.j2y.familypop.backup.Dialog_MessageBox_ok_cancel;
 import com.j2y.familypop.client.FpcRoot;
 import com.j2y.network.client.FpNetFacade_client;
 import com.nclab.familypop.R;
+
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
@@ -90,6 +97,10 @@ public class Activity_clientStart extends Activity implements View.OnClickListen
 
     private CheckBox[] _checkbox_pos_color = new CheckBox[eCheckBoxPosColor.MAX.getValue()];
 
+    // message
+    public ImageView _image_servertoConnect = null;
+    public ImageView _image_servertoConnectFail = null;
+
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -147,6 +158,9 @@ public class Activity_clientStart extends Activity implements View.OnClickListen
             _checkbox_pos_color[i].setOnClickListener(this);
         }
         setUserPos(eCheckBoxPosColor.getValue(FpcRoot.Instance._bubble_color_type));
+
+        _image_servertoConnect = (ImageView) findViewById(R.id.image_connectToServer);
+        _image_servertoConnectFail = (ImageView) findViewById(R.id.image_connect_to_server_fail);
     }
     //-------------------------------------------------------------------------------------------------------------------------------------------------
     // pos_color
@@ -220,20 +234,25 @@ public class Activity_clientStart extends Activity implements View.OnClickListen
         else
         {
             if( _onceClick_connectToServer == true) return;
-
             FpcRoot.Instance._user_name = _user_name.getText().toString();
             FpcRoot.Instance.ConnectToServer(_ipText.getText().toString());
-            ChangeScenarioActivity();
 
+            _connectedTime = System.currentTimeMillis();
             _onceClick_connectToServer = true;
+
+
+            _image_servertoConnect.setVisibility(View.VISIBLE);
+            _image_servertoConnectFail.setVisibility(View.GONE);
+
+            ChangeScenarioActivity();
         }
-
     }
-
-
     //------------------------------------------------------------------------------------------------------------------------------------------------------
+    private long _connectedTime;
+    boolean _connectFail = false;
     public void ChangeScenarioActivity()
     {
+
         new Thread()
         {
             @Override
@@ -256,39 +275,72 @@ public class Activity_clientStart extends Activity implements View.OnClickListen
                             _onceClick_connectToServer = false;
                             //MainActivity.Instance._ready = false;
                             finish();
-                            return;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        //
+                        long deltaTime = System.currentTimeMillis() - _connectedTime;
+                        if(deltaTime > 5000) // 5초간 대기.
+                        {
+                            FpcRoot.Instance.DisconnectServer();
+                            _connectFail = true;
+                            //finish();
+                            break;
                         }
                     }
                 }
-
             }
         }.start();
+
+        new Handler().postDelayed(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                if( _connectFail )
+                {
+                    _image_servertoConnect.setVisibility(View.GONE);
+                    _image_servertoConnectFail.setVisibility(View.VISIBLE);
+                    _connectFail = false;
+                    new Handler().postDelayed(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            _image_servertoConnect.setVisibility(View.GONE);
+                            _image_servertoConnectFail.setVisibility(View.GONE);
+                            _onceClick_connectToServer = false;
+                            //finish();
+                        }
+                    }, 3000);
+                }
+            }
+        },6000);
+
+
+
+
     }
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // 컬러 레디오 버튼
     //
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-
     RadioButton.OnClickListener optionOnClickListener = new RadioButton.OnClickListener() {
 
         public void onClick(View v)
         {
-
             // 컬러
             for (int i = 0; i < _radio_button_colors.length; ++i)
             {
-
                 if(_radio_button_colors[i].isChecked())
                 {
                     FpcRoot.Instance._bubble_color_type = i;
                     FpcRoot.Instance._user_posid = i;
                 }
             }
-
-
         }
     };
     RadioButton.OnClickListener posidOnClickListener = new RadioButton.OnClickListener()

@@ -399,13 +399,15 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
 
             // tic tac toe
             case R.id.button_client_featuremenu_tictactoe:
-                //_layout_ttt.setVisibility(View.VISIBLE);
-                _selectScenario = FpNetConstants.SCENARIO_TIC_TAC_TOE;
-                FpNetFacade_client.Instance.SendPacket_req_start_Tic_Tac_Toe();
-                _layout_regulation.setVisibility(View.INVISIBLE);
 
-                _layout_roomInfo.setVisibility(View.GONE);
-                _layout_bubbleImage.setVisibility(View.GONE);
+                //back 16.01.11
+//                _selectScenario = FpNetConstants.SCENARIO_TIC_TAC_TOE;
+//                FpNetFacade_client.Instance.SendPacket_req_start_Tic_Tac_Toe();
+//                _layout_regulation.setVisibility(View.INVISIBLE);
+//                _layout_roomInfo.setVisibility(View.GONE);
+//                _layout_bubbleImage.setVisibility(View.GONE);
+
+                FpNetFacade_client.Instance.SendPacket_req_start_Tic_Tac_Toe();
 
                 active_featureMenu(false);
                 break;

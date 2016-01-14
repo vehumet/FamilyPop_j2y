@@ -244,33 +244,37 @@ public class FpNetServer_packetHandler
         {
             Log.i("[J2Y]", "[패킷수신] tic tac toe 게임 시작");
 
-            Activity_serverMain.Instance._tictactoe._tictactoe_runningMsg_event = true;
-            Activity_serverMain.Instance.Initialization_tictactoe();
-            //_net_server.BroadcastPacket(FpNetConstants.SCNoti_Start_Tic_Tac_Toe);
-            _net_server.Send_Start_TicTacToe();
+            Activity_serverMain.Instance._isNotLocatorDevice = FpsRoot.Instance._localization._server.getLocator() == null ? true : false;
 
-            // 대화 내용 저장 안하고 그냥 날려버림.
-            if( FpsRoot.Instance._scenarioDirector._activeScenarioType == FpNetConstants.SCENARIO_RECORD)
+            //로케이터 서버가 있을때.
+            if( !Activity_serverMain.Instance._isNotLocatorDevice )
             {
-                FpsRoot.Instance._socioPhone.stopRecord();
-                FpsRoot.Instance._socioPhone.recordRelease();
+                Activity_serverMain.Instance._tictactoe._tictactoe_runningMsg_event = true;
+                Activity_serverMain.Instance.Initialization_tictactoe();
+                //_net_server.BroadcastPacket(FpNetConstants.SCNoti_Start_Tic_Tac_Toe);
 
-                //if( FpsRoot.Instance._scenarioDirector._activeScenarioType == FpNetConstants.SCENARIO_GAME) ??
-                FpNetFacade_server.Instance.Send_endBomb();
+
+                _net_server.Send_Start_TicTacToe();
+
+                // 대화 내용 저장 안하고 그냥 날려버림.
+                if( FpsRoot.Instance._scenarioDirector._activeScenarioType == FpNetConstants.SCENARIO_RECORD)
+                {
+                    FpsRoot.Instance._socioPhone.stopRecord();
+                    FpsRoot.Instance._socioPhone.recordRelease();
+
+                    //if( FpsRoot.Instance._scenarioDirector._activeScenarioType == FpNetConstants.SCENARIO_GAME) ??
+                    FpNetFacade_server.Instance.Send_endBomb();
+
+                }
+                FpsRoot.Instance._scenarioDirector._activeScenarioType = FpNetConstants.SCENARIO_TIC_TAC_TOE;
+                FpsRoot.Instance._scenarioDirector.ChangeScenario(FpNetConstants.SCENARIO_NONE);
+            }
+            else //로케이터 가 없을때.
+            {
+                //not locator
+                Activity_serverMain.Instance._isNotLocatorDevice_time = System.currentTimeMillis();
 
             }
-            FpsRoot.Instance._scenarioDirector._activeScenarioType = FpNetConstants.SCENARIO_TIC_TAC_TOE;
-            FpsRoot.Instance._scenarioDirector.ChangeScenario(FpNetConstants.SCENARIO_NONE);
-
-            //FpNetFacade_server.Instance._clients
-
-            /*
-             for(FpNetServer_client client : _clients)
-        {
-            client.SendPacket(msgID, outPacket);
-        }
-             */
-
         }
     };
 

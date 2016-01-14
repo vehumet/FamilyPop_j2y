@@ -75,6 +75,10 @@ public class Activity_serverMain extends PApplet
     private PImage _bomb_runningMsg_image = null;
 
     //tictactoe event
+    public boolean  _isNotLocatorDevice = false;
+    public long     _isNotLocatorDevice_time;
+    private PImage  _image_isNotLocatorDevice;
+
     private PImage _ttt_image_winner = null; //image_winner.png
     private boolean _winner_event = false;
 
@@ -231,10 +235,6 @@ public class Activity_serverMain extends PApplet
 //        _box2d.setContinuousPhysics(false);
 //        _box2d.setWarmStarting(false);
 
-
-
-
-
         requestImageMax = 1;
 
         _smile_image = this.loadImage("image_bubble_grey_smile.png");
@@ -243,6 +243,9 @@ public class Activity_serverMain extends PApplet
 
         _ttt_image_winner_o = this.loadImage("widget_ttt_server_owin.png");
         _ttt_image_winner_x = this.loadImage("widget_ttt_server_xwin.png");
+
+        // is not locator device
+        _image_isNotLocatorDevice = this.loadImage("image_isnot_locator_device.png");
 
         //tic tac toe.
         _tictactoe_runningMsg_event = false;
@@ -359,13 +362,24 @@ public class Activity_serverMain extends PApplet
                 if (activeScenario != null)
                     activeScenario.OnDraw();
 
-                if (_smile_event)  {
+                // 스마일 이벤트
+                if (_smile_event)
+                {
 
                     long deltaTime = System.currentTimeMillis() - _smile_event_time;
                     if (deltaTime > 5000)
                         _smile_event = false;
 
                     this.image(_smile_image, (this.width - _smile_image.width) / 2, (this.height - _smile_image.height) / 2);
+                }
+                // 로케이터 없음
+                if(_isNotLocatorDevice)
+                {
+                    long deltaTime = System.currentTimeMillis() - _isNotLocatorDevice_time;
+                    if(deltaTime > 5000)
+                        _isNotLocatorDevice = false;
+
+                    this.image(_image_isNotLocatorDevice, (this.width - _image_isNotLocatorDevice.width) / 2, (this.height - _image_isNotLocatorDevice.height) / 2);
                 }
                 if( _bomb_runningMsg_event )
                 {

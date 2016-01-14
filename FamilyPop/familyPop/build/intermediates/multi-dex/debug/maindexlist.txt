@@ -6,8 +6,8 @@ com/j2y/familypop/activity/BaseActivity.class
 processing/core/PApplet$1.class
 com/j2y/network/base/FpNetFacade_base.class
 com/j2y/familypop/activity/client/Activity_clientStart.class
-com/j2y/engine/ColumnListView.class
 edu/emory/mathcs/jtransforms/fft/DoubleFFT_1DTest.class
+com/j2y/engine/ColumnListView.class
 com/j2y/familypop/activity/lobby/Activity_locatorStart.class
 com/j2y/familypop/activity/client/Activity_clientStart$2.class
 com/j2y/familypop/MainActivity.class
@@ -90,6 +90,7 @@ com/j2y/network/base/FpPacketData.class
 com/j2y/familypop/activity/client/Activity_clientGame.class
 com/j2y/familypop/server/FpsScenario_record.class
 com/j2y/familypop/backup/Dialog_MessageBox_ok_cancel.class
+com/j2y/familypop/activity/client/Activity_clientStart$4.class
 com/j2y/familypop/activity/lobby/Activity_talkHistory$TouchMove.class
 cps/mobilemaestro/library/MMMeasureResult$MMPeakData.class
 com/j2y/network/client/FpNetFacade_client.class
