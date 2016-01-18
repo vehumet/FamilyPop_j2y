@@ -16,6 +16,7 @@ import android.util.Log;
 import com.nclab.partitioning.interfaces.IPartitioningInterface;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -31,11 +32,10 @@ public class ContextAPI{
     public Context context;
 
     public static List<String> registeredContexts = new ArrayList<String>();
-    public static List<Integer> maestro_QueryIds = new ArrayList<Integer>();
-    public static List<Integer> dummy_QueryIds = new ArrayList<Integer>();
-    public static List<Integer> QueryIds = new ArrayList<Integer>();
-    public static List<Integer> record_QueryIds = new ArrayList<Integer>();
+    public static HashMap<String, Integer> QueryMap = new HashMap<String, Integer>();
+//    public static List<Integer> QueryIds = new ArrayList<Integer>();
     public SymphonyService SService;
+    private SymphonyConnection scThread;
 
     public ContextAPI(Context context) {
         this.context = context;
@@ -89,7 +89,7 @@ public class ContextAPI{
             Log.d("ContextAPI", "RegisterQuery: " + query + " => " + queryId);
 
             // add queryId to the list
-            QueryIds.add(queryId);
+            QueryMap.put(query, queryId);
         }
     }
 
@@ -100,7 +100,7 @@ public class ContextAPI{
         }
 
         // set connectivity to ContextAPI
-        SService.setServiceConnection(new ServiceConnection(){
+        SService.setServiceConnection(new ServiceConnection() {
                                           @Override
                                           public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
                                               if (SService.isBinded() == false)
@@ -110,10 +110,13 @@ public class ContextAPI{
                                               SService.updateTaskType("MW");
 
                                               symphonyLock.lock();
-                                              try { symphonyConnected.signal(); }
-                                              finally { symphonyLock.unlock(); }
+                                              try {
+                                                  symphonyConnected.signal();
+                                              } finally {
+                                                  symphonyLock.unlock();
+                                              }
 
-                                              SymphonyServiceConnected= true;
+                                              SymphonyServiceConnected = true;
                                           }
 
                                           @Override
@@ -121,7 +124,7 @@ public class ContextAPI{
                                               Log.d("gulee", "SymphoneyService disconnected.");
                                           }
                                       }
-            );
+        );
         // start Symphony Service
         SService.startService(context);
     }
@@ -131,10 +134,10 @@ public class ContextAPI{
             return;
 
         //  de-register all queries
-        deregisterQuery("DUMMY", dummy_QueryIds);
-        deregisterQuery("DISTANCE", maestro_QueryIds);
-        deregisterQuery("SPEAKER", QueryIds);
-        deregisterQuery("REC", record_QueryIds);
+        //deregisterQuery("DUMMY");
+        //deregisterQuery("DISTANCE");
+        //deregisterQuery("SPEAKER");
+        deregisterQuery("GetVolume");
 
         //ContextAPI.getInstance().stopService(this);
     }
@@ -147,8 +150,10 @@ public class ContextAPI{
                     + " INTERVAL " + queryTokens[1] + " " + queryTokens[2]
                     + " DELAY " + queryTokens[3];
 
+
             SymphonyConnection scThread = new SymphonyConnection(context, queryTokens[0], _query);
             scThread.start();
+
             return true;
 
         } catch (Exception e) {
@@ -158,18 +163,12 @@ public class ContextAPI{
     }
 
 
-    public void deregisterQuery(String context, List<Integer> queryIdsList) {
-
+    public void deregisterQuery(String context) {
         try {
-            // for all registered queries
-            for (int queryId : queryIdsList) {
-                // deregister the query
-                SService.deregisterQuery(queryId);
-                Log.d("SymphonyService", "DeregisterQuery: " + queryId);
-            }
-            // clear the queryId list
-            queryIdsList.clear();
-            registeredContexts.remove(context);
+            int queryId = (Integer)QueryMap.get(context);
+            SService.deregisterQuery(queryId);
+            Log.d("SymphonyService", "DeregisterQuery: " + queryId);
+
         } catch (Exception e) {
             Log.d("SymphonyService", e.toString());
         }

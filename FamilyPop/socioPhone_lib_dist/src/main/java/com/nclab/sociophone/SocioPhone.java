@@ -40,6 +40,7 @@ public class SocioPhone {
     public static boolean isServer = false;
     private int myId = 0;
     private long _record_start_time = 0;
+    private ContextAPI CAPI;
 
 
     /**
@@ -81,8 +82,8 @@ public class SocioPhone {
 
         }
 
-        ContextAPI CAPI = new ContextAPI(mContext);
-        boolean issuceed = CAPI.registerQuery("GetVolume 10000 16000 6000");
+        CAPI = new ContextAPI(mContext);
+        boolean isSucceeded = CAPI.registerQuery("GetVolume 1000 1001 0");
     }
 
     /**
@@ -175,9 +176,9 @@ public class SocioPhone {
         }
 
 
-        recordThread = new RecordProcessThread(sHandler, true, filename);
+        recordThread = new RecordProcessThread(sHandler, true, filename, mContext);
         recordThread.setCheckPoint(ctime);
-        recordThread.start();
+        recordThread.start_record();
         _record_start_time = System.currentTimeMillis();
     }
 
@@ -199,6 +200,7 @@ public class SocioPhone {
             recordThread.stopRecord();
 
         }
+        CAPI.deregisterQuery("GetVolume");
     }
     public void recordRelease()
     {
@@ -340,11 +342,6 @@ public class SocioPhone {
         mNetworkManager.destroy();
         if (recordThread != null) {
             recordThread.stopRecord();
-            try { // [J2Y]
-                recordThread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
         if (isUsingBluetoothHeadset) {
             mContext.unregisterReceiver(btHeadsetStatusRecevicer);

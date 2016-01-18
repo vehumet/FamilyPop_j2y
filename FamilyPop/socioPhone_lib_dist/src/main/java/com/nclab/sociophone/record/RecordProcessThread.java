@@ -1,13 +1,13 @@
 package com.nclab.sociophone.record;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.media.AudioFormat;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.AudioRecord;
-import android.media.MediaRecorder;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.nclab.sociophone.SocioPhone;
 import com.nclab.sociophone.SocioPhoneConstants;
@@ -18,15 +18,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.ArrayList;
 import java.util.Calendar;
 
-import static android.content.Context.MODE_WORLD_READABLE;
-
-public class RecordProcessThread extends Thread
+public class RecordProcessThread
 {
     private AudioRecord audioRecord;
     private int _bufferSize = 0;
@@ -39,231 +35,54 @@ public class RecordProcessThread extends Thread
     public boolean filter = false;
     Handler mHandler;
     int sampleRate = 8000;
-    long window_size = SocioPhoneConstants.windowSize;
+    long window_size = SocioPhoneConstants.windowSize; // 300
     long nextCheckPoint = Long.MAX_VALUE;
     // Volume
     boolean volume;
     String mFilename;
     double _sound_amplitude;
-
+    private BroadcastReceiver symphonyReceiver;
+    Context mContext;
 
     //FileOutputStream os = null;
-    public RecordProcessThread(Handler handler, boolean volume, String filename)
+    public RecordProcessThread(Handler handler, boolean volume, String filename, Context mContext)
     {
         mHandler = handler;
         mFilename = filename;
-
-        //_bufferSize = AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_STEREO, AudioFormat.ENCODING_PCM_16BIT)*3;
         _bufferSize = 100 * 1024;
-//        AudioRecord audioRecord = new AudioRecord(MediaRecorder.AudioSource.DEFAULT, MMCtrlParam.recordRate, 1, AudioFormat.ENCODING_PCM_16BIT, bufferSize);
-        audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, 100 * 1024); // 100KB Buffer
-
-        this.volume = volume;
+        this.mContext = mContext;
     }
 
     public void setCheckPoint(long time) {
         nextCheckPoint = time;
     }
 
-    public void run()
+    public void start_record()
     {
-        super.run();
-        Log.i("MYTAG", "Recorder Thread is running");
-        while (audioRecord.getState() == AudioRecord.STATE_UNINITIALIZED)
-        {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-                mHandler.obtainMessage(999, e).sendToTarget();
-            }
-        }
+        Log.i("gulee", "Recorder Thread is running");
+        BroadcastReceiver symphonyReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                // TODO Auto-generated method stub
+                String ctxName = intent.getStringExtra("context");
+                String ctxVal = intent.getStringExtra("result");
 
-        audioRecord.startRecording();
+                Log.d("gulee", "StartRecord context: " + ctxName + ", result: " + ctxVal);
 
-        long size = 0;
-        int received = 0;
-        long sum = 0;
-        int buffer_size = 2000;
-        short[] buffer = new short[buffer_size];
-        //ArrayList<Short> wav_buffer = new ArrayList<Short>(); // back 151222 memleak
-        boolean flag = false;
-        boolean warm = false;
+                if (ctxName == null)
+                    return;
 
-        //=====
-        // recording
-        byte data[] = new byte[_bufferSize];
-        String filename = getTempFilename();
-        FileOutputStream os = null;
-        try
-        {
-            os = new FileOutputStream(filename);
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
-
-        int read = 0;
-
-
-
-        while (_recording)
-        {
-            // If it is recording state, read from buffer, and write to file
-//			if(os == null && warm) {
-//        		try {
-//        			Log.i("MYTAG", "init file!");
-//        			os = new FileOutputStream(getRawFilename());
-//        		}
-//        		catch(Exception e){
-//        			e.printStackTrace();
-//        			mHandler.obtainMessage(SocioPhoneConstants.DISPLAY_LOG, "Error on file initialization");
-//        		}
-//        	}
-
-            // back 151222
-            //received = audioRecord.read(buffer, 0, buffer_size);
-//            for (int i = 0; i < received; ++i)
-//                wav_buffer.add(buffer[i]);
-            //writeAudioDataToFile();
-            // ========================================================================
-            received = audioRecord.read(buffer, 0, buffer_size);
-            if( read>0)
-            {
-            }
-            if( AudioRecord.ERROR_INVALID_OPERATION != read )
-            {
-                try
-                {
-                    for( int i=0; i<buffer.length; i++)
-                    {
-                        os.write(shortToByte(buffer[i]));
-                    }
-                    //os.write(shortToByte(buffer[0]));
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
+                if (ctxName.equals("GetVolume")) {
+                    long temp = System.currentTimeMillis() + SocioPhoneConstants.deviceTimeOffset;
+                    _sound_amplitude = Double.parseDouble(ctxVal);
+                    Log.d("gulee", "StartRecord context: " + ctxName + ", result: " + ctxVal);
+                    mHandler.obtainMessage(SocioPhoneConstants.SIGNAL_VOLUME_WINDOW, new VolumeWindow(temp, Double.parseDouble(ctxVal)) ).sendToTarget();
                 }
             }
+        };
 
+        mContext.registerReceiver(symphonyReceiver, new IntentFilter("com.nclab.partitioning.DEFAULT"));
 
-            //========================================================================
-            int averageSoundLevel = 0;
-            for (int i = 0; i < received; i++)
-            {
-                //averageSoundLevel += Math.abs(buffer[i]);
-                averageSoundLevel += Math.abs(buffer[i]);
-            }
-            if( averageSoundLevel == 0 ||
-                received == 0 )
-            {
-                float error = 0;
-                error++;
-            }
-            averageSoundLevel /= received;
-            _sound_amplitude = (averageSoundLevel / 1);
-            //int amplitude = (buffer[0] & 0xff) << 8 | buffer[1];
-            //_sound_amplitude = 20 * Math.log10((double)Math.abs(amplitude) / 32768);
-
-
-//			try {
-//				if(os != null && warm) {
-//                    byte[] buffer_bytes = shortToBytes(buffer, received);
-//                    os.write(buffer_bytes, 0, buffer_bytes.length);
-//                }
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//				mHandler.obtainMessage(SocioPhoneConstants.DISPLAY_LOG, "Error on file writting");
-//			}
-
-
-            long temp = System.currentTimeMillis() + SocioPhoneConstants.deviceTimeOffset;
-            if (temp > nextCheckPoint)
-            {
-                flag = true;
-                do {
-                    nextCheckPoint += window_size;
-                }
-                while (temp > nextCheckPoint);
-            }
-            size += received;
-
-            //window process
-            if (!volume)
-            {
-                continue;
-            }
-            else if (warm)
-            {
-                for (int i = 0; i < received; i++)
-                {
-                    int intensity = buffer[i];
-                    sum += intensity * intensity;
-                }
-            }
-            if (flag)
-            {
-                //double decibel = (10 * Math.log10(sum/(double)size));
-                double decibel = sum / (double) size;
-                if (warm)
-                {
-                    if (filter)
-                    {
-                        //decibel = vFilter.getAmplitude(datab, datac) / (double) size;
-                    }
-                    mHandler.obtainMessage(SocioPhoneConstants.SIGNAL_VOLUME_WINDOW, new VolumeWindow(nextCheckPoint - window_size, decibel)).sendToTarget();
-                }
-                size = 0;
-                sum = 0;
-                warm = true;
-                flag = false;
-                datac = 0;
-                //Log.i("MYTAG", "Recorder Thread is warmed up");
-            }
-        }
-
-        try
-        {
-            os.close();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-//		if(os != null) {
-//			try {
-//				os.flush();
-//				os.close();
-//
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-
-        audioRecord.stop();
-        audioRecord.release();
-        audioRecord = null;
-
-
-
-        // back 151222 memleak
-        // wav 파일 저장
-//        short[] wav_buffer_array = new short[wav_buffer.size()];
-//
-//        for (int i = 0; i < wav_buffer_array.length; ++i)
-//        {
-//            wav_buffer_array[i] = wav_buffer.get(i);
-//        }
-//
-//        Wave waveFile = new Wave(sampleRate, (short) 1, wav_buffer_array, 0, wav_buffer.size() - 1);
-//
-//        waveFile.wroteToFile(GetFilePath(), GetWavFileName());
-
-        stopRecording();
     }
 
     public byte[] shortToBytes(short[] shortsA, int sizeInShorts)
