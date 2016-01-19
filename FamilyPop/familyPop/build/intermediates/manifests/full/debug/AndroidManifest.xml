@@ -93,6 +93,11 @@
         <activity
             android:name="com.j2y.familypop.activity.lobby.Activity_locatorWaitingForConnection"
             android:label="@layout/activity_dialogue_start_locator_waitingforconnection" />
+        <activity
+            android:name="com.j2y.familypop.activity.lobby.Activity_locatorNowCalibrating"
+            android:label="@layout/activity_dialogue_start_locator_nowcalibrating" />
+        <!-- <activity android:name="com.j2y.familypop.activity.lobby.Activity_locatorNowCalibrating" android:lable="@layout/activity_dialogue_start_locator_nowcalibrating"></activity> -->
+
     </application>
 
 </manifest>

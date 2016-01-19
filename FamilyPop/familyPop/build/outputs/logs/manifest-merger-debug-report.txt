@@ -194,3 +194,9 @@ ADDED from AndroidManifest.xml:71:9
 		ADDED from AndroidManifest.xml:71:104
 	android:name
 		ADDED from AndroidManifest.xml:71:19
+activity#com.j2y.familypop.activity.lobby.Activity_locatorNowCalibrating
+ADDED from AndroidManifest.xml:72:9
+	android:label
+		ADDED from AndroidManifest.xml:72:98
+	android:name
+		ADDED from AndroidManifest.xml:72:19

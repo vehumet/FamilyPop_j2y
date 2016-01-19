@@ -4,6 +4,7 @@ import android.content.Intent;
 import com.j2y.familypop.activity.Activity_clientMain;
 import com.j2y.familypop.activity.Activity_serverMain;
 import com.j2y.familypop.activity.lobby.Activity_title;
+import com.j2y.familypop.client.FpcLocalization_Client;
 import com.j2y.familypop.client.FpcRoot;
 import com.j2y.familypop.client.FpcTalkRecord;
 import com.j2y.familypop.server.FpsRoot;
@@ -48,6 +49,7 @@ public class MainActivity extends Activity
 	public static MainActivity Instance;
 	public FpsRoot _fpsRoot;
 	public FpcRoot _fpcRoot;
+    public FpcLocalization_Client _localization;
 
     public double _calibration_width_length;
     public double _calibration_height_length;
@@ -58,6 +60,9 @@ public class MainActivity extends Activity
 
     //debug
     public String _deviceRole;
+
+    // # localization locator 역할용 클라이언트.
+
 
     //client init info
     //public boolean _ready;

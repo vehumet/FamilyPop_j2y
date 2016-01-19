@@ -175,9 +175,10 @@
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
         android:id="@+id/layout_client_mode_bubble_regulation"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_marginTop="100dp">
 
+        <!--VolThreshold-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -211,6 +212,7 @@
             android:longClickable="true"
             android:visibility="gone"/>
 
+        <!--VolThreshold  end -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -325,7 +327,8 @@
             android:checked="false"
             android:layout_gravity="center_horizontal"
             android:textOff="j2y_mode"
-            android:textOn="sociophone_mode" />
+            android:textOn="sociophone_mode"
+            android:visibility="gone"/>
 
     </LinearLayout>
 

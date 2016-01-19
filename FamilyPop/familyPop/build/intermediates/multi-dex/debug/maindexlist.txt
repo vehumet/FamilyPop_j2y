@@ -132,6 +132,7 @@ Jama/SingularValueDecomposition.class
 com/j2y/familypop/activity/lobby/Activity_title.class
 processing/core/PApplet$RegisteredMethods.class
 cps/mobilemaestro/library/MMSender.class
+com/j2y/familypop/activity/lobby/Activity_locatorWaitingForConnection$1.class
 com/j2y/familypop/server/FpsTalkUser.class
 processing/core/PApplet$RendererChangeException.class
 processing/event/TouchEvent.class

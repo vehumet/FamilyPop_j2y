@@ -28,6 +28,7 @@ public class Activity_locatorNowCalibrating extends BaseActivity implements View
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_dialogue_start_locator_nowcalibrating);
+
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------

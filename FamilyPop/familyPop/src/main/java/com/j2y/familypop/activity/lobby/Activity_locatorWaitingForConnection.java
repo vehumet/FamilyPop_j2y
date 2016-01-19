@@ -3,6 +3,7 @@ package com.j2y.familypop.activity.lobby;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
@@ -32,6 +33,29 @@ public class Activity_locatorWaitingForConnection extends BaseActivity implement
 
         _button_home = (ImageButton) findViewById(R.id.button_start_locator_waiting_topmenu_home);
         _button_home.setOnClickListener(this);
+
+        //  그냥 3초후에 비교 해보고 기면 씬전환 아니면 전 화면으로.
+        new Handler().postDelayed(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                if (MainActivity.Instance._localization._client.connected)
+                {
+                    startActivity(new Intent(MainActivity.Instance, Activity_locatorNowCalibrating.class));
+                    //startActivity(new Intent(MainActivity.Instance, Activity_locatorWaitingForConnection.class));
+                }
+                else
+                {
+                    if( MainActivity.Instance._localization != null)
+                        MainActivity.Instance._localization.Disconnect();
+
+                    MainActivity.Instance._localization = null;
+                    finish();
+                    //finish();
+                }
+            }
+        }, 3000);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------
