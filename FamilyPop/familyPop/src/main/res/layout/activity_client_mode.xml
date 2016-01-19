@@ -105,7 +105,17 @@
             android:layout_alignParentLeft="true"
             android:textStyle="bold"
             android:textColor="#ffffff" />
+
     </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="clear"
+        android:id="@+id/button_client_mode_view_clearBubble"
+        android:textColor="#ffffff"
+        android:layout_marginLeft="0dp"
+        android:layout_below="@+id/layout_client_mode_room_info" />
+
 
     <!-- 버블 이미지 -->
     <FrameLayout
@@ -115,7 +125,6 @@
         android:layout_marginTop="250dp"
         android:id="@+id/layout_image_view"
         >
-
         <ImageButton
             android:layout_width="200dp"
             android:layout_height="200dp"
@@ -175,8 +184,8 @@
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
         android:id="@+id/layout_client_mode_bubble_regulation"
-        android:visibility="visible"
-        android:layout_marginTop="100dp">
+        android:visibility="gone"
+        android:layout_marginTop="50dp">
 
         <!--VolThreshold-->
         <TextView
@@ -186,13 +195,12 @@
             android:text="0"
             android:id="@+id/textView_regulation_0"
             android:textColor="#ffffff"
-            android:visibility="gone"/>
-
+            android:visibility="visible"/>
         <SeekBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/seekBar_regulation_0"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -203,14 +211,14 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:textColor="#ffffff"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
         <SeekBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/seekBar_regulation_1"
             android:longClickable="true"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
         <!--VolThreshold  end -->
         <TextView

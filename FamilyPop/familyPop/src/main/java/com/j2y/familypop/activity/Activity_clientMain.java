@@ -88,6 +88,8 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
     private Button _button_feature_quitdialogue;
     private Button _button_feature_savedialogue;
 
+    private Button _button_client_mode_view_clearBubble;
+
     // text info
     private boolean _plugVisibleInfo;
     private TextView _text_date;
@@ -95,6 +97,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
     public TextView _text_user;
     public TextView _text_color_pos;
     public LinearLayout _layout_roomInfo;
+
 
     // 버블
     private ImageButton _button_redbubble;
@@ -382,6 +385,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
                 FpNetFacade_client.Instance.SendPacket_req_regulation_info(s0, s1, s2, s3,voice_hold, mode, smileEffect, plusBubbleSize);
 
                 break;
+
             case R.id.button_client_mode_regulation_cancel: // 취소함
                 _layout_regulation.setVisibility(View.INVISIBLE);
 
@@ -389,6 +393,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
                 _layout_bubbleImage.setVisibility(View.VISIBLE);
                 break;
 
+            case R.id.button_client_mode_view_clearBubble:
             case R.id.button_client_mode_clearBubble:
                 FpNetFacade_client.Instance.SendPacket_req_clearBubble();
                 break;
@@ -1087,6 +1092,10 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         Date currentTime = new Date(System.currentTimeMillis());
         String time = simpleDateFormat.format(currentTime);
         //
+
+        _button_client_mode_view_clearBubble = (Button) findViewById(R.id.button_client_mode_view_clearBubble);
+        _button_client_mode_view_clearBubble.setOnClickListener(this);
+
 
         _layout_roomInfo = (LinearLayout) findViewById(R.id.layout_client_mode_room_info);
         _text_date = (TextView) findViewById(R.id.text_client_date);
