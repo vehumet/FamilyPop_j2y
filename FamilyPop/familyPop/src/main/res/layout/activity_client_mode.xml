@@ -314,7 +314,7 @@
                 android:id="@+id/button_client_mode_clearBubble"
                 android:text="clear"
                 android:textColor="#ffffff"
-                android:layout_marginLeft="50dp" />
+                android:layout_marginLeft="0dp" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -322,21 +322,31 @@
                 android:text="cancel"
                 android:id="@+id/button_client_mode_regulation_cancel"
                 android:textColor="#ffffff"
-                android:layout_marginLeft="50dp" />
+                android:layout_marginLeft="0dp" />
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New ToggleButton"
+                android:id="@+id/toggleButton_voice_processing_mode"
+                android:checked="false"
+                android:textOff="j2y_mode"
+                android:textOn="sociophone_mode"
+                android:visibility="visible"/>
 
 
         </LinearLayout>
 
-        <ToggleButton
-            android:layout_width="160dp"
-            android:layout_height="match_parent"
-            android:text="New ToggleButton"
-            android:id="@+id/toggleButton_voice_processing_mode"
-            android:checked="false"
-            android:layout_gravity="center_horizontal"
-            android:textOff="j2y_mode"
-            android:textOn="sociophone_mode"
-            android:visibility="gone"/>
+        <!--<ToggleButton-->
+            <!--android:layout_width="160dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:text="New ToggleButton"-->
+            <!--android:id="@+id/toggleButton_voice_processing_mode"-->
+            <!--android:checked="false"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:textOff="j2y_mode"-->
+            <!--android:textOn="sociophone_mode"-->
+            <!--android:visibility="gone"/>-->
 
     </LinearLayout>
 
