@@ -3,3 +3,4 @@ FamilyPop/socioPhone_lib_dist/build/*
 FamilyPop/build/*
 FamilyPop/.idea/*
 FamilyPop/.gradle/*
+*.iml

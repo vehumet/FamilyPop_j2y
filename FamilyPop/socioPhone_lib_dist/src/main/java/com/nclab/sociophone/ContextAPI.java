@@ -1,9 +1,5 @@
 package com.nclab.sociophone;
 
-/**
- * Created by gulee-lab on 15. 12. 15..
- */
-
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -20,6 +16,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
+
+/**
+ * Created by gulee-lab on 15. 12. 15..
+ */
 
 public class ContextAPI{
 
@@ -63,7 +63,6 @@ public class ContextAPI{
         public SymphonyConnection(Context context, String contextName, String query, long starttime) {
             this.context = context;
             this.contextName = contextName;
-            this.contextName = contextName;
             this.query = query;
             this.starttime = starttime;
         }
@@ -89,7 +88,8 @@ public class ContextAPI{
             Log.d("ContextAPI", "RegisterQuery: " + query + " => " + queryId);
 
             // add queryId to the list
-            QueryMap.put(query, queryId);
+            Log.d("SymphonyService", "queryId: " + queryId + "at after registerQuery, put to querymap");
+            QueryMap.put(contextName, queryId);
         }
     }
 
@@ -157,7 +157,7 @@ public class ContextAPI{
             return true;
 
         } catch (Exception e) {
-            Log.d("SymphonyService", "SService-> registerQuery exception : " + e.toString());
+            Log.e("SymphonyService", "SService-> registerQuery exception : " + e.toString());
             return false;
         }
     }
@@ -165,12 +165,13 @@ public class ContextAPI{
 
     public void deregisterQuery(String context) {
         try {
-            int queryId = (Integer)QueryMap.get(context);
+            int queryId = QueryMap.get(context);
+            Log.d("SymphonyService", "queryId: " + queryId + "at deregisterQuery");
             SService.deregisterQuery(queryId);
             Log.d("SymphonyService", "DeregisterQuery: " + queryId);
 
         } catch (Exception e) {
-            Log.d("SymphonyService", e.toString());
+            Log.e("SymphonyService", e.toString());
         }
     }
 
@@ -218,6 +219,7 @@ public class ContextAPI{
         public void startService(Context context) {
             // 서비스 인텐트를 생성한다.
             final Intent serviceIntent = new Intent(SERVICE_ACTION);
+            serviceIntent.setPackage("com.nclab.partitioning.service");
 
             // 서비스를 연결한다.
             conn = new InnerServiceConnection();
@@ -249,7 +251,7 @@ public class ContextAPI{
                     m_interface.updateTaskType(taskType);
                 } catch (RemoteException e) {
                     // 예외를 로그에 기록한다.
-                    Log.d("SymphonyService", e.toString());
+                    Log.e("SymphonyService", e.toString());
                 }
             }
         }
@@ -264,7 +266,7 @@ public class ContextAPI{
                     return queryId;
                 } catch (RemoteException e) {
                     // 예외를 로그에 기록한다.
-                    Log.d("SymphonyService", e.toString());
+                    Log.e("SymphonyService", e.toString());
                 }
             }
             return -1;
@@ -279,7 +281,7 @@ public class ContextAPI{
                     return m_interface.deregisterQuery(queryId);
                 } catch (RemoteException e) {
                     // 예외를 로그에 기록한다.
-                    Log.d("SymphonyService", e.toString());
+                    Log.e("SymphonyService", e.toString());
                 }
             }
             // 빈 값을 반환한다.

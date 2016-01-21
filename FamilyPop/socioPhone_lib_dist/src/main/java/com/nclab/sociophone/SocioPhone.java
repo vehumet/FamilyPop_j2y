@@ -17,6 +17,7 @@ import com.nclab.sociophone.interfaces.TurnDataListener;
 import com.nclab.sociophone.network.NetworkManager;
 import com.nclab.sociophone.processors.SoundProcessManager;
 import com.nclab.sociophone.processors.VolumeWindow;
+import com.nclab.sociophone.record.AudioRecorderService;
 import com.nclab.sociophone.record.RecordProcessThread;
 
 /**
@@ -41,6 +42,7 @@ public class SocioPhone {
     private int myId = 0;
     private long _record_start_time = 0;
     private ContextAPI CAPI;
+    private Intent audioRecordIntent;
 
 
     /**
@@ -60,6 +62,7 @@ public class SocioPhone {
         dHandler = new DisplayHandler(this);
         mNetworkManager = new NetworkManager(sHandler, dHandler);
         sHandler.setNetworkManager(mNetworkManager);
+
         if (!bluetoothHeadset) {
             //recordThread = new RecordProcessThread(sHandler, true);
         } else {
@@ -175,11 +178,16 @@ public class SocioPhone {
             displayInterface.onDisplayMessageArrived(0, "TS Client: " + (System.currentTimeMillis() + SocioPhoneConstants.deviceTimeOffset));
         }
 
-
         recordThread = new RecordProcessThread(sHandler, true, filename, mContext);
         recordThread.setCheckPoint(ctime);
-        recordThread.start_record();
+        recordThread.start_record(); // get volume
         _record_start_time = System.currentTimeMillis();
+        // FIXME start AudioRecorderService. It registers rec query
+        Log.i("JSIM", "start audioRecorderService");
+        audioRecordIntent = new Intent("com.nclab.sociophone.record.AudioRecorderService");
+        audioRecordIntent.setClass(mContext, AudioRecorderService.class);
+        audioRecordIntent.putExtra("sociophone request", "startService");
+        mContext.startService(audioRecordIntent);
     }
 
     /**
@@ -201,6 +209,11 @@ public class SocioPhone {
 
         }
         CAPI.deregisterQuery("GetVolume");
+        // FIXME stop AudioRecorderService. It deregisters rec query
+        audioRecordIntent = new Intent("com.nclab.sociophone.record.AudioRecorderService");
+        audioRecordIntent.setClass(mContext, AudioRecorderService.class);
+        //audioRecordIntent.putExtra("sociophone request", "stopService");
+        mContext.stopService(audioRecordIntent);
     }
     public void recordRelease()
     {
