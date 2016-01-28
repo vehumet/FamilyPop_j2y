@@ -21,6 +21,7 @@ import com.j2y.network.base.FpNetMessageCallBack;
 import com.j2y.network.base.data.FpNetDataNoti_changeScenario;
 import com.j2y.network.base.data.FpNetDataNoti_roomInfo;
 import com.j2y.network.base.data.FpNetDataReq_TicTacToe_index;
+import com.j2y.network.base.data.FpNetDataReq_bubbleMove;
 import com.j2y.network.base.data.FpNetDataReq_changeScenario;
 import com.j2y.network.base.data.FpNetDataReq_regulation_info;
 import com.j2y.network.base.data.FpNetDataReq_shareImage;
@@ -81,6 +82,9 @@ public class FpNetServer_packetHandler
         // regulation_inf
         _net_server.RegisterMessageCallBack(FpNetConstants.CSReq_regulation_Info,onReq_regulation_info);
         _net_server.RegisterMessageCallBack(FpNetConstants.CSReq_clearBubble, onReq_clearBubble);
+
+        // user message
+        _net_server.RegisterMessageCallBack(FpNetConstants.CSReq_userInput_bubbleMove, onReq_userInput_bubbleMove);
     }
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     // 클라 연결
@@ -515,6 +519,26 @@ public class FpNetServer_packetHandler
                 outMsg._smile_events.addAll(talk_user._smile_events);
 
                 client.SendPacket(FpNetConstants.SCRes_TalkRecordInfo, outMsg);
+            }
+        }
+    };
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------
+    // 사용자 메세지
+    FpNetMessageCallBack onReq_userInput_bubbleMove = new FpNetMessageCallBack()
+    {
+        @Override
+        public void CallBack(FpNetIncomingMessage inMsg)
+        {
+            if( Activity_serverMain.Instance != null)
+            {
+                //Log.i("[J2Y]"," onReq_userInput_bubbleMove ");
+
+                FpNetDataReq_bubbleMove data = new FpNetDataReq_bubbleMove();
+                data.Parse(inMsg);
+                //Log.i("[J2Y]","x : "+data._dirX + "y : " + data._dirY);
+
+                Activity_serverMain.Instance.MoveUserBubble_add(data._dirX, data._dirY, data._clientid );
             }
         }
     };

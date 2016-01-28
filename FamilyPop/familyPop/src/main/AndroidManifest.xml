@@ -48,6 +48,8 @@
         <activity android:name="com.j2y.familypop.activity.Activity_serverMain" android:screenOrientation="landscape" android:label="@layout/activity_main"></activity>
         <activity android:name="com.j2y.familypop.activity.Activity_clientMain" android:label="@layout/activity_client"></activity>
 
+        <!-- user interaction  이렇게 하면 안될거 같음. -->
+        <!--<activity android:name="com.j2y.familypop.activity.Activity_userInteraction" android:label="@layout/activity_client_mode_interaction"></activity>-->
 
         <activity android:name="com.j2y.familypop.activity.lobby.Activity_title" android:label="@layout/activity_title"></activity>
         <!--<activity android:name="com.j2y.familypop.activity.lobby.Activity_mainRolenRole" android:label="@layout/activity_role"></activity>-->

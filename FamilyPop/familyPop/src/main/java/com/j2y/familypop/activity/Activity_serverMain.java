@@ -747,4 +747,22 @@ public class Activity_serverMain extends PApplet
                 user._attractor.body.setTransform(worldPos, 0f);
         }
     }
+
+    public void MoveUserBubble_add(float x, float y, int userId)
+    {
+        Vec2 worldPos;// = _box2d.coordPixelsToWorld(x, y);
+        for (FpsTalkUser user : _talk_users.values())
+        {
+            if (user._attractor == null)
+                continue;
+            if(userId == user._net_client._clientID)
+            {
+                worldPos = user._attractor.body.getPosition();
+                worldPos.x += x;
+                worldPos.y += y;
+
+                user._attractor.body.setTransform(worldPos, 0f);
+            }
+        }
+    }
 }

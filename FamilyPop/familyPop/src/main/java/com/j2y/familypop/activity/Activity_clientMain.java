@@ -101,6 +101,9 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
 
     // 버블
     private ImageButton _button_redbubble;
+    private TouchMove _touchMove;
+
+
     private TextView _text_voiceAmplitude;
     private TextView _text_voiceAmplitudeAverage;
     private ImageButton _shared_image;
@@ -685,9 +688,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
     }
     public void ExitRoom()
     {
-
         //SaveTalkRecord();
-
 
         startActivity(new Intent(MainActivity.Instance, Activity_talkHistory.class));
         finish();
@@ -858,6 +859,13 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
                     _voiceAvgCount = 0;
                     FpNetFacade_client.Instance.SendPacket_familyTalk_voice(_voiceAmpAvg);
                 }
+
+                // 버블이동 패킷 을 서버로 보낸다.
+                if( _touchMove._actionDown )
+                {
+                    Log.i("[J2Y]", "_isClick");
+                    FpNetFacade_client.Instance.SendPacket_req_userInput_bubbleMove(_touchMove._normalX, -_touchMove._normalY);
+                }
             }
 
             super.onProgressUpdate(values);
@@ -911,12 +919,9 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
 //        // return temp Uri
 //        return Uri.fromFile(f);
 
-
     	 String status = Environment.getExternalStorageState();
         if (!status.equals(Environment.MEDIA_MOUNTED))
             return null;
-
-
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 
             File file = new File(Environment.getExternalStorageDirectory(), "temp.jpg");
@@ -1053,7 +1058,8 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------
-    private void init_guiWidgets() {
+    private void init_guiWidgets()
+    {
         ((Button) findViewById(R.id.button_client_featuremenu_familybomb)).setOnClickListener(this);
         ((Button) findViewById(R.id.button_client_featuremenu_talk)).setOnClickListener(this);
         ((Button) findViewById(R.id.button_client_featuremenu_smile_event)).setOnClickListener(this);
@@ -1062,6 +1068,11 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
 
         _button_redbubble = (ImageButton) findViewById(R.id.button_client_redbubble);
         _button_redbubble.setOnClickListener(this);
+        _touchMove = new TouchMove(_button_redbubble,
+                                   _button_redbubble.getX(),
+                                   _button_redbubble.getY());
+
+        _touchMove._move = false;
 
         _image_smilebubble = (ImageView) findViewById(R.id.image_createMode_smile);
         _image_boomChosen = (ImageView) findViewById(R.id.image_message_boom_you_were_chosen);

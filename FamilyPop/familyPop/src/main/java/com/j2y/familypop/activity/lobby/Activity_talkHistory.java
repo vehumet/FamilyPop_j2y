@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.j2y.engine.ColumnListView;
 import com.j2y.familypop.MainActivity;
 import com.j2y.familypop.activity.BaseActivity;
+import com.j2y.familypop.activity.TouchMove;
 import com.j2y.familypop.activity.client.Activity_clientStart;
 import com.j2y.familypop.activity.server.Activity_serverStart;
 import com.j2y.familypop.backup.Dialog_MessageBox_ok_cancel;
@@ -578,91 +579,112 @@ public class Activity_talkHistory extends BaseActivity implements View.OnClickLi
     }
 
     // class
-    public class TouchMove implements View.OnTouchListener
-    {
-        private final int _START_DRAG = 0;
-        private final int _END_DRAG = 1;
-        private int _isMoving;
-        private float _offset_x, _offset_y;
-        private float _action_downX;
-        private float _action_downY;
-
-        private boolean _actionDown = false;
-        private boolean _start_yn = true;
-        public boolean _isClick = false;
-
-        private float _startPosx = 780.0f;
-        private float _startPosy;
-
-        View _src;
-        public TouchMove(View src , float startPosX, float startPosy )
-        {
-            _src = src;
-            _src.setOnTouchListener(this);
-
-            _startPosx = startPosX;
-            _startPosy = startPosy;
-
-            _src.setX(_startPosx);
-            _src.setY(_startPosy);
-        }
-
-        @Override
-        public boolean onTouch(View v, MotionEvent event)
-        {
-
-            int eventaction = event.getAction();
-            switch (eventaction) {
-                case MotionEvent.ACTION_DOWN: // 손가락이 스크린에 닿았을 때
-
-                    if (_start_yn) {
-                        _offset_x = event.getRawX();
-                        _offset_y = event.getRawY();
-                        _start_yn = false;
-                    }
-
-                    if( !_actionDown )
-                    {
-                        _actionDown = true;
-
-                        _action_downX = event.getRawX();
-                        _action_downY = event.getRawY();
-                    }
-
-                    _isMoving = _START_DRAG;
-
-                    _isClick = true;
-
-                    break;
-                case MotionEvent.ACTION_MOVE: // 닿은 채로 손가락을 움직일 때
-
-                    int posx = (int) ((event.getRawX()) - (_offset_x - _startPosx));
-                    int posy = (int) (event.getRawY() - _offset_y);
-
-                    float effectiveAreaX = Math.abs(event.getRawX() - _action_downX );
-                    float effectiveAreaY = Math.abs(event.getRawY() - _action_downY);
-
-                    if( effectiveAreaX > 50 ||
-                            effectiveAreaY  > 50   )
-                    {
-                        _isClick = false;
-                    }
-
-                    //v.setX((int) (event.getRawX()) - (_offset_x - _startPosx));
-                    //v.setY((int) event.getRawY() - _offset_y);
-
-                    v.setX(posx);
-                    v.setY(posy);
-
-
-                    break;
-                case MotionEvent.ACTION_UP: // 닿았던 손가락을 스크린에서 뗄때
-                    _isMoving = _END_DRAG;
-                    _actionDown = false;
-                    break;
-            }
-
-            return false;
-        }
-    }
+//    public class TouchMove implements View.OnTouchListener
+//    {
+//        private final int _START_DRAG = 0;
+//        private final int _END_DRAG = 1;
+//        private int _isMoving;
+//        private float _offset_x, _offset_y;
+//        private float _action_downX;
+//        private float _action_downY;
+//
+//        private boolean _actionDown = false;
+//        private boolean _start_yn = true;
+//        public boolean _isClick = false;
+//        public boolean _move = true;
+//
+//        private float _startPosx = 780.0f;
+//        private float _startPosy;
+//
+//
+//        public float _normalX = 0.0f;
+//        public float _normalY = 0.0f;
+//
+//        View _src;
+//        public TouchMove(View src , float startPosX, float startPosy )
+//        {
+//            _src = src;
+//            _src.setOnTouchListener(this);
+//
+//            _startPosx = startPosX;
+//            _startPosy = startPosy;
+//
+//            if( src != null)
+//            {
+//                _src.setX(_startPosx);
+//                _src.setY(_startPosy);
+//            }
+//        }
+//
+//        @Override
+//        public boolean onTouch(View v, MotionEvent event)
+//        {
+//
+//            int eventaction = event.getAction();
+//            switch (eventaction)
+//            {
+//                case MotionEvent.ACTION_DOWN: // 손가락이 스크린에 닿았을 때
+//
+//                    if (_start_yn)
+//                    {
+//                        _offset_x = event.getRawX();
+//                        _offset_y = event.getRawY();
+//                        _start_yn = false;
+//                    }
+//
+//                    if( !_actionDown )
+//                    {
+//                        _actionDown = true;
+//
+//                        _action_downX = event.getRawX();
+//                        _action_downY = event.getRawY();
+//                    }
+//
+//                    _isMoving = _START_DRAG;
+//
+//                    _isClick = true;
+//
+//                    break;
+//                case MotionEvent.ACTION_MOVE: // 닿은 채로 손가락을 움직일 때
+//
+//                    int posx = (int) ((event.getRawX()) - (_offset_x - _startPosx));
+//                    int posy = (int) (event.getRawY() - _offset_y);
+//
+//                    float nposx = event.getRawX() - _action_downX;
+//                    float nposy = event.getRawY() - _action_downY;
+//
+//                    float effectiveAreaX = Math.abs(event.getRawX() - _action_downX );
+//                    float effectiveAreaY = Math.abs(event.getRawY() - _action_downY);
+//
+//                    if( effectiveAreaX > 50 ||
+//                            effectiveAreaY  > 50   )
+//                    {
+//                        _isClick = false;
+//                    }
+//
+//                    if( _move )
+//                    {
+//                        v.setX(posx);
+//                        v.setY(posy);
+//                    }
+//                    double dv = Math.sqrt(nposx * nposx + nposy * nposy);
+//
+//                    nposx /= dv;
+//                    nposy /= dv;
+//
+//                    _normalX = nposx;
+//                    _normalY = nposy;
+//
+//                    //Log.i("[J2Y]", "Activity_talkHistory:onDestroy");
+//                    Log.i("[J2Y]", "x : " + _normalX+" y : " + _normalY);
+//
+//                    break;
+//                case MotionEvent.ACTION_UP: // 닿았던 손가락을 스크린에서 뗄때
+//                    _isMoving = _END_DRAG;
+//                    _actionDown = false;
+//                    break;
+//            }
+//            return false;
+//        }
+//    }
 }

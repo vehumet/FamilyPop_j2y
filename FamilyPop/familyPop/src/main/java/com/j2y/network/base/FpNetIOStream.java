@@ -87,7 +87,7 @@ public class FpNetIOStream extends Thread
         packet._data = new byte[header._size];
         int read_bytes = 0;
 
-        Log.i("[J2Y]", "SendPacket_image read");
+        //Log.i("[J2Y]", "SendPacket_image read");
 
         MainActivity.Debug_begin_timecount(MainActivity.Instance._deviceRole+"_ReadPacket");
 
@@ -109,7 +109,7 @@ public class FpNetIOStream extends Thread
         }
 
         MainActivity.Debug_end_timecount();
-        Log.i("[J2Y]", "SendPacket_image read _ end");
+        //Log.i("[J2Y]", "SendPacket_image read _ end");
 
         return packet;
     }

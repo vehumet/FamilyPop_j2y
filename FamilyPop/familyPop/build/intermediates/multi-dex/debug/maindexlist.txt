@@ -62,6 +62,7 @@ com/nclab/sociophone/interfaces/TurnDataListener.class
 com/j2y/familypop/activity/Activity_clientMain$7.class
 cps/mobilemaestro/library/MMUtils.class
 android/support/v4/app/NotificationCompat$Builder.class
+com/j2y/familypop/activity/TouchMove.class
 com/j2y/familypop/client/FpcLocalization_Client.class
 processing/core/PGraphics.class
 android/support/v4/widget/SlidingPaneLayout.class
@@ -91,7 +92,6 @@ com/j2y/familypop/activity/client/Activity_clientGame.class
 com/j2y/familypop/server/FpsScenario_record.class
 com/j2y/familypop/backup/Dialog_MessageBox_ok_cancel.class
 com/j2y/familypop/activity/client/Activity_clientStart$4.class
-com/j2y/familypop/activity/lobby/Activity_talkHistory$TouchMove.class
 cps/mobilemaestro/library/MMMeasureResult$MMPeakData.class
 com/j2y/network/client/FpNetFacade_client.class
 processing/core/PFont.class

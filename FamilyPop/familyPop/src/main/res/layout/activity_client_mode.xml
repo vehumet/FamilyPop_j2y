@@ -107,6 +107,7 @@
             android:textColor="#ffffff" />
 
     </LinearLayout>
+    <!-- 버블 클리어 버튼 -->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -680,4 +681,92 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/text_dialogue"
         android:layout_marginTop="15dp" />
+
+    <!--user interaction-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/layout_client_mode_user_interaction"
+        android:visibility="gone"
+        android:layout_marginTop="50dp"
+        android:background="#ffffff"
+        android:weightSum="1">
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:id="@+id/layout_user_interaction_target_0"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:id="@+id/imageView33"
+                android:background="@drawable/image_target_pink"
+                android:layout_weight="0"
+                android:layout_marginLeft="50dp" />
+
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:id="@+id/imageView_target_pink"
+                android:background="@drawable/image_target_red"
+                android:layout_weight="0"
+                android:layout_marginLeft="50dp" />
+
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:id="@+id/imageView34"
+                android:background="@drawable/image_target_yellow"
+                android:layout_weight="0"
+                android:layout_marginLeft="50dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:id="@+id/linearLayout_user_interaction_target_1"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:id="@+id/imageView35"
+                android:background="@drawable/image_target_green"
+                android:layout_weight="0"
+                android:layout_marginLeft="50dp" />
+
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:id="@+id/imageView36"
+                android:background="@drawable/image_target_phthalogreen"
+                android:layout_weight="0"
+                android:layout_marginLeft="50dp" />
+
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:id="@+id/imageView37"
+                android:background="@drawable/image_target_blue"
+                android:layout_weight="0"
+                android:layout_marginLeft="50dp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:id="@+id/imageView_user_interaction_like"
+            android:background="@drawable/image_like"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100dp" />
+    </LinearLayout>
+
+
 </RelativeLayout>

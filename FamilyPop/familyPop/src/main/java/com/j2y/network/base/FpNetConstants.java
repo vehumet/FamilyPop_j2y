@@ -67,6 +67,10 @@ public class FpNetConstants
 
 	public final static int CSReq_throwback_Tic_Tac_Toe = 4007;
 
+	// 사용자 메세지
+	public final static int CSReq_userInput_bubbleMove = 5000;
+	//public final static int CSReq_userInput_
+
 
 
     //----------------------------------------------------------------------------

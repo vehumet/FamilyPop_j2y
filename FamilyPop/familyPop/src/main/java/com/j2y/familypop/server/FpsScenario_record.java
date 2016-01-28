@@ -242,7 +242,7 @@ public class FpsScenario_record extends FpsScenario_base
 
         if (isBubbleStarting)
         {
-            Log.i("KAIST", "-----Bubble starts: " + currentSpeakerId + "/" + previousSpeakerId);
+            //Log.i("KAIST", "-----Bubble starts: " + currentSpeakerId + "/" + previousSpeakerId);
 
             // 3.1. 이전 버블 발사
             if (_current_bubble != null)
@@ -269,7 +269,7 @@ public class FpsScenario_record extends FpsScenario_base
         }
         else if (isBubbleGrowing)
         {
-            Log.i("KAIST", "Bubble grows: " + currentSpeakerId + "/" + previousSpeakerId);
+            //Log.i("KAIST", "Bubble grows: " + currentSpeakerId + "/" + previousSpeakerId);
 
             if (_current_bubble != null)
                 _current_bubble.PlusMoverRadius(Activity_serverMain.Instance._plusMoverRadius * 0.1f);
@@ -277,7 +277,7 @@ public class FpsScenario_record extends FpsScenario_base
         }
         else if (isBubbleEnding)
         {
-            Log.i("KAIST", "-----Bubble ends: " + currentSpeakerId + "/" + previousSpeakerId);
+           // Log.i("KAIST", "-----Bubble ends: " + currentSpeakerId + "/" + previousSpeakerId);
 
             // 3.1. 이전 버블 발사
             if (_current_bubble != null)
@@ -647,6 +647,8 @@ public class FpsScenario_record extends FpsScenario_base
 
         if(bitmapByteArray != null)
         {
+            //_shareImage = null;
+
             Bitmap shareBitmap = FpNetUtil.ByteArrayToBitmap(bitmapByteArray);
             int nHeight = shareBitmap.getHeight();
             int nWidth = shareBitmap.getWidth();

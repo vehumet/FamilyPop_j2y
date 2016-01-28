@@ -229,17 +229,18 @@ public class MainActivity extends Activity
     private static String _debug_name;
     public static void Debug_begin_timecount(String name)
     {
-        _debug_timecount = 0;
-        _debug_name = name;
-        _debug_timecount = System.currentTimeMillis();
-
-        Log.i("[SI]", _debug_name + "_Start timecount : " + _debug_timecount);
+//        _debug_timecount = 0;
+//        _debug_name = name;
+//        _debug_timecount = System.currentTimeMillis();
+//
+//        Log.i("[SI]", _debug_name + "_Start timecount : " + _debug_timecount);
     }
     public static void Debug_end_timecount()
     {
-        long end = System.currentTimeMillis();
-
-        Log.i("[SI]", _debug_name + "_End timecount : " + _debug_timecount);
-        Log.i("[SI]", _debug_name + "_"+(end -_debug_timecount )  +" milliseconds");
+//        long end = System.currentTimeMillis();
+//
+//        Log.i("[SI]", _debug_name + "_End timecount : " + _debug_timecount);
+//        Log.i("[SI]", _debug_name + "_"+(end -_debug_timecount )  +" milliseconds");
     }
+
 }

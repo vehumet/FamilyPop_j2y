@@ -25,6 +25,7 @@ import com.j2y.network.base.data.FpNetDataNoti_roomInfo;
 import com.j2y.network.base.data.FpNetDataNoti_serverInfo;
 import com.j2y.network.base.data.FpNetDataReq_TicTacToe_Start;
 import com.j2y.network.base.data.FpNetDataReq_TicTacToe_index;
+import com.j2y.network.base.data.FpNetDataReq_bubbleMove;
 import com.j2y.network.base.data.FpNetDataReq_changeScenario;
 import com.j2y.network.base.data.FpNetDataReq_regulation_info;
 import com.j2y.network.base.data.FpNetDataReq_shareImage;
@@ -569,6 +570,14 @@ public class FpNetFacade_client extends FpNetFacade_base
         sendMessage(FpNetConstants.CSReq_familyTalk_voice, reqPaket);
     }
 
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    // 사용자 메세지
+    public void SendPacket_req_userInput_bubbleMove(float dirX, float dirY)
+    {
+        FpNetDataReq_bubbleMove reqPaket = new FpNetDataReq_bubbleMove();
+        reqPaket._dirX = dirX;
+        reqPaket._dirY = dirY;
 
-
+        sendMessage(FpNetConstants.CSReq_userInput_bubbleMove, reqPaket);
+    }
 }
