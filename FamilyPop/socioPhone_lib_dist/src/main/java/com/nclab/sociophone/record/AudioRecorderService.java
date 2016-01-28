@@ -2,14 +2,15 @@ package com.nclab.sociophone.record;
 
 import android.app.Service;
 import android.content.Intent;
-import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
 
 import com.nclab.sociophone.ContextAPI;
+import com.nclab.sociophone.SocioPhone;
+import com.nclab.sociophone.SocioPhoneConstants;
 
-import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -19,6 +20,7 @@ public class AudioRecorderService extends Service {
     // JSIM's code START
 
     private ContextAPI CAPI;
+    String mFilename;
 
     // JSIM's code END
 
@@ -43,6 +45,7 @@ public class AudioRecorderService extends Service {
         if (intent != null && intent.getExtras() != null) {
             String sender = intent.getStringExtra("sociophone request");
             if (sender.equals("startService")) {
+                mFilename = intent.getStringExtra("filename");
                 CAPI.registerQuery("REC 1000 1000 0");
             }
         }
@@ -95,7 +98,7 @@ public class AudioRecorderService extends Service {
      * @return WAV file path.
      */
     public String getWaveFilePath(){
-        String filepath = Environment.getExternalStorageDirectory().getPath();
+        /*String filepath = Environment.getExternalStorageDirectory().getPath();
         File file = new File(filepath, AUDIO_RECORDER_FOLDER);
 
         if(!file.exists()){
@@ -103,7 +106,18 @@ public class AudioRecorderService extends Service {
         }
 
         Log.e("FILE", file.getAbsolutePath() + "/" + System.currentTimeMillis() + AUDIO_RECORDER_FILE_EXT_WAV);
-        return file.getAbsolutePath() + "/" + System.currentTimeMillis() + AUDIO_RECORDER_FILE_EXT_WAV;
+        return file.getAbsolutePath() + "/" + System.currentTimeMillis() + AUDIO_RECORDER_FILE_EXT_WAV;*/
+        Log.i("JSIM", mFilename + "_" + convertToHRF(System.currentTimeMillis() + SocioPhoneConstants.deviceTimeOffset) + "_" + (SocioPhone.isServer ? "B" : "A") + ".wav");
+        return mFilename + "_" + convertToHRF(System.currentTimeMillis() + SocioPhoneConstants.deviceTimeOffset) + "_" + (SocioPhone.isServer ? "B" : "A") + ".wav";
+    }
+
+    private String convertToHRF(long time) {
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(time);
+        String res = (c.get(Calendar.MONTH) + 1) + "-" + c.get(Calendar.DATE) + "-" + c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE);
+
+        return res;
+
     }
 
     /**

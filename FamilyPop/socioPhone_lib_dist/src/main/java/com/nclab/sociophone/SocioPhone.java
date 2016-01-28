@@ -187,6 +187,7 @@ public class SocioPhone {
         audioRecordIntent = new Intent("com.nclab.sociophone.record.AudioRecorderService");
         audioRecordIntent.setClass(mContext, AudioRecorderService.class);
         audioRecordIntent.putExtra("sociophone request", "startService");
+        audioRecordIntent.putExtra("filename", filename);
         mContext.startService(audioRecordIntent);
     }
 
