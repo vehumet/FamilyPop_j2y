@@ -37,8 +37,7 @@ public class RecordProcessThread
     int sampleRate = 8000;
     long window_size = SocioPhoneConstants.windowSize; // 300
     long nextCheckPoint = Long.MAX_VALUE;
-    // Volume
-    boolean volume;
+    boolean flag;
     String mFilename;
     double _sound_amplitude;
     private BroadcastReceiver symphonyReceiver;
@@ -74,9 +73,18 @@ public class RecordProcessThread
 
                 if (ctxName.equals("GetVolume")) {
                     long temp = System.currentTimeMillis() + SocioPhoneConstants.deviceTimeOffset;
+                    if(temp > nextCheckPoint){
+                        flag = true;
+                        do{
+                            nextCheckPoint += window_size;
+                        }while(temp > nextCheckPoint);
+                    }
                     _sound_amplitude = Double.parseDouble(ctxVal);
-                    Log.d("gulee", "StartRecord context: " + ctxName + ", result: " + ctxVal);
-                    mHandler.obtainMessage(SocioPhoneConstants.SIGNAL_VOLUME_WINDOW, new VolumeWindow(temp, Double.parseDouble(ctxVal)) ).sendToTarget();
+                    if(flag) {
+                        Log.d("gulee", "StartRecord context: " + ctxName + ", result: " + ctxVal);
+                        mHandler.obtainMessage(SocioPhoneConstants.SIGNAL_VOLUME_WINDOW, new VolumeWindow(temp, Double.parseDouble(ctxVal))).sendToTarget();
+                        flag = false;
+                    }
                 }
             }
         };

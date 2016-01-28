@@ -86,7 +86,7 @@ public class SocioPhone {
         }
 
         CAPI = new ContextAPI(mContext);
-        boolean isSucceeded = CAPI.registerQuery("GetVolume 1000 1001 0");
+        boolean isSucceeded = CAPI.registerQuery("GetVolume 100 101 0");
     }
 
     /**

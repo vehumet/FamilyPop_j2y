@@ -1,14 +1,12 @@
 package com.j2y.familypop.activity;
 
-import java.io.File;
-import java.io.IOException;
-
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -18,7 +16,6 @@ import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,42 +29,28 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.j2y.familypop.MainActivity;
 import com.j2y.familypop.activity.lobby.Activity_talkHistory;
-import com.j2y.familypop.activity.server.Activity_serverCalibrationLocation;
-import com.j2y.familypop.backup.CustomDialogClass;
 import com.j2y.familypop.backup.Dialog_MessageBox_ok_cancel;
 import com.j2y.familypop.client.FpcRoot;
 import com.j2y.familypop.client.FpcScenarioDirectorProxy;
 import com.j2y.familypop.client.FpcScenario_base;
 import com.j2y.familypop.client.FpcTalkRecord;
-import com.j2y.familypop.server.FpsScenarioDirector;
 import com.j2y.network.base.FpNetConstants;
 import com.j2y.network.base.FpNetUtil;
 import com.j2y.network.base.data.FpNetData_base;
 import com.j2y.network.client.FpNetFacade_client;
-import com.j2y.network.server.FpNetServer_client;
 import com.nclab.familypop.R;
 
-import java.net.URI;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import java.sql.Date;
-
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
-import android.widget.Toast;
-import android.widget.ToggleButton;
-
 import org.jbox2d.common.Vec3;
+
+import java.io.File;
+import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
