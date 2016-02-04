@@ -131,9 +131,9 @@ public class FpcRoot implements TurnDataListener, DisplayInterface, EventDataLis
         //_socioPhone.stopRecord();
         //MainActivity.Sleep(500);
 
-        if(_socioPhone != null)
-            _socioPhone.destroy();
-        _socioPhone = null;
+        //if(_socioPhone != null)
+        //    _socioPhone.destroy();
+        //_socioPhone = null;
     }
     // # localization 접속 종료.
     public void DestroyLocalization()
