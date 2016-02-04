@@ -1,5 +1,6 @@
 package com.j2y.familypop.activity;
 
+import android.graphics.Matrix;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,6 +23,7 @@ public class TouchMove implements View.OnTouchListener
     protected boolean _start_yn = true;
     public boolean _isClick = false;
     public boolean _move = true;
+    public boolean _active = true;
 
     protected float _startPosx = 780.0f;
     protected float _startPosy;
@@ -29,6 +31,8 @@ public class TouchMove implements View.OnTouchListener
 
     public float _normalX = 0.0f;
     public float _normalY = 0.0f;
+
+    public float _touchDirVectorRotation = 0.0f;
 
     // 충돌
     private ArrayList<View> _collisionViews;
@@ -53,73 +57,82 @@ public class TouchMove implements View.OnTouchListener
     @Override
     public boolean onTouch(View v, MotionEvent event)
     {
-
-        int eventaction = event.getAction();
-        switch (eventaction)
+        if( _active )
         {
-            case MotionEvent.ACTION_DOWN: // 손가락이 스크린에 닿았을 때
+            int eventaction = event.getAction();
+            switch (eventaction)
+            {
+                case MotionEvent.ACTION_DOWN: // 손가락이 스크린에 닿았을 때
 
-                _normalX = 0.0f;
-                _normalY = 0.0f;
+                    _normalX = 0.0f;
+                    _normalY = 0.0f;
 
-                if (_start_yn)
-                {
-                    _offset_x = event.getRawX();
-                    _offset_y = event.getRawY();
-                    _start_yn = false;
-                }
+                    if (_start_yn)
+                    {
+                        _offset_x = event.getRawX();
+                        _offset_y = event.getRawY();
+                        _start_yn = false;
+                    }
 
-                if( !_actionDown )
-                {
-                    _actionDown = true;
+                    if( !_actionDown )
+                    {
+                        _actionDown = true;
 
-                    _action_downX = event.getRawX();
-                    _action_downY = event.getRawY();
-                }
+                        _action_downX = event.getRawX();
+                        _action_downY = event.getRawY();
+                    }
 
-                _isMoving = _START_DRAG;
+                    _isMoving = _START_DRAG;
 
-                _isClick = true;
+                    _isClick = true;
 
-                break;
-            case MotionEvent.ACTION_MOVE: // 닿은 채로 손가락을 움직일 때
+                    break;
+                case MotionEvent.ACTION_MOVE: // 닿은 채로 손가락을 움직일 때
 
-                int posx = (int) ((event.getRawX()) - (_offset_x - _startPosx));
-                int posy = (int) (event.getRawY() - _offset_y);
+                    int posx = (int) ((event.getRawX()) - (_offset_x - _startPosx));
+                    int posy = (int) (event.getRawY() - _offset_y);
 
-                float nposx = event.getRawX() - _action_downX;
-                float nposy = event.getRawY() - _action_downY;
 
-                float effectiveAreaX = Math.abs(event.getRawX() - _action_downX );
-                float effectiveAreaY = Math.abs(event.getRawY() - _action_downY);
+                    float nposx = event.getRawX() - _action_downX;
+                    float nposy = event.getRawY() - _action_downY;
 
-                if( effectiveAreaX > 50 ||
-                        effectiveAreaY  > 50   )
-                {
-                    _isClick = false;
-                }
+                    float effectiveAreaX = Math.abs(event.getRawX() - _action_downX );
+                    float effectiveAreaY = Math.abs(event.getRawY() - _action_downY);
 
-                if( _move )
-                {
-                    v.setX(posx);
-                    v.setY(posy);
-                }
-                double dv = Math.sqrt(nposx * nposx + nposy * nposy);
+                    if( effectiveAreaX > 50 ||
+                            effectiveAreaY  > 50   )
+                    {
+                        _isClick = false;
+                    }
 
-                nposx /= dv;
-                nposy /= dv;
+                    if( _move )
+                    {
+                        v.setX(posx);
+                        v.setY(posy);
+                    }
+                    double dv = Math.sqrt(nposx * nposx + nposy * nposy);
 
-                _normalX = nposx;
-                _normalY = nposy;
+                    nposx /= dv;
+                    nposy /= dv;
 
-                //Log.i("[J2Y]", "x : " + _normalX + " y : " + _normalY);
-                break;
-            case MotionEvent.ACTION_UP: // 닿았던 손가락을 스크린에서 뗄때
-                _isMoving = _END_DRAG;
-                _actionDown = false;
+                    //Math.toDegrees(angrad)
+                    //Math.toRadians()
 
-                _collisionView_ID = collision_chack(event.getRawX(), event.getRawY() );
-                break;
+                    Vector2 v2 = new Vector2(nposx, nposy);
+                    v2.rotate(_touchDirVectorRotation);
+
+                    _normalX = v2.x;
+                    _normalY = v2.y;
+
+                    //Log.i("[J2Y]", "x : " + _normalX + " y : " + _normalY);
+                    break;
+                case MotionEvent.ACTION_UP: // 닿았던 손가락을 스크린에서 뗄때
+                    _isMoving = _END_DRAG;
+                    _actionDown = false;
+
+                    _collisionView_ID = collision_chack(event.getRawX(), event.getRawY() );
+                    break;
+            }
         }
         return false;
     }
@@ -154,4 +167,6 @@ public class TouchMove implements View.OnTouchListener
     {
         _collisionViews.add(v);
     }
+
+
 }

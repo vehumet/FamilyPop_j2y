@@ -179,10 +179,11 @@ public class FpsScenario_record extends FpsScenario_base
 
         //Loop through hashmap to find the maximum count
         Integer keyOfMaxValue = null;
-        for (int key : frequencymap.keySet()) {
-
+        for (int key : frequencymap.keySet())
+        {
             Integer value = frequencymap.get(key);
-            if(value == maximum){
+            if(value == maximum)
+            {
                 keyOfMaxValue = key;
             }
         }
@@ -201,11 +202,13 @@ public class FpsScenario_record extends FpsScenario_base
         //Log.i("[J2Y]", "OnTurnDataReceived: " + speakerID[0]);
         //Log.i("[J2Y]", "ThreadID:[OnTurn]" + (int) Thread.currentThread().getId());
 
-        synchronized (speakerBuffer) {
+        synchronized (speakerBuffer)
+        {
             speakerBuffer.add(0, speakerID);
 
             int window_size = Activity_serverMain.Instance._regulation_seekBar_2;
-            if (speakerBuffer.size() > window_size) {
+            if (speakerBuffer.size() > window_size)
+            {
                 speakerBuffer.remove(window_size);
 
                 currentSpeakerId = getMaxCountValue(speakerBuffer);
@@ -285,16 +288,10 @@ public class FpsScenario_record extends FpsScenario_base
                 int end_time = (int) FpsRoot.Instance._socioPhone.GetRecordTime();
                 _current_bubble.StartMover(end_time);
                 _current_bubble = null;
-
-
             }
         }
-
         previousSpeakerId = currentSpeakerId;
-
     }
-
-
      /*
     @Override
     public void OnTurnDataReceived(int speakerID) {
@@ -532,26 +529,48 @@ public class FpsScenario_record extends FpsScenario_base
     public void  Create_smile_bubble()
     {
 
-        for (FpsTalkUser user : Activity_serverMain.Instance._talk_users.values()) {
+        for (FpsTalkUser user : Activity_serverMain.Instance._talk_users.values())
+        {
             if (user == null)
                 continue;
 
-            FpsBubble bubble = new FpsBubble();
-            Vec2 bpos = new Vec2(_applet.width / 2f, _applet.height / 2f);
-            Vec2 userPos = user._attractor.GetPosition();
-            Vec2 dir = new Vec2((userPos.x - bpos.x) * 0.1f, (userPos.y - bpos.y) * 0.1f);
-            bpos.x += dir.x;
-            bpos.y += dir.y;
-
-            boolean res = bubble.CreateMover(_applet, _box2d, 80.0f, bpos.x, bpos.y, 0, 100, FpsBubble.Type_Smile);
-
-            if (res) {
-                bubble._start_time = (int) FpsRoot.Instance._socioPhone.GetRecordTime();
-                bubble.StartMover(0);
-                user._bubble.add(bubble);
-            }
+            Create_smile_bubble(user);
+//            FpsBubble bubble = new FpsBubble();
+//            Vec2 bpos = new Vec2(_applet.width / 2f, _applet.height / 2f);
+//            Vec2 userPos = user._attractor.GetPosition();
+//            Vec2 dir = new Vec2((userPos.x - bpos.x) * 0.1f, (userPos.y - bpos.y) * 0.1f);
+//            bpos.x += dir.x;
+//            bpos.y += dir.y;
+//
+//            boolean res = bubble.CreateMover(_applet, _box2d, 80.0f, bpos.x, bpos.y, 0, 100, FpsBubble.Type_Smile);
+//
+//            if (res)
+//            {
+//                bubble._start_time = (int) FpsRoot.Instance._socioPhone.GetRecordTime();
+//                bubble.StartMover(0);
+//                user._bubble.add(bubble);
+//            }
         }
     }
+    public void Create_smile_bubble(FpsTalkUser user)
+    {
+        FpsBubble bubble = new FpsBubble();
+        Vec2 bpos = new Vec2(_applet.width / 2f, _applet.height / 2f);
+        Vec2 userPos = user._attractor.GetPosition();
+        Vec2 dir = new Vec2((userPos.x - bpos.x) * 0.1f, (userPos.y - bpos.y) * 0.1f);
+        bpos.x += dir.x;
+        bpos.y += dir.y;
+
+        boolean res = bubble.CreateMover(_applet, _box2d, 80.0f, bpos.x, bpos.y, 0, 100, FpsBubble.Type_Smile);
+
+        if (res)
+        {
+            bubble._start_time = (int) FpsRoot.Instance._socioPhone.GetRecordTime();
+            bubble.StartMover(0);
+            user._bubble.add(bubble);
+        }
+    }
+
 
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -581,11 +600,10 @@ public class FpsScenario_record extends FpsScenario_base
                 _applet.text("" + log, 150, y += 50);
             }
         }
-        finally {
+        finally
+        {
             _lock_turn_data.unlock();
         }
-
-
 
         if(_shareImage != null)
         {

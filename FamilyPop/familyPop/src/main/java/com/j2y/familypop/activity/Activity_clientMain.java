@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -89,6 +90,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
     private Button _button_feature_savedialogue;
 
     private Button _button_client_mode_view_clearBubble;
+    private ImageButton _button_rotation;
 
     // text info
     private boolean _plugVisibleInfo;
@@ -177,6 +179,8 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
     public int _ttt_style;
     public Button _button_ttt_Style;
 
+    private ImageView _button_userLike;
+
     //
     Dialog_MessageBox_ok_cancel _messageBox_instruction;
     Dialog_MessageBox_ok_cancel _messageBox_exit_familybomb;
@@ -225,6 +229,10 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         }
         // # localization  클라이언트용 접속.
         FpcRoot.Instance.InitLocalization();
+
+
+        deactive_interactionView();
+        allDeactive_targetImage();
 	}
     @Override
     protected void onDestroy()
@@ -270,6 +278,8 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
     // GetSoundAmplitue()
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     // [이벤트] 버튼 클릭
+
+    private int _device_rotationCount = 0;
     @Override
 	public void onClick(View view) 
 	{
@@ -400,6 +410,12 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
             case R.id.button_client_mode_clearBubble:
                 FpNetFacade_client.Instance.SendPacket_req_clearBubble();
                 break;
+            case R.id.imagebutton_rotation:
+                _device_rotationCount++;
+                _button_rotation.setRotation(_button_rotation.getRotation() + (MainActivity.Instance._rotationAngle));
+                MainActivity.Instance._deviceRotation = _button_rotation.getRotation();
+
+                break;
             case R.id.toggleButton_voice_processing_mode:
 
                 break;
@@ -471,6 +487,13 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
 
                 break;
             //end tic tac toe
+
+            case R.id.imagebutton_interaction:
+                active_interactionView();
+                break;
+            case R.id.imagebutton_interaction_exit:
+                deactive_interactionView();
+                break;
 		}
 
 	}
@@ -651,6 +674,57 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         return super.onTouchEvent(e);
     }
 
+    //ArrayList<View> _touchViews;
+    ArrayList<Interaction_Target> _touchViews;
+    boolean _interaction = false;
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent e)
+    {
+
+        if( _interaction )
+        {
+            int eventAction = e.getAction();
+
+            switch(eventAction)
+            {
+                case MotionEvent.ACTION_DOWN:
+//                Toast.makeText(MainActivity.Instance, "ACTION_DOWN", Toast.LENGTH_SHORT).show();
+
+                    Rect rect = new Rect();
+                    _button_userLike.getGlobalVisibleRect(rect);
+
+                    float posX = rect.left;
+                    float posY = rect.top;
+                    float widht = rect.width();
+                    float height = rect.height();
+
+                    if( posX < e.getX() && (posX+widht) > e.getX()  &&
+                            posY < e.getY() && (posY+height) > e.getY() )
+                    {
+                        _effectButton = true;
+                        //Toast.makeText(MainActivity.Instance, "ACTION_DOWN", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case MotionEvent.ACTION_MOVE:
+//                Toast.makeText(MainActivity.Instance, "ACTION_MOVE", Toast.LENGTH_SHORT).show();
+                    break;
+                case MotionEvent.ACTION_UP:
+//                Toast.makeText(MainActivity.Instance, "ACTION_UP", Toast.LENGTH_SHORT).show();
+                    //int id =  collision_chack(e.getX(), e.getY());
+                    Interaction_Target target = collision_chack(e.getX(), e.getY());
+                    if( target != null)
+                    {
+                        FpNetFacade_client.Instance.SendPacket_req_userInteraction(target._clientId);
+                    }
+                    _effectButton = false;
+                    break;
+            }
+        }
+
+
+
+        return super.dispatchTouchEvent(e);
+    }
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // 네트워크
@@ -659,13 +733,10 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     // 방 나가기 요청
-    private void request_exitRoom() {
-
+    private void request_exitRoom()
+    {
         Log.i("[J2Y]", "Request exit room");
-
-
         // todo: 방 정보 입력 팝업
-
         if(FpcRoot.Instance._scenarioDirectorProxy._activeScenario != null)
             FpcRoot.Instance._scenarioDirectorProxy._activeScenario.OnDeactivated();
 
@@ -864,6 +935,16 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
                 if( _touchMove._actionDown )
                 {
                     Log.i("[J2Y]", "_isClick");
+
+                    if( _device_rotationCount % 2 == 0 )
+                    {
+                        _touchMove._touchDirVectorRotation = MainActivity.Instance._deviceRotation;
+                    }
+                    else
+                    {
+                        _touchMove._touchDirVectorRotation = MainActivity.Instance._deviceRotation * -1;
+                    }
+
                     FpNetFacade_client.Instance.SendPacket_req_userInput_bubbleMove(_touchMove._normalX, -_touchMove._normalY);
                 }
             }
@@ -1068,6 +1149,8 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
 
         _button_redbubble = (ImageButton) findViewById(R.id.button_client_redbubble);
         _button_redbubble.setOnClickListener(this);
+
+
         _touchMove = new TouchMove(_button_redbubble,
                                    _button_redbubble.getX(),
                                    _button_redbubble.getY());
@@ -1085,7 +1168,6 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         _text_color_pos.setText("Color:" + FpcRoot.Instance._bubble_color_type + " , userPos: " + FpcRoot.Instance._user_posid);
 
         //drawable.image_bead_1
-
 
         switch(FpcRoot.Instance._bubble_color_type)
         {
@@ -1143,7 +1225,8 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         _button_regulation_cancel.setOnClickListener(this);
         _button_regulation_clearBubble = (Button) findViewById(R.id.button_client_mode_clearBubble);
         _button_regulation_clearBubble.setOnClickListener(this);
-
+        _button_rotation = (ImageButton) findViewById(R.id.imagebutton_rotation);
+        _button_rotation.setOnClickListener(this);
 
 
         _seekBar_regulation_0 = (SeekBar) findViewById(R.id.seekBar_regulation_0);
@@ -1253,6 +1336,26 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
 
         _imageview_ttt_winner = (ImageView) findViewById(R.id.imageview_win_tic_tac_toe);
         _ttt_style = 0;
+
+
+        // user message
+        _button_userLike = (ImageView) findViewById(R.id.imageview_user_interaction_like);
+        //_button_userLike.setOnClickListener(this);
+
+        // touch
+        _touchViews = new ArrayList<Interaction_Target>();
+        //add_touchViewObject(_layout_bubbleImage)
+       // add_touchViewObject((ImageView)findViewById(R.id.imageview_target_blue));
+       // add_touchViewObject((ImageView)findViewById(R.id.imageview_target_green));
+       // add_touchViewObject( (ImageView)findViewById(R.id.imageview_target_phthalogreen) );
+       // add_touchViewObject( (ImageView)findViewById(R.id.imageview_target_pink) );
+       // add_touchViewObject( (ImageView)findViewById(R.id.imageview_target_red) );
+       // add_touchViewObject((ImageView) findViewById(R.id.imageview_target_yellow));
+
+
+        ((Button)findViewById(R.id.imagebutton_interaction)).setOnClickListener(this);
+        ((Button)findViewById(R.id.imagebutton_interaction_exit)).setOnClickListener(this);
+
 
     }
 
@@ -1465,6 +1568,91 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
 
     }
 
+    //-----------------------------------------------------------------------------------------------------------------------------
+    //
+    private int _collisionView_ID;
+    private boolean _effectButton;
+
+    private Interaction_Target collision_chack(float x, float y)
+    {
+        Interaction_Target ret =null;
+        for( Interaction_Target v : _touchViews)
+        {
+
+            Rect rect = new Rect();
+            v._targetImage.getGlobalVisibleRect(rect);
+
+            float posX = rect.left;  // 위치 + left 마진
+            float posY = rect.top;
+            int destWidth  = rect.width();
+            int destHeight = rect.height();
+
+            if( posX < x && (posX+destWidth) > x  &&
+                posY < y && (posY+destHeight) > y )
+            {
+                ret = v;
+//                Toast.makeText(MainActivity.Instance, "collision_chack : " + ret, Toast.LENGTH_SHORT).show();
+                break;
+            }
+        }
+        return ret;
+    }
+
+    public void add_touchViewObject(Interaction_Target v)
+    {
+        _touchViews.add(v);
+    }
+    public void clear_touchViewObject()
+    {
+        _touchViews.clear();
+    }
+    private int GetCollision_viewID()
+    {
+        return _collisionView_ID;
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------------------
+    // 화자간 Interaction
+    private void active_interactionView()
+    {
+        findViewById(R.id.layout_client_mode_user_interaction).setVisibility(View.VISIBLE);
+        _interaction = true;
+        _touchMove._active = false;
+        //((LinearLayout)findViewById(R.id.layout_client_mode_room_info)).setVisibility(View.GONE);
+    }
+    private void deactive_interactionView()
+    {
+        findViewById(R.id.layout_client_mode_user_interaction).setVisibility(View.GONE);
+        _interaction = false;
+        _touchMove._active = true;
+    }
+    public ImageView active_targetImage(int bubble_color_type)
+    {
+        ImageView ret = null;
+        switch(bubble_color_type)
+        {
+            case 0: ret = (ImageView)findViewById(R.id.imageview_target_pink);              break;      // pink
+            case 1: ret = (ImageView)findViewById(R.id.imageview_target_red);                break;      // red
+            case 2: ret = (ImageView)findViewById(R.id.imageview_target_yellow);                break;      // yellow
+            case 3: ret = (ImageView)findViewById(R.id.imageview_target_green);                break;      // green
+            case 4: ret = (ImageView)findViewById(R.id.imageview_target_phthalogreen);                break;      // phthalogreen
+            case 5: ret = (ImageView)findViewById(R.id.imageview_target_blue);                break;      // blue
+            //case 6: findViewById(R.id.imageview_target_pink).setVisibility(View.VISIBLE);   break;
+        }
+
+        if( ret != null) ret.setVisibility(View.VISIBLE);
+        return ret;
+    }
+    public void allDeactive_targetImage()
+    {
+        findViewById(R.id.imageview_target_pink).setVisibility(View.GONE);
+        findViewById(R.id.imageview_target_red).setVisibility(View.GONE);
+        findViewById(R.id.imageview_target_yellow).setVisibility(View.GONE);
+
+        findViewById(R.id.imageview_target_green).setVisibility(View.GONE);
+        findViewById(R.id.imageview_target_phthalogreen).setVisibility(View.GONE);
+        findViewById(R.id.imageview_target_blue).setVisibility(View.GONE);
+    }
 }
 
 

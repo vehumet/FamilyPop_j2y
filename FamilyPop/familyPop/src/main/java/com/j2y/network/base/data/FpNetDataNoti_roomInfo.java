@@ -10,9 +10,13 @@ package com.j2y.network.base.data;
 import com.j2y.network.base.FpNetIncomingMessage;
 import com.j2y.network.base.FpNetOutgoingMessage;
 
+import java.util.ArrayList;
+
 public class FpNetDataNoti_roomInfo extends FpNetData_base
 {
     public String _userNames;
+    public String _bubblesInfo = "";
+    public String _clientsInfo = "";
 
     //----------------------------------------------------------------
     // 메시지 파싱
@@ -22,6 +26,8 @@ public class FpNetDataNoti_roomInfo extends FpNetData_base
         super.Parse(inMsg);
 
         _userNames = inMsg.ReadString();
+        _bubblesInfo = inMsg.ReadString();
+        _clientsInfo = inMsg.ReadString();
     }
 
     //----------------------------------------------------------------
@@ -32,5 +38,7 @@ public class FpNetDataNoti_roomInfo extends FpNetData_base
         super.Packing(outMsg);
 
         outMsg.Write(_userNames);
+        outMsg.Write(_bubblesInfo);
+        outMsg.Write(_clientsInfo);
     }
 }

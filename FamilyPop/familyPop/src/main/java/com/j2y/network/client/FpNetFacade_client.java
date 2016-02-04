@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.j2y.familypop.MainActivity;
 import com.j2y.familypop.activity.Activity_clientMain;
 import com.j2y.familypop.activity.Activity_serverMain;
+import com.j2y.familypop.activity.Interaction_Target;
 import com.j2y.familypop.client.FpcRoot;
 import com.j2y.familypop.client.FpcScenarioDirectorProxy;
 import com.j2y.familypop.server.FpsRoot;
@@ -34,6 +35,7 @@ import com.j2y.network.base.data.FpNetData_base;
 import com.j2y.network.base.data.FpNetData_familyTalk;
 import com.j2y.network.base.data.FpNetData_setUserInfo;
 import com.j2y.network.base.data.FpNetData_smileEvent;
+import com.j2y.network.base.data.FpNetData_userInteraction;
 import com.nclab.familypop.R;
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -295,9 +297,33 @@ public class FpNetFacade_client extends FpNetFacade_base
             data.Parse(inMsg);
             Log.i("[J2Y]", "[패킷수신] [방 정보]" + data._userNames);
 
-
             if(Activity_clientMain.Instance != null)
+            {
                 Activity_clientMain.Instance._text_user.setText(data._userNames);
+
+
+                String[] bubbleDatas = data._bubblesInfo.split("/");
+                String[] clientDatas = data._clientsInfo.split("/");
+
+                Activity_clientMain.Instance.allDeactive_targetImage();
+                Activity_clientMain.Instance.clear_touchViewObject();
+
+                for( int i=0; i<bubbleDatas.length; i++)
+                {
+                    Interaction_Target target = target = new Interaction_Target();
+                    target._bubbleColorType = Integer.parseInt(bubbleDatas[i]);
+                    target._clientId = Integer.parseInt(clientDatas[i]);
+                    target._targetImage = Activity_clientMain.Instance.active_targetImage(target._bubbleColorType);
+                    Activity_clientMain.Instance.add_touchViewObject(target);
+                }
+
+//                Interaction_Target target = target = new Interaction_Target();
+//                target._bubbleColorType = data._bubbleColorType;
+//                target._clientId = data._client_id;
+//                target._targetImage = Activity_clientMain.Instance.active_targetImage(data._bubbleColorType);
+//
+//                Activity_clientMain.Instance.add_touchViewObject(target);
+            }
         }
     };
 
@@ -579,5 +605,13 @@ public class FpNetFacade_client extends FpNetFacade_base
         reqPaket._dirY = dirY;
 
         sendMessage(FpNetConstants.CSReq_userInput_bubbleMove, reqPaket);
+    }
+
+    public void SendPacket_req_userInteraction(int clientId)
+    {
+        FpNetData_userInteraction reqPaket = new FpNetData_userInteraction();
+        reqPaket._clientid = clientId;
+
+        sendMessage(FpNetConstants.CSReq_userInteraction, reqPaket);
     }
 }

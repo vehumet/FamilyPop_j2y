@@ -29,6 +29,7 @@ import com.j2y.network.base.data.FpNetDataRes_recordInfoList;
 import com.j2y.network.base.data.FpNetData_familyTalk;
 import com.j2y.network.base.data.FpNetData_setUserInfo;
 import com.j2y.network.base.data.FpNetData_smileEvent;
+import com.j2y.network.base.data.FpNetData_userInteraction;
 
 import org.jbox2d.common.Vec2;
 
@@ -85,6 +86,7 @@ public class FpNetServer_packetHandler
 
         // user message
         _net_server.RegisterMessageCallBack(FpNetConstants.CSReq_userInput_bubbleMove, onReq_userInput_bubbleMove);
+        _net_server.RegisterMessageCallBack(FpNetConstants.CSReq_userInteraction, onReq_userInteraction);
     }
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     // 클라 연결
@@ -167,9 +169,22 @@ public class FpNetServer_packetHandler
             else
                 FpsRoot.Instance._room_user_names += (", " + data._userName);
 
+            // 접속한 사용자들의 버블 정보를 만든다, 접속한 클라이언트들의 id 정보를 만든다.
+            String bubblesInfo = "";
+            String clientsInfo = "";
+            //FpsRoot.Instance.
+            for( FpNetServer_client c : FpNetFacade_server.Instance._clients )
+            {
+                bubblesInfo += c._bubble_color_type + "/";
+                clientsInfo += c._clientID + "/";
+            }
+
+
             // 방정보 전파
             FpNetDataNoti_roomInfo outMsg = new FpNetDataNoti_roomInfo();
             outMsg._userNames = FpsRoot.Instance._room_user_names;
+            outMsg._clientsInfo = clientsInfo;
+            outMsg._bubblesInfo = bubblesInfo;
             Log.i("[J2Y]", "[방이름] " + outMsg._userNames);
 
             _net_server.BroadcastPacket(FpNetConstants.SCNoti_roomUserInfo, outMsg);
@@ -539,6 +554,30 @@ public class FpNetServer_packetHandler
                 //Log.i("[J2Y]","x : "+data._dirX + "y : " + data._dirY);
 
                 Activity_serverMain.Instance.MoveUserBubble_add(data._dirX, data._dirY, data._clientid );
+            }
+        }
+    };
+    FpNetMessageCallBack onReq_userInteraction = new FpNetMessageCallBack()
+    {
+        @Override
+        public void CallBack(FpNetIncomingMessage inMsg)
+        {
+
+            FpNetData_userInteraction data = new FpNetData_userInteraction();
+            data.Parse(inMsg);
+
+            if( FpsScenarioDirector.Instance.GetActiveScenarioType() ==  FpNetConstants.SCENARIO_RECORD )
+            {
+                FpsScenario_record record =  (FpsScenario_record) FpsScenarioDirector.Instance.GetActiveScenario();
+
+                for( FpsTalkUser user : Activity_serverMain.Instance._talk_users.values())
+                {
+                    if( user._net_client._clientID == data._clientid)
+                    {
+                        record.Create_smile_bubble(user);
+                        break;
+                    }
+                }
             }
         }
     };

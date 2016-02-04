@@ -60,6 +60,8 @@ public class MainActivity extends Activity
 
     //debug
     public String _deviceRole;
+    public float _deviceRotation = 0.0f;
+    public float _rotationAngle = 90.0f;
 
     // # localization locator 역할용 클라이언트.
 

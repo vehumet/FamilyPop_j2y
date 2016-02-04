@@ -105,20 +105,45 @@
             android:layout_alignParentLeft="true"
             android:textStyle="bold"
             android:textColor="#ffffff" />
+        <!-- 버블 클리어 버튼 -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="clear"
+                android:id="@+id/button_client_mode_view_clearBubble"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="0dp"
+                android:layout_below="@+id/layout_client_mode_room_info" />
+
+            <!-- 화자간 interaction 진입 버튼 -->
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imagebutton_interaction"
+                android:layout_toRightOf="@+id/button_client_mode_view_clearBubble"
+                android:layout_alignTop="@+id/button_client_mode_view_clearBubble"
+                android:text="Interaction"
+                android:textColor="#ffffff" />
+
+            <!-- 디바이스 회전 -->
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imagebutton_rotation"
+                android:layout_marginLeft="0dp"
+                android:background="@drawable/image_phone" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
-    <!-- 버블 클리어 버튼 -->
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="clear"
-        android:id="@+id/button_client_mode_view_clearBubble"
-        android:textColor="#ffffff"
-        android:layout_marginLeft="0dp"
-        android:layout_below="@+id/layout_client_mode_room_info" />
 
 
-    <!-- 버블 이미지 -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -689,7 +714,7 @@
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
         android:id="@+id/layout_client_mode_user_interaction"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_marginTop="50dp"
         android:background="#ffffff"
         android:weightSum="1">
@@ -705,7 +730,7 @@
             <ImageView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:id="@+id/imageView33"
+                android:id="@+id/imageview_target_pink"
                 android:background="@drawable/image_target_pink"
                 android:layout_weight="0"
                 android:layout_marginLeft="50dp" />
@@ -713,7 +738,7 @@
             <ImageView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:id="@+id/imageView_target_pink"
+                android:id="@+id/imageview_target_red"
                 android:background="@drawable/image_target_red"
                 android:layout_weight="0"
                 android:layout_marginLeft="50dp" />
@@ -721,7 +746,7 @@
             <ImageView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:id="@+id/imageView34"
+                android:id="@+id/imageview_target_yellow"
                 android:background="@drawable/image_target_yellow"
                 android:layout_weight="0"
                 android:layout_marginLeft="50dp" />
@@ -737,7 +762,7 @@
             <ImageView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:id="@+id/imageView35"
+                android:id="@+id/imageview_target_green"
                 android:background="@drawable/image_target_green"
                 android:layout_weight="0"
                 android:layout_marginLeft="50dp" />
@@ -745,7 +770,7 @@
             <ImageView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:id="@+id/imageView36"
+                android:id="@+id/imageview_target_phthalogreen"
                 android:background="@drawable/image_target_phthalogreen"
                 android:layout_weight="0"
                 android:layout_marginLeft="50dp" />
@@ -753,7 +778,7 @@
             <ImageView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:id="@+id/imageView37"
+                android:id="@+id/imageview_target_blue"
                 android:background="@drawable/image_target_blue"
                 android:layout_weight="0"
                 android:layout_marginLeft="50dp" />
@@ -762,10 +787,19 @@
         <ImageView
             android:layout_width="128dp"
             android:layout_height="128dp"
-            android:id="@+id/imageView_user_interaction_like"
+            android:id="@+id/imageview_user_interaction_like"
             android:background="@drawable/image_like"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="100dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imagebutton_interaction_exit"
+            android:layout_toRightOf="@+id/button_client_mode_view_clearBubble"
+            android:layout_alignTop="@+id/button_client_mode_view_clearBubble"
+            android:text="Interaction_exit"
+            android:textColor="#ffffff" />
     </LinearLayout>
 
 

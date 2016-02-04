@@ -9,7 +9,6 @@ package com.j2y.network.base;
 
 public class FpNetConstants 
 {
-	
 	//----------------------------------------------------------------------------
 	// 연결
 	public final static int Connected = 1;
@@ -69,9 +68,8 @@ public class FpNetConstants
 
 	// 사용자 메세지
 	public final static int CSReq_userInput_bubbleMove = 5000;
+	public final static int CSReq_userInteraction = 5001;
 	//public final static int CSReq_userInput_
-
-
 
     //----------------------------------------------------------------------------
 	// 시나리오
