@@ -180,7 +180,7 @@ public class Activity_serverMain extends PApplet
         //FpsRoot.Instance._socioPhone.setSilenceVolThreshold(_regulation_seekBar_0);
         //FpsRoot.Instance._socioPhone.setSilenceVolVarThreshold(_regulation_seekBar_1);
 
-        Handler handler = new Handler();
+        /*Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -203,7 +203,7 @@ public class Activity_serverMain extends PApplet
                     }
                 });
             }
-        }, 5000);
+        }, 5000);*/
 
         if(Build.VERSION.SDK_INT >  10)
         {
