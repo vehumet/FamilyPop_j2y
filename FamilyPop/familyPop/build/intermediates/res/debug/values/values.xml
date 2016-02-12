@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/D:/J2YSoft/familypop/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml -->
+    <!-- From: file:/D:/J2YSoft/familypop_16_02_04/FamilyPop_j2y/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml -->
     <eat-comment/>
     <color name="black">#000000</color>
     <color name="blue">#4D82D6</color>
@@ -23,11 +23,11 @@
     <color name="red">#E44742</color>
     <color name="yellow">#EBEC4B</color>
     <declare-styleable name="ColumnListView"><attr format="integer" name="columns"/><attr format="dimension" name="column_padding"/><attr format="boolean" name="overscroll"/><attr format="float" name="fling_damping"/><attr format="integer" name="snap_spring"/><attr format="float" name="rubberband_factor"/></declare-styleable>
-    <!-- From: file:/D:/J2YSoft/familypop/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/dimens.xml -->
+    <!-- From: file:/D:/J2YSoft/familypop_16_02_04/FamilyPop_j2y/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/D:/J2YSoft/familypop/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/strings.xml -->
+    <!-- From: file:/D:/J2YSoft/familypop_16_02_04/FamilyPop_j2y/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_settings">Settings</string>
     <string name="app_name">FamilyPop</string>
@@ -36,7 +36,7 @@
     <string name="title_history">HISTORY</string>
     <string name="title_setting">SETTING</string>
     <string name="title_startDialogue">START DIALOGUE</string>
-    <!-- From: file:/D:/J2YSoft/familypop/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml -->
+    <!-- From: file:/D:/J2YSoft/familypop_16_02_04/FamilyPop_j2y/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--

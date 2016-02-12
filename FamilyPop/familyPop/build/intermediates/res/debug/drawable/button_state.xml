@@ -5,4 +5,4 @@
     <item android:drawable="@color/color_button_state_onclick" android:state_focused="true"/>
     <item android:drawable="@color/color_button_state_normal"/>
 
-</selector><!-- From: file:/D:/J2YSoft/familypop/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/drawable/button_state.xml -->
+</selector><!-- From: file:/D:/J2YSoft/familypop_16_02_04/FamilyPop_j2y/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/drawable/button_state.xml -->

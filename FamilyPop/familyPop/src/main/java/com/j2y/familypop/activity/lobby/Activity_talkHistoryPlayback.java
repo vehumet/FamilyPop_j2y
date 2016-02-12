@@ -205,7 +205,8 @@ public class Activity_talkHistoryPlayback extends BaseActivity implements View.O
 
             String filepath = Environment.getExternalStorageDirectory().getPath() + "/SocioPhone";
 
-            String wav_fullname = filepath + "/" + talk_record._filename;
+            //String wav_fullname = filepath + "/" + talk_record._filename;
+            String wav_fullname = talk_record._filename;
             //Uri muri = Uri.parse(wav_fullname);
 
             //File files = new File(wav_fullname);
@@ -224,10 +225,9 @@ public class Activity_talkHistoryPlayback extends BaseActivity implements View.O
 
 
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             //Toast.makeText(this, "error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
-
-
         }
 
         create_progessBar();

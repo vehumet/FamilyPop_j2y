@@ -62,7 +62,9 @@ public class SocioPhone {
         sHandler.setNetworkManager(mNetworkManager);
         if (!bluetoothHeadset) {
             //recordThread = new RecordProcessThread(sHandler, true);
-        } else {
+        }
+        else
+        {
             mContext.registerReceiver(btHeadsetStatusRecevicer, new IntentFilter(BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED));
 
             mContext.registerReceiver(new BroadcastReceiver() {

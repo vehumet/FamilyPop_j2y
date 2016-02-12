@@ -171,8 +171,10 @@ public class FpsScenario_record extends FpsScenario_base
         }
 
         //Loop through hashmap to find the maximum count
-        for (int value : frequencymap.values()) {
-            if(value > maximum){
+        for (int value : frequencymap.values())
+        {
+            if(value > maximum)
+            {
                 maximum = value;
             }
         }

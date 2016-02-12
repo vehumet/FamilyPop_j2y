@@ -5,4 +5,4 @@
     <item android:drawable="@drawable/image_ttt_empty_red" android:state_focused="true"/>
     <item android:drawable="@drawable/image_ttt_o_red"/>
 
-</selector><!-- From: file:/D:/J2YSoft/familypop/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/drawable/button_style_tictectoe.xml -->
+</selector><!-- From: file:/D:/J2YSoft/familypop_16_02_04/FamilyPop_j2y/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/drawable/button_style_tictectoe.xml -->

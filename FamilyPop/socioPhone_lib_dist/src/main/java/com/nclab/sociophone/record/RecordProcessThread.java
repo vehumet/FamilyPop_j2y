@@ -178,8 +178,6 @@ public class RecordProcessThread extends Thread
 //				e.printStackTrace();
 //				mHandler.obtainMessage(SocioPhoneConstants.DISPLAY_LOG, "Error on file writting");
 //			}
-
-
             long temp = System.currentTimeMillis() + SocioPhoneConstants.deviceTimeOffset;
             if (temp > nextCheckPoint)
             {
@@ -294,8 +292,21 @@ public class RecordProcessThread extends Thread
     private String _wav_fileName = "";
     private String makeWavFileName()
     {
-        _wav_fileName = mFilename + "_" + convertToHRF(System.currentTimeMillis() + SocioPhoneConstants.deviceTimeOffset) + "_" + (SocioPhone.isServer ? "B" : "A") + ".wav";
+
+        String filepath = Environment.getExternalStorageDirectory().getPath();
+        File file = new File(filepath, "SocioPhone");
+
+        if (!file.exists())
+        {
+            file.mkdirs();
+        }
+
+        _wav_fileName = file.getAbsolutePath() + "/" + mFilename + "_" + convertToHRF(System.currentTimeMillis() + SocioPhoneConstants.deviceTimeOffset) + "_" + (SocioPhone.isServer ? "B" : "A") + ".wav";
         return _wav_fileName;
+
+        //back
+//        _wav_fileName = mFilename + "_" + convertToHRF(System.currentTimeMillis() + SocioPhoneConstants.deviceTimeOffset) + "_" + (SocioPhone.isServer ? "B" : "A") + ".wav";
+//        return _wav_fileName;
     }
     public String GetWavFileName()
     {
@@ -304,7 +315,8 @@ public class RecordProcessThread extends Thread
         return _wav_fileName;
     }
 
-    public String getRawFilename() {
+    public String getRawFilename()
+    {
         String filepath = Environment.getExternalStorageDirectory().getPath();
         File file = new File(filepath, "SocioPhone");
 
@@ -560,7 +572,8 @@ public class RecordProcessThread extends Thread
 
         byte[] data = new byte[_bufferSize];
 
-        try {
+        try
+        {
             in = new FileInputStream(inFilename);
             out = new FileOutputStream(outFilename);
             totalAudioLen = in.getChannel().size();
@@ -572,16 +585,20 @@ public class RecordProcessThread extends Thread
             WriteWaveFileHeader(out, totalAudioLen, totalDataLen,
                     longSampleRate, channels, byteRate);
 
-            while(in.read(data) != -1) {
+            while(in.read(data) != -1)
+            {
                 out.write(data);
             }
 
             in.close();
             out.close();
-        } catch (FileNotFoundException e)
+        }
+        catch (FileNotFoundException e)
         {
             e.printStackTrace();
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }

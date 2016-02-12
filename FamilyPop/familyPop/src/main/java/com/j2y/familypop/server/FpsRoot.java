@@ -29,7 +29,8 @@ import cps.mobilemaestro.library.MMDeviceLayout;
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-public class FpsRoot implements TurnDataListener, DisplayInterface, EventDataListener {
+public class FpsRoot implements TurnDataListener, DisplayInterface, EventDataListener
+{
     public static FpsRoot Instance;
     public static FpNetFacade_server _server;
 
@@ -113,7 +114,10 @@ public class FpsRoot implements TurnDataListener, DisplayInterface, EventDataLis
         _socioPhone.setNetworkMode(true);
         _socioPhone.setVolumeOrderMode(true);
 
-        _socioPhone.isServer = true;
+        // 16_02_05 back
+        //_socioPhone.isServer = true;
+        SocioPhone.isServer = true;
+
         _socioPhone.openServer();
     }
 
@@ -165,9 +169,10 @@ public class FpsRoot implements TurnDataListener, DisplayInterface, EventDataLis
         stopRecord();
         MainActivity.Sleep(500);
 
-        if (_socioPhone != null)
-            _socioPhone.destroy();
-        _socioPhone = null;
+        _socioPhone.stopRecord();
+        // 16_02_05 back
+//        if (_socioPhone != null){ _socioPhone.destroy(); }
+//        _socioPhone = null;
     }
     public void stopRecord(){ if( _socioPhone != null){ _socioPhone.stopRecord(); } }
 

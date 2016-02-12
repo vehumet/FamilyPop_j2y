@@ -84,7 +84,8 @@ public class FpcRoot implements TurnDataListener, DisplayInterface, EventDataLis
         DestroySocioPhone();
         DestroyLocalization();
 
-        if(_client != null) {
+        if(_client != null)
+        {
             _client.destroy();
             _client = null;
         }
@@ -109,7 +110,10 @@ public class FpcRoot implements TurnDataListener, DisplayInterface, EventDataLis
         _socioPhone.setNetworkMode(true);
         _socioPhone.setVolumeOrderMode(true);
 
-        _socioPhone.isServer = false;
+        // back 160211
+        //_socioPhone.isServer = false;
+
+        SocioPhone.isServer = false;
     }
     // # localization (client) 생성.
     public void InitLocalization()
@@ -131,9 +135,10 @@ public class FpcRoot implements TurnDataListener, DisplayInterface, EventDataLis
         //_socioPhone.stopRecord();
         //MainActivity.Sleep(500);
 
-        if(_socioPhone != null)
-            _socioPhone.destroy();
-        _socioPhone = null;
+        // back 160211
+//        if(_socioPhone != null){ _socioPhone.destroy(); }
+//        _socioPhone = null;
+
     }
     // # localization 접속 종료.
     public void DestroyLocalization()
