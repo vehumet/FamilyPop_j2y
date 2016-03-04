@@ -35,23 +35,22 @@ public class SignalHandler extends Handler {
     }
 
     @Override
-    public void handleMessage(Message msg) {
+    public void handleMessage(Message msg)
+    {
         String[] data;
         super.handleMessage(msg);
-        switch (msg.what)
-        {
+        switch (msg.what) {
             case SocioPhoneConstants.SIGNAL_DATA:
+
                 if( msg != null)
                 {
                     data = ((String) msg.obj).split(",");
-                    if( 2 <=data.length ) // ??
-                    {
-                        long time = Long.parseLong(data[0]);
-                        double power = Double.parseDouble(data[1]);
-                        VolumeWindow window = new VolumeWindow(time, power);
-                        mSocioPhone.onDataReceived(window, msg.arg1 + 1);
-                    }
+                    long time = Long.parseLong(data[0]);
+                    double power = Double.parseDouble(data[1]);
+                    VolumeWindow window = new VolumeWindow(time, power);
+                    mSocioPhone.onDataReceived(window, msg.arg1 + 1);
                 }
+
                 break;
             case SocioPhoneConstants.BT_ACCEPT:
                 mNetworkManager.sendToClientsID("11:");
@@ -112,7 +111,7 @@ public class SignalHandler extends Handler {
      * @param t Current time of opposite device at transmit time.
      */
     private void timeSync(long t) {
-        if (mSocioPhone.isServer) {
+        if (SocioPhone.isServer) {
             //Retransmit its current timestamp
             mNetworkManager.sendToClients("/5:" + System.currentTimeMillis());
         } else {
@@ -143,7 +142,7 @@ public class SignalHandler extends Handler {
      * @param window Recently generated volume window
      */
     private void processVolumeWindow(VolumeWindow window) {
-        if (mSocioPhone.isServer) {
+        if (SocioPhone.isServer) {
             mSocioPhone.onDataReceived(window, 0);
         } else {
             //mSocioPhone.sendMessage("/1:"+window.timestamp+","+window.power);
@@ -156,7 +155,7 @@ public class SignalHandler extends Handler {
     private void distributeTurnData(String idxs) {
 
         //mSocioPhone.sendMessage("/3:"+idxs);
-        if (mSocioPhone.isServer)
+        if (SocioPhone.isServer)
             mNetworkManager.sendToClients("/3:" + idxs);
         else
             mNetworkManager.sendToServer("/3:" + idxs);

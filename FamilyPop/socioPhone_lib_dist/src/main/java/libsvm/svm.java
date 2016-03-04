@@ -146,7 +146,7 @@ abstract class QMatrix {
     abstract double[] get_QD();
 
     abstract void swap_index(int i, int j);
-};
+}
 
 abstract class Kernel extends QMatrix {
     private svm_node[][] x;
@@ -208,7 +208,7 @@ abstract class Kernel extends QMatrix {
         this.gamma = param.gamma;
         this.coef0 = param.coef0;
 
-        x = (svm_node[][]) x_.clone();
+        x = x_.clone();
 
         if (kernel_type == svm_parameter.RBF) {
             x_square = new double[l];
@@ -437,9 +437,9 @@ class Solver {
         this.l = l;
         this.Q = Q;
         QD = Q.get_QD();
-        p = (double[]) p_.clone();
-        y = (byte[]) y_.clone();
-        alpha = (double[]) alpha_.clone();
+        p = p_.clone();
+        y = y_.clone();
+        alpha = alpha_.clone();
         this.Cp = Cp;
         this.Cn = Cn;
         this.eps = eps;
@@ -1066,7 +1066,7 @@ class SVC_Q extends Kernel {
 
     SVC_Q(svm_problem prob, svm_parameter param, byte[] y_) {
         super(prob.l, prob.x, param);
-        y = (byte[]) y_.clone();
+        y = y_.clone();
         cache = new Cache(prob.l, (long) (param.cache_size * (1 << 20)));
         QD = new double[prob.l];
         for (int i = 0; i < prob.l; i++)
@@ -1400,8 +1400,6 @@ public class svm {
         double[] alpha;
         double rho;
     }
-
-    ;
 
     static decision_function svm_train_one(
             svm_problem prob, svm_parameter param,

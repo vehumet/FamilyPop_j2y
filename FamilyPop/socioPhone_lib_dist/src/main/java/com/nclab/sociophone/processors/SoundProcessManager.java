@@ -572,14 +572,22 @@ public class SoundProcessManager {
 
             }
 
-            public void onFinish() {
+            public void onFinish()
+            {
                 int volSum = 0;
-                for(Double vol : mListSilenceVol){
+                for(Double vol : mListSilenceVol)
+                {
                     volSum += vol;
                 }
-                int result = volSum / mListSilenceVol.size(); // divide by zero
-                callback.done(result);
-                mListSilenceVol.clear(); // Should be null after its use
+
+                if( volSum != 0 && mListSilenceVol.size() != 0)
+                {
+                    int result = volSum / mListSilenceVol.size(); // divide by zero
+                    callback.done(result);
+                    mListSilenceVol.clear(); // Should be null after its use
+
+
+                }
 
                 isMeasuringSilenceVolThreshold = false;
             }
@@ -587,7 +595,7 @@ public class SoundProcessManager {
 
     }
 
-    private ArrayList<Double> mListSilenceVolVar = new ArrayList<Double>();;
+    private ArrayList<Double> mListSilenceVolVar = new ArrayList<Double>();
     boolean isMeasuringSilenceVolVarThreshold = false;
     public void measureSilenceVolVar(int timeInMs, final MeasurementCallback callback) {
         isMeasuringSilenceVolVarThreshold = true;
@@ -604,11 +612,14 @@ public class SoundProcessManager {
                 for(Double vol : mListSilenceVolVar){
                     volSum += vol;
                 }
-                int result = volSum / mListSilenceVolVar.size();
-                callback.done(result);
-                mListSilenceVolVar.clear(); // Should be null after its use
+                if( volSum != 0 && mListSilenceVolVar.size() != 0)
+                {
+                    int result = volSum / mListSilenceVolVar.size();
+                    callback.done(result);
+                    mListSilenceVolVar.clear(); // Should be null after its use
 
-                isMeasuringSilenceVolVarThreshold = false;
+                    isMeasuringSilenceVolVarThreshold = false;
+                }
             }
         }.start();
 

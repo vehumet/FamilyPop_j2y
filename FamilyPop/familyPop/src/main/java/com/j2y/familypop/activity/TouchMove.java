@@ -35,10 +35,10 @@ public class TouchMove implements View.OnTouchListener
     public float _touchDirVectorRotation = 0.0f;
 
     // Ãæµ¹
-    private ArrayList<View> _collisionViews;
-    private int _collisionView_ID;
+    protected ArrayList<View> _collisionViews;
+    protected int _collisionView_ID;
 
-    private View _src;
+    protected View _src;
     public TouchMove(View src , float startPosX, float startPosy )
     {
         _src = src;
@@ -138,8 +138,8 @@ public class TouchMove implements View.OnTouchListener
     }
 
     //==============================================================================================================
-    // private
-    private int collision_chack(float x, float y)
+    //
+    protected int collision_chack(float x, float y)
     {
         int ret = -1;
 
@@ -149,9 +149,6 @@ public class TouchMove implements View.OnTouchListener
 //            float posY = v.getY();
 //            int destWidth  = v.getWidth();
 //            int destHeight = v.getHeight();
-//
-//
-//
 //        }
 
         return ret;

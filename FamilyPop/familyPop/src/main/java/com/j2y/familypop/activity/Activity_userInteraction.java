@@ -8,7 +8,7 @@ import com.j2y.familypop.activity.BaseActivity;
 import com.nclab.familypop.R;
 
 /**
- * Created by gmpguru on 2016-01-28. ÀÌ·¸°Ô ÇÏ¸é ¾ÈµÉ°Å°°À½. Á¦°ÅÇØ¾ßÁö.
+ * Created by gmpguru on 2016-01-28. ì´ë ‡ê²Œ í•˜ë©´ ì•ˆë ê±°ê°™ìŒ. ì œê±°í•´ì•¼ì§€.
  */
 public class Activity_userInteraction extends BaseActivity
 {

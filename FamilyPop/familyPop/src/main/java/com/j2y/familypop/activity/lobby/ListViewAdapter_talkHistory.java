@@ -134,9 +134,6 @@ public class ListViewAdapter_talkHistory extends BaseAdapter implements View.OnC
                 convertView.setPadding(0, 200, 0, 0);
 
             }
-
-
-
             TextView text_playTime = (TextView) convertView.findViewById(R.id.listitem_history_text_playtime);
             TextView text_name = (TextView) convertView.findViewById(R.id.listitem_history_text_name);
             TextView text_day = (TextView) convertView.findViewById(R.id.listitem_history_text_day);
@@ -157,7 +154,6 @@ public class ListViewAdapter_talkHistory extends BaseAdapter implements View.OnC
             if(null == _backPadding)
                 _backPadding = new Rect(listview.getPaddingLeft(),listview.getPaddingTop(),listview.getPaddingRight(),listview.getPaddingBottom());
 
-
             if(position % 2 == 0)  //left item
             {
                 leftPoint.setVisibility(View.GONE);
@@ -176,7 +172,6 @@ public class ListViewAdapter_talkHistory extends BaseAdapter implements View.OnC
 //                        _backPadding.right,
 //                        _backPadding.bottom);
 
-
             }
             else    //right item
             {
@@ -194,7 +189,6 @@ public class ListViewAdapter_talkHistory extends BaseAdapter implements View.OnC
 //                        _backPadding.top,
 //                        _backPadding.right - 50,
 //                        _backPadding.bottom);
-
 
             }
 

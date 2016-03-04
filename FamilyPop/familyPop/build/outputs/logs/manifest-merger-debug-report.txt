@@ -15,10 +15,14 @@ ADDED from AndroidManifest.xml:2:1
 		INJECTED from AndroidManifest.xml:0:0
 uses-sdk
 ADDED from AndroidManifest.xml:7:5
-MERGED from com.android.support:multidex:1.0.0:18:5
 MERGED from FamilyPop:socioPhone_lib_dist:unspecified:7:5
+MERGED from com.android.support:support-v4:21.0.0:15:5
 MERGED from FamilyPop:mmlib:unspecified:5:5
 MERGED from FamilyPop:socioPhone_lib_dist:unspecified:7:5
+MERGED from com.android.support:support-v4:21.0.0:15:5
+MERGED from com.android.support:support-v4:21.0.0:15:5
+MERGED from com.android.support:palette-v7:21.0.0:15:5
+MERGED from com.android.support:support-v4:21.0.0:15:5
 	android:targetSdkVersion
 		ADDED from AndroidManifest.xml:9:9
 		INJECTED from AndroidManifest.xml:0:0
@@ -82,8 +86,13 @@ ADDED from AndroidManifest.xml:30:5
 application
 ADDED from AndroidManifest.xml:33:5
 MERGED from FamilyPop:socioPhone_lib_dist:unspecified:11:5
+MERGED from com.android.support:support-v4:21.0.0:16:5
 MERGED from FamilyPop:mmlib:unspecified:9:5
 MERGED from FamilyPop:socioPhone_lib_dist:unspecified:11:5
+MERGED from com.android.support:support-v4:21.0.0:16:5
+MERGED from com.android.support:support-v4:21.0.0:16:5
+MERGED from com.android.support:palette-v7:21.0.0:16:5
+MERGED from com.android.support:support-v4:21.0.0:16:5
 	android:label
 		ADDED from AndroidManifest.xml:36:9
 	android:allowBackup
@@ -200,3 +209,14 @@ ADDED from AndroidManifest.xml:74:9
 		ADDED from AndroidManifest.xml:74:98
 	android:name
 		ADDED from AndroidManifest.xml:74:19
+service#com.nclab.sociophone.record.AudioRecorderService
+ADDED from FamilyPop:socioPhone_lib_dist:unspecified:16:9
+MERGED from FamilyPop:socioPhone_lib_dist:unspecified:16:9
+	android:name
+		ADDED from FamilyPop:socioPhone_lib_dist:unspecified:16:18
+intent-filter#com.nclab.sociophone.record.AudioRecorderService
+ADDED from FamilyPop:socioPhone_lib_dist:unspecified:17:13
+action#com.nclab.sociophone.record.AudioRecorderService
+ADDED from FamilyPop:socioPhone_lib_dist:unspecified:18:17
+	android:name
+		ADDED from FamilyPop:socioPhone_lib_dist:unspecified:18:25

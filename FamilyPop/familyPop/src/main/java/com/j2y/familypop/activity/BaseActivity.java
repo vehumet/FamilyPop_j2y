@@ -17,7 +17,7 @@ import com.j2y.familypop.MainActivity;
 public abstract class BaseActivity extends Activity
 {
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    // 메인 함수
+    // /메인 함수
     @Override
     protected  void onCreate(Bundle savedInstanceState)
     {

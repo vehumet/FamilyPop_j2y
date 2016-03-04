@@ -102,7 +102,8 @@ public class Vector2 {
         float distY = this.y - other.y;
         return FloatMath.sqrt(distX * distX + distY * distY);
     }
-    public float dist(float x, float y) {
+    public float dist(float x, float y)
+    {
         float distX = this.x - x;
         float distY = this.y - y;
         return FloatMath.sqrt(distX * distX + distY * distY);

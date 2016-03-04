@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.nclab.sociophone.handler.DisplayHandler;
 import com.nclab.sociophone.handler.SignalHandler;
@@ -18,6 +17,7 @@ import com.nclab.sociophone.interfaces.TurnDataListener;
 import com.nclab.sociophone.network.NetworkManager;
 import com.nclab.sociophone.processors.SoundProcessManager;
 import com.nclab.sociophone.processors.VolumeWindow;
+import com.nclab.sociophone.record.AudioRecorderService;
 import com.nclab.sociophone.record.RecordProcessThread;
 
 /**
@@ -25,7 +25,8 @@ import com.nclab.sociophone.record.RecordProcessThread;
  *
  * @author Chanyou
  */
-public class SocioPhone {
+public class SocioPhone
+{
 
     private SignalHandler sHandler;
     private DisplayHandler dHandler;
@@ -41,6 +42,9 @@ public class SocioPhone {
     public static boolean isServer = false;
     private int myId = 0;
     private long _record_start_time = 0;
+    private ContextAPI CAPI;
+    private Intent audioRecordIntent;
+    private AudioRecorderService _audioRecordService;
 
 
     /**
@@ -60,11 +64,10 @@ public class SocioPhone {
         dHandler = new DisplayHandler(this);
         mNetworkManager = new NetworkManager(sHandler, dHandler);
         sHandler.setNetworkManager(mNetworkManager);
+
         if (!bluetoothHeadset) {
             //recordThread = new RecordProcessThread(sHandler, true);
-        }
-        else
-        {
+        } else {
             mContext.registerReceiver(btHeadsetStatusRecevicer, new IntentFilter(BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED));
 
             mContext.registerReceiver(new BroadcastReceiver() {
@@ -84,6 +87,8 @@ public class SocioPhone {
 
         }
 
+        CAPI = new ContextAPI(mContext);
+        boolean isSucceeded = CAPI.registerQuery("GetVolume 100 101 0");
     }
 
     /**
@@ -174,10 +179,20 @@ public class SocioPhone {
             ctime = time;
             displayInterface.onDisplayMessageArrived(0, "TS Client: " + (System.currentTimeMillis() + SocioPhoneConstants.deviceTimeOffset));
         }
-        recordThread = new RecordProcessThread(sHandler, true, filename);
+
+        recordThread = new RecordProcessThread(sHandler, true, filename, mContext);
         recordThread.setCheckPoint(ctime);
-        recordThread.start();
+        recordThread.start_record(); // get volume
         _record_start_time = System.currentTimeMillis();
+        // FIXME start AudioRecorderService. It registers rec query
+        Log.i("JSIM", "start audioRecorderService");
+        audioRecordIntent = new Intent("com.nclab.sociophone.record.AudioRecorderService");
+        _audioRecordService = new AudioRecorderService();
+        //audioRecordIntent.setClass(mContext, AudioRecorderService.class);
+        audioRecordIntent.setClass(mContext, _audioRecordService.getClass());
+        audioRecordIntent.putExtra("sociophone request", "startService");
+        mContext.startService(audioRecordIntent);
+
     }
 
     /**
@@ -198,6 +213,13 @@ public class SocioPhone {
             recordThread.stopRecord();
 
         }
+        CAPI.deregisterQuery("GetVolume");
+        // FIXME stop AudioRecorderService. It deregisters rec query
+        audioRecordIntent = new Intent("com.nclab.sociophone.record.AudioRecorderService");
+
+        audioRecordIntent.setClass(mContext, AudioRecorderService.class);
+        //audioRecordIntent.putExtra("sociophone request", "stopService");
+        mContext.stopService(audioRecordIntent);
     }
     public void recordRelease()
     {
@@ -208,13 +230,11 @@ public class SocioPhone {
             recordThread = null;
         }
     }
-
-
     /**
      * @param isServer true if this device is server
      */
     public void setIsServer(boolean isServer) {
-        this.isServer = isServer;
+        SocioPhone.isServer = isServer;
     }
 
     /*
@@ -228,8 +248,10 @@ public class SocioPhone {
         return recordThread.GetFilePath();
     }
 
-    public String GetWavFileName() {
-        return (recordThread != null) ? recordThread.GetWavFileName() : "";
+    public String GetWavFileName()
+    {
+        return (_audioRecordService != null) ? _audioRecordService.getWaveFilePath() : "";
+        //return (recordThread != null) ? recordThread.GetWavFileName() : "";
     }
 
     public double GetSoundAmplitue() {
@@ -339,11 +361,6 @@ public class SocioPhone {
         mNetworkManager.destroy();
         if (recordThread != null) {
             recordThread.stopRecord();
-            try { // [J2Y]
-                recordThread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
         if (isUsingBluetoothHeadset) {
             mContext.unregisterReceiver(btHeadsetStatusRecevicer);

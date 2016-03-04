@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 16
+    compileSdkVersion 21
     buildToolsVersion "22.0.1"
 
     defaultConfig {
         applicationId "com.nclab.familypop"
-        minSdkVersion 9
-        targetSdkVersion 18
+        minSdkVersion 21
+        targetSdkVersion 21
         multiDexEnabled true
     }
 
@@ -22,7 +22,8 @@ android {
 dependencies {
     compile project(':socioPhone_lib_dist')
     compile project(':mmlib')
-    compile 'com.android.support:support-v4:18.0.0'
+    compile 'com.android.support:support-v4:21.0.0'
+    compile 'com.android.support:palette-v7:21.0.0'
     compile files('libs/android-core.jar')
     compile files('libs/box2d_processing.jar')
     compile files('libs/jbox2d-library-2.2.1-ds.jar')

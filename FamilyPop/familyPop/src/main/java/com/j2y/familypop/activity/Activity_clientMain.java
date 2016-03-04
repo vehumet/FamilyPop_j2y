@@ -6,10 +6,12 @@ import java.io.IOException;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -70,6 +72,8 @@ import android.widget.ToggleButton;
 
 import org.jbox2d.common.Vec3;
 
+import com.j2y.familypop.activity.JoyStick;
+
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
@@ -104,6 +108,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
     // 버블
     private ImageButton _button_redbubble;
     private TouchMove _touchMove;
+    private JoyStick _joyStick;
 
 
     private TextView _text_voiceAmplitude;
@@ -185,16 +190,19 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
     Dialog_MessageBox_ok_cancel _messageBox_instruction;
     Dialog_MessageBox_ok_cancel _messageBox_exit_familybomb;
 
+    // joystick
+    JoyStick _js;
+
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // 초기화/종료
     //
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------
+    RelativeLayout _layout_joystick;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
-
         super.onCreate(savedInstanceState);
         Log.i("[J2Y]", "Activity_clientMain:onCreate");
 
@@ -233,21 +241,44 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
 
         deactive_interactionView();
         allDeactive_targetImage();
+
+        // joystick 생성
+
+        _layout_joystick = (RelativeLayout)findViewById(R.id.image_sticklayout);
+
+        Resources res = getResources();
+        Drawable drawble = res.getDrawable(R.drawable.image_stick_red);
+        //js = new Joystick(getApplicationContext() , layout_joystick, R.drawable.image_stick_yellow);
+        _js = new JoyStick(getApplicationContext() , _layout_joystick, drawble);
+
+        _js.setStickSize(250, 250);
+        _js.setLayoutSize(800, 800);
+        //js.setLayoutAlpha(150);
+        //js.setStickAlpha(100);
+        _js.setOffset(125);
+        //js.setMinimumDistance(50);
+
+
+        _js.draw(800/2, 800/2);
+        // touch event
+        _layout_joystick.setOnTouchListener(new View.OnTouchListener()
+        {
+            public boolean onTouch(View arg0, MotionEvent arg1)
+            {
+                _js.drawStick(arg1);
+                return true;
+            }
+        });
 	}
-    @Override
+     @Override
     protected void onDestroy()
     {
-
         Log.i("[J2Y]", "Activity_clientMain:onDestroy");
-
-        if(_task_voiceAmplitude != null) {
-
+        if(_task_voiceAmplitude != null)
+        {
             _task_voiceAmplitude.cancel(true);
             _task_voiceAmplitude = null;
         }
-
-
-
         FpcRoot.Instance.DisconnectServer();
 
         Instance = null;
@@ -268,7 +299,6 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
                 FpcRoot.Instance.AddTalkRecord(talk_record);
             FpcRoot.Instance.SaveTalkRecords();
         }
-
     }
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // GUI 이벤트
@@ -278,7 +308,6 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
     // GetSoundAmplitue()
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     // [이벤트] 버튼 클릭
-
     private int _device_rotationCount = 0;
     @Override
 	public void onClick(View view) 
@@ -303,9 +332,6 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
 
             startActivityForResult(intent, 0);
             active_featureMenu(false);
-
-
-
 
             /*
              Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -720,9 +746,6 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
                     break;
             }
         }
-
-
-
         return super.dispatchTouchEvent(e);
     }
 
@@ -828,8 +851,6 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
                 _image_boomChosen.setVisibility(View.INVISIBLE);
             }
         }, 5000);
-
-
     }
     public void OnEventSC_win_Tic_Tac_toe()
     {
@@ -1118,7 +1139,6 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
                                     FpNetFacade_client.Instance.SendPacket_req_shareImage(null);
                                     cancel();
                                     break;
-
                                 case R.id.button_custom_dialog_cancel: //skip
                                     cancel();
                                     break;
@@ -1130,9 +1150,6 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
             });
         }
     }
-
-
-
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // GUI Widgets
     //
@@ -1141,6 +1158,11 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     private void init_guiWidgets()
     {
+        // layout
+        _layout_bubbleImage = (FrameLayout) findViewById(R.id.layout_image_view); //layout_image_view
+        _imageview_ttt_winner = (ImageView) findViewById(R.id.imageview_win_tic_tac_toe);
+        _ttt_style = 0;
+
         ((Button) findViewById(R.id.button_client_featuremenu_familybomb)).setOnClickListener(this);
         ((Button) findViewById(R.id.button_client_featuremenu_talk)).setOnClickListener(this);
         ((Button) findViewById(R.id.button_client_featuremenu_smile_event)).setOnClickListener(this);
@@ -1150,10 +1172,15 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         _button_redbubble = (ImageButton) findViewById(R.id.button_client_redbubble);
         _button_redbubble.setOnClickListener(this);
 
+        Rect rect = new Rect();
+//        _button_redbubble.getGlobalVisibleRect(rect);
+//        _touchMove = new TouchMove(_button_redbubble,
+//                                    rect.centerX(),
+//                                    rect.centerY());
 
         _touchMove = new TouchMove(_button_redbubble,
-                                   _button_redbubble.getX(),
-                                   _button_redbubble.getY());
+                rect.centerX(),
+                rect.centerY() );
 
         _touchMove._move = false;
 
@@ -1278,8 +1305,8 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         _textView_regulation_2.setText("bufferSize : "+String.valueOf(_seekBar_regulation_2.getProgress()));
         _textView_regulation_3.setText("bubbleMaxSize : "+String.valueOf(_seekBar_regulation_3.getProgress()));
         _textView_voice_hold.setText("voiceHold : "+String.valueOf(_seekBar_voice_hold.getProgress()));
-        _textView_regulation_smileEffect.setText("smileEffect : "+String.valueOf(_seekBar_regulation_smileEffect.getProgress()));
-        _textView_plus_bubble_size.setText("plusSize : "+String.valueOf(_seekBar_plus_bubble_size.getProgress()));
+        _textView_regulation_smileEffect.setText("smileEffect : " + String.valueOf(_seekBar_regulation_smileEffect.getProgress()));
+        _textView_plus_bubble_size.setText("plusSize : " + String.valueOf(_seekBar_plus_bubble_size.getProgress()));
 
         _toggleButton_voiceProcessingMode = (ToggleButton) findViewById(R.id.toggleButton_voice_processing_mode);
         _toggleButton_voiceProcessingMode.setChecked(false);
@@ -1330,12 +1357,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         _button_ttt_throwback.setOnClickListener(this);
         _button_ttt_Style.setOnClickListener(this);
 
-        // layout
 
-        _layout_bubbleImage = (FrameLayout) findViewById(R.id.layout_image_view);
-
-        _imageview_ttt_winner = (ImageView) findViewById(R.id.imageview_win_tic_tac_toe);
-        _ttt_style = 0;
 
 
         // user message
@@ -1357,6 +1379,24 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         ((Button)findViewById(R.id.imagebutton_interaction_exit)).setOnClickListener(this);
 
 
+
+        // joystick // _layout_bubbleImage
+//        _joyStick = new JoyStick(getApplicationContext(), _layout_bubbleImage, R.drawable._image_bubble_red);
+//        _joyStick.setStickSize(50, 50);
+//        _joyStick.setLayoutSize(100, 100);
+////        _joyStick.setLayoutAlpha(150);
+//        _joyStick.setOffset(90);
+//        _joyStick.setMinimumDistance(50);
+//
+//        _layout_bubbleImage.setOnTouchListener(new View.OnTouchListener()
+//        {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event)
+//            {
+//                _joyStick.drawStick(event);
+//                return false;
+//            }
+//        });
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1569,7 +1609,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
     }
 
     //-----------------------------------------------------------------------------------------------------------------------------
-    //
+    // Interaction
     private int _collisionView_ID;
     private boolean _effectButton;
 

@@ -2,6 +2,8 @@
 processing/opengl/PGraphics2D.class
 processing/core/PApplet.class
 com/j2y/network/base/FpNetFacade_base$1.class
+com/j2y/familypop/activity/SVGParser.class
+com/nclab/sociophone/record/AudioRecorderService.class
 com/j2y/familypop/activity/BaseActivity.class
 processing/core/PApplet$1.class
 com/j2y/network/base/FpNetFacade_base.class
@@ -27,8 +29,8 @@ processing/event/KeyEvent.class
 processing/core/PVector.class
 android/support/v4/app/FragmentTabHost.class
 com/j2y/familypop/activity/Activity_serverMain$1.class
-processing/data/XML.class
 com/j2y/familypop/client/FpcTalkRecord$Bubble.class
+processing/data/XML.class
 org/jbox2d/common/Vec3.class
 cps/mobilemaestro/library/MMCtrlParam.class
 com/j2y/familypop/server/FpsTicTacToe.class
@@ -49,6 +51,7 @@ com/j2y/network/base/FpNetIOStream.class
 edu/emory/mathcs/jtransforms/fft/RealFFTUtils_2DTest.class
 com/j2y/familypop/activity/lobby/Activity_talkHistory$2.class
 com/j2y/familypop/activity/server/Activity_serverCalibrationLocation.class
+com/j2y/familypop/activity/SVG.class
 com/j2y/familypop/activity/Activity_clientMain$button_ttt_requestLocalization_handler.class
 com/j2y/familypop/activity/Activity_clientMain.class
 edu/emory/mathcs/jtransforms/fft/FloatFFT_3DTest.class
@@ -67,6 +70,7 @@ com/j2y/familypop/activity/TouchMove.class
 com/j2y/familypop/client/FpcLocalization_Client.class
 processing/core/PGraphics.class
 android/support/v4/widget/SlidingPaneLayout.class
+com/nclab/sociophone/record/SoundRecThread.class
 cps/mobilemaestro/library/MMAudioPlayer.class
 android/support/v4/widget/CursorAdapter.class
 com/j2y/familypop/activity/Activity_clientMain$button_ttt_throwback_handler.class
@@ -100,6 +104,7 @@ com/j2y/familypop/activity/server/Activity_serverCalibration$1.class
 cps/mobilemaestro/library/MMServer$1.class
 com/j2y/familypop/activity/lobby/Activity_mainRole.class
 com/j2y/familypop/activity/Activity_clientMain$6.class
+com/nclab/sociophone/ContextAPI.class
 com/j2y/familypop/activity/lobby/Activity_talkHistoryPlayback$SeekBarHandler.class
 processing/core/PApplet$SketchSurfaceViewGL.class
 com/j2y/familypop/backup/test_CustomSeekBar.class

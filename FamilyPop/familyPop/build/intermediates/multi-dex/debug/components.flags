@@ -80,6 +80,10 @@
     <init>();
 }
 
+-keep class com.nclab.sociophone.record.AudioRecorderService {
+    <init>();
+}
+
 -keep public class * extends android.app.backup.BackupAgent {
     <init>();
 }

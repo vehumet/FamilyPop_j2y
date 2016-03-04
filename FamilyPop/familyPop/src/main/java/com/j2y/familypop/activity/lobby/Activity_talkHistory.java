@@ -1,6 +1,5 @@
 package com.j2y.familypop.activity.lobby;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.j2y.engine.ColumnListView;
 import com.j2y.familypop.MainActivity;
@@ -31,7 +29,6 @@ import com.j2y.familypop.client.FpcTalkRecord;
 import com.nclab.familypop.R;
 
 import java.sql.Date;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -482,13 +479,13 @@ public class Activity_talkHistory extends BaseActivity implements View.OnClickLi
 
     private TouchMove _touchMove_button_addHistory;
     //------------------------------------------------------------------------------------------------------------------------------------------------------
-    private void init_actionBar() {
+    private void init_actionBar()
+    {
         //ui
         _button_addHistory = (ImageButton) findViewById(R.id.button_add_history);
         _button_addHistory.setOnClickListener(this);
 
         _touchMove_button_addHistory = new TouchMove(_button_addHistory, 780.0f, 0.0f);
-
 
         //top menu role
         _button_role = (ImageButton) findViewById(R.id.button_history_topmenu_role);

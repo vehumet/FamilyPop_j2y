@@ -5,8 +5,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="9"
-        android:targetSdkVersion="18" />
+        android:minSdkVersion="21"
+        android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -102,6 +102,11 @@
             android:label="@layout/activity_dialogue_start_locator_nowcalibrating" />
         <!-- <activity android:name="com.j2y.familypop.activity.lobby.Activity_locatorNowCalibrating" android:lable="@layout/activity_dialogue_start_locator_nowcalibrating"></activity> -->
 
+        <service android:name="com.nclab.sociophone.record.AudioRecorderService" >
+            <intent-filter>
+                <action android:name="com.nclab.sociophone.record.AudioRecorderService" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

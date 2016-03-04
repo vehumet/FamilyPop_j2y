@@ -86,10 +86,10 @@ public class KmeansCluster {
         int clusterIdx = 0;
         boolean res = false;
         while (iter.hasNext()) {
-            ArrayList<double[]> cluster_list = (ArrayList<double[]>) iter.next();
+            ArrayList<double[]> cluster_list = iter.next();
             Iterator<double[]> cluster_iter = cluster_list.iterator();
             while (cluster_iter.hasNext()) {
-                double[] v = (double[]) cluster_iter.next();
+                double[] v = cluster_iter.next();
 
                 //find nearest centroid
                 int min_index = selectCentroid(v);

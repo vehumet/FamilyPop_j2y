@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#1b1b1b"
+
     android:id="@+id/layout_client_mode"
      >
-
+    <!--android:background="#1b1b1b"-->
     <!--<Button-->
     <!--android:id="@+id/applyButton"-->
     <!--android:layout_width="wrap_content"-->
@@ -35,8 +35,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/layout_client_mode_room_info"
-        android:visibility="visible"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="50dp"
+        android:visibility="visible">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,6 +72,7 @@
             android:layout_alignParentLeft="true"
             android:textStyle="bold" />
 
+        <!-- 컬러 정보 -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,8 +82,10 @@
             android:textColor="@color/color_default_string"
             android:layout_below="@+id/text_client_users"
             android:layout_alignParentLeft="true"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone"/>
 
+        <!-- 보이스 정보-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -92,9 +95,11 @@
             android:textColor="@color/color_default_string"
             android:layout_below="@+id/text_client_color"
             android:layout_alignParentLeft="true"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone"/>
 
 
+        <!-- 보이스 정보2-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -104,13 +109,16 @@
             android:layout_below="@+id/text_voice_amplitude"
             android:layout_alignParentLeft="true"
             android:textStyle="bold"
-            android:textColor="#ffffff" />
-        <!-- 버블 클리어 버튼 -->
+            android:textColor="#ffffff"
+            android:visibility="gone"/>
+        <!-- 버블 클리어 버튼 , 화자간 interaction 진입 버튼,디바이스 회전 -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
+            <!-- 버블 클리어 버튼 -->
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -144,21 +152,14 @@
     </LinearLayout>
 
 
+    <!-- 출력 레이어 -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
         android:layout_marginTop="250dp"
         android:id="@+id/layout_image_view"
+        android:visibility="gone"
         >
-        <ImageButton
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:id="@+id/button_client_redbubble"
-            android:background="@drawable/image_bubble_red"
-            android:layout_gravity="center"
-            android:visibility="visible"
-            />
 
         <ImageButton
             android:id="@+id/button_shared_image"
@@ -200,6 +201,20 @@
             android:layout_gravity="left|bottom"
             android:background="@drawable/image_winner"
             android:visibility="invisible"/>
+
+        <!-- 구슬 버튼-->
+        <ImageButton
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/button_client_redbubble"
+            android:background="@drawable/image_bubble_red"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"/>
+
+
+
 
     </FrameLayout>
 
@@ -380,9 +395,10 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         android:id="@+id/layout_tic_tac_toe"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        >
 
         <!-- tic_tac_toe_grid -->
         <RelativeLayout
@@ -541,7 +557,6 @@
     </FrameLayout>
 
     <!-- home button -->
-
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -714,10 +729,10 @@
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
         android:id="@+id/layout_client_mode_user_interaction"
-        android:visibility="visible"
         android:layout_marginTop="50dp"
         android:background="#ffffff"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:visibility="gone">
 
 
         <LinearLayout
@@ -802,5 +817,25 @@
             android:textColor="#ffffff" />
     </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="236dp"
+        android:layout_height="236dp"
+        android:id="@+id/image_sticklayout"
+        android:src="@drawable/image_sticklayout_green"
+        android:layout_gravity="center"
+        android:background="@drawable/image_sticklayout_green"
+        android:visibility="visible"
+        android:layout_alignWithParentIfMissing="false"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
 
-</RelativeLayout><!-- From: file:/D:/J2YSoft/familypop_16_02_04/FamilyPop_j2y/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/activity_client_mode.xml -->
+
+
+
+
+
+
+
+
+<!-- From: file:/D:/J2YSoft/familypop_16_02_04/FamilyPop_j2y/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/activity_client_mode.xml -->

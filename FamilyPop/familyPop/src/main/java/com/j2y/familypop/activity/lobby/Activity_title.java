@@ -1,17 +1,14 @@
 package com.j2y.familypop.activity.lobby;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ImageView;
 
 import com.j2y.familypop.activity.BaseActivity;
 import com.nclab.familypop.R;
@@ -42,6 +39,11 @@ public class Activity_title extends BaseActivity implements View.OnClickListener
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_title);
+
+        // svg test
+        //ImageView title = (ImageView)findViewById(R.id.imageView2);
+        //Resources res = getResources();
+        //title.setImageDrawable(res.getDrawable(R.drawable.test_redbubble));
     }
 
 //    @Override

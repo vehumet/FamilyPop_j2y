@@ -18,6 +18,7 @@
 -keep class com.j2y.familypop.activity.server.Activity_serverCalibrationLocation { <init>(); }
 -keep class com.j2y.familypop.activity.lobby.Activity_locatorWaitingForConnection { <init>(); }
 -keep class com.j2y.familypop.activity.lobby.Activity_locatorNowCalibrating { <init>(); }
+-keep class com.nclab.sociophone.record.AudioRecorderService { <init>(); }
 -keep public class * extends android.app.backup.BackupAgent {
     <init>();
 }

@@ -203,10 +203,18 @@ public class Activity_talkHistoryPlayback extends BaseActivity implements View.O
 
         try {
 
-            String filepath = Environment.getExternalStorageDirectory().getPath() + "/SocioPhone";
+            //String filepath = Environment.getExternalStorageDirectory().getPath() + "/SocioPhone";
+            String filepath = Environment.getExternalStorageDirectory().getPath();// + "/SocioPhone";
 
             //String wav_fullname = filepath + "/" + talk_record._filename;
-            String wav_fullname = talk_record._filename;
+            //String wav_fullname = talk_record._filename;
+            //String wav_fullname = Environment.getExternalStorageDirectory().getPath() +"/"+  talk_record._filename;
+                               // Environment.getExternalStorageDirectory().getPath()
+
+            //String wav_fullname = filepath +"/AudioRecorder"+  "/1456900415436.wav";
+            //String wav_fullname = filepath +"/AudioRecorder"+  "/"+talk_record._filename;//1456900415436.wav";
+            String wav_fullname = talk_record._filename;//1456900415436.wav";
+
             //Uri muri = Uri.parse(wav_fullname);
 
             //File files = new File(wav_fullname);
