@@ -108,8 +108,6 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
     // 버블
     private ImageButton _button_redbubble;
     private TouchMove _touchMove;
-    private JoyStick _joyStick;
-
 
     private TextView _text_voiceAmplitude;
     private TextView _text_voiceAmplitudeAverage;
@@ -191,7 +189,13 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
     Dialog_MessageBox_ok_cancel _messageBox_exit_familybomb;
 
     // joystick
-    JoyStick _js;
+    public JoyStick _joystick;
+
+    // client pos button
+    private ImageButton _button_clientpos_pink_left;
+    private ImageButton _button_clientpos_pink_top;
+    private ImageButton _button_clientpos_pink_right;
+    private ImageButton _button_clientpos_pink_bottom;
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // 초기화/종료
@@ -242,33 +246,32 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         deactive_interactionView();
         allDeactive_targetImage();
 
-        // joystick 생성
-
-        _layout_joystick = (RelativeLayout)findViewById(R.id.image_sticklayout);
-
-        Resources res = getResources();
-        Drawable drawble = res.getDrawable(R.drawable.image_stick_red);
-        //js = new Joystick(getApplicationContext() , layout_joystick, R.drawable.image_stick_yellow);
-        _js = new JoyStick(getApplicationContext() , _layout_joystick, drawble);
-
-        _js.setStickSize(250, 250);
-        _js.setLayoutSize(800, 800);
-        //js.setLayoutAlpha(150);
-        //js.setStickAlpha(100);
-        _js.setOffset(125);
-        //js.setMinimumDistance(50);
-
-
-        _js.draw(800/2, 800/2);
-        // touch event
-        _layout_joystick.setOnTouchListener(new View.OnTouchListener()
-        {
-            public boolean onTouch(View arg0, MotionEvent arg1)
-            {
-                _js.drawStick(arg1);
-                return true;
-            }
-        });
+//        // joystick 생성
+//        _layout_joystick = (RelativeLayout)findViewById(R.id.image_sticklayout);
+//        Resources res = getResources();
+//        Drawable drawble = null;
+//        drawble = res.getDrawable(R.drawable.image_stick_red);
+//
+//        //js = new Joystick(getApplicationContext() , layout_joystick, R.drawable.image_stick_yellow);
+//        _joystick = new JoyStick(getApplicationContext() , _layout_joystick, drawble);
+//
+//        _joystick.setStickSize(250, 250);
+//        _joystick.setLayoutSize(800, 800);
+//        //js.setLayoutAlpha(150);
+//        //js.setStickAlpha(100);
+//        _joystick.setOffset(125);
+//        //js.setMinimumDistance(50);
+//
+//        _joystick.draw(800 / 2, 800 / 2);
+//        // touch event
+//        _layout_joystick.setOnTouchListener(new View.OnTouchListener()
+//        {
+//            public boolean onTouch(View arg0, MotionEvent arg1)
+//            {
+//                _joystick.drawStick(arg1);
+//                return true;
+//            }
+//        });
 	}
      @Override
     protected void onDestroy()
@@ -514,15 +517,47 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
                 break;
             //end tic tac toe
 
+            // interaction
             case R.id.imagebutton_interaction:
                 active_interactionView();
                 break;
             case R.id.imagebutton_interaction_exit:
                 deactive_interactionView();
                 break;
-		}
+            // end interaction
 
+            // client pos
+            case R.id.imageButton_clientpos_pink_left:    active_clientPos(R.id.imageButton_clientpos_pink_right);  break;
+            case R.id.imageButton_clientpos_pink_top:     active_clientPos(R.id.imageButton_clientpos_pink_left);   break;
+            case R.id.imageButton_clientpos_pink_right:   active_clientPos(R.id.imageButton_clientpos_pink_bottom); break;
+            case R.id.imageButton_clientpos_pink_bottom:  active_clientPos(R.id.imageButton_clientpos_pink_top);    break;
+            // end client pos
+		}
 	}
+    // client pos
+    private void active_clientPos( int id )
+    {
+        _button_clientpos_pink_left.setVisibility(View.GONE);
+        _button_clientpos_pink_top.setVisibility(View.GONE);
+        _button_clientpos_pink_right.setVisibility(View.GONE);
+        _button_clientpos_pink_bottom.setVisibility(View.GONE);
+
+        switch (id)
+        {
+            case R.id.imageButton_clientpos_pink_left:
+                _button_clientpos_pink_left.setVisibility(View.VISIBLE);
+                break;
+            case R.id.imageButton_clientpos_pink_top:
+                _button_clientpos_pink_top.setVisibility(View.VISIBLE);
+                break;
+            case R.id.imageButton_clientpos_pink_right:
+                _button_clientpos_pink_right.setVisibility(View.VISIBLE);
+                break;
+            case R.id.imageButton_clientpos_pink_bottom:
+                _button_clientpos_pink_bottom.setVisibility(View.VISIBLE);
+                break;
+        }
+    }
 
     // _button_ttt_localization 지연용
     class button_ttt_localization_handler implements Runnable
@@ -547,9 +582,6 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
             FpcRoot.Instance._localization._client.requestLocalization();
         }
     }
-
-
-
     private void OnClock_bomb_instruction()
     {
         _messageBox_instruction = new Dialog_MessageBox_ok_cancel(this)
@@ -926,7 +958,6 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         @Override
         protected void onProgressUpdate(Void... values)
         {
-
             if(FpcRoot.Instance._socioPhone != null)
             {
                 double amplitude = FpcRoot.Instance._socioPhone.GetSoundAmplitue();
@@ -968,11 +999,34 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
 
                     FpNetFacade_client.Instance.SendPacket_req_userInput_bubbleMove(_touchMove._normalX, -_touchMove._normalY);
                 }
-            }
 
+                // joystick
+                if(_joystick.gettouchState())
+                {
+                    Vector2 v2 = new Vector2(_joystick.getX(),_joystick.getY());
+
+                    if( _device_rotationCount % 2 == 0 )
+                    {
+                        //_touchMove._touchDirVectorRotation = MainActivity.Instance._deviceRotation;
+                        v2.rotate(MainActivity.Instance._deviceRotation);
+                    }
+                    else
+                    {
+                        //_touchMove._touchDirVectorRotation = MainActivity.Instance._deviceRotation * -1;
+                        v2.rotate(MainActivity.Instance._deviceRotation * -1);
+                    }
+
+                    //double dv = Math.sqrt(_joystick.getX() * _joystick.getX() + _joystick.getY() * _joystick.getY());
+//                    float dirX = (float)_joystick.getX()/(float)dv;
+//                    float dirY = (float)_joystick.getY()/(float)dv;
+
+                    Vector2 n = v2.nor();
+
+                    FpNetFacade_client.Instance.SendPacket_req_userInput_bubbleMove(n.x, -n.y);
+                }
+            }
             super.onProgressUpdate(values);
         }
-
         @Override
         protected Void doInBackground(Void... arg0) {
 
@@ -1189,23 +1243,72 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         _image_bombRunning = (ImageView) findViewById(R.id.image_message_bomb_running);
 
 
-        // todo: 이미지 컬러 변경
+        // todo: 이미지 컬러 변경 ( 조이스틱 컬러 변경 추가.. )
 //        _button_redbubble
         _text_color_pos = ((TextView) findViewById(R.id.text_client_color));
         _text_color_pos.setText("Color:" + FpcRoot.Instance._bubble_color_type + " , userPos: " + FpcRoot.Instance._user_posid);
 
-        //drawable.image_bead_1
+        // joystick
+        _layout_joystick = (RelativeLayout) findViewById(R.id.image_sticklayout);
+        Resources res = getResources();
+        Drawable drawble = null;
 
         switch(FpcRoot.Instance._bubble_color_type)
         {
-            case 0: _button_redbubble.setBackgroundResource(R.drawable.image_bead_4);   break;      // pink
-            case 1: _button_redbubble.setBackgroundResource(R.drawable.image_bead_0);   break;      // red
-            case 2: _button_redbubble.setBackgroundResource(R.drawable.image_bead_2);   break;      // yellow
-            case 3: _button_redbubble.setBackgroundResource(R.drawable.image_bead_1);   break;      // green
-            case 4: _button_redbubble.setBackgroundResource(R.drawable.image_bead_5);   break;      // phthalogreen
-            case 5: _button_redbubble.setBackgroundResource(R.drawable.image_bead_3);   break;      // blue
-            case 6: _button_redbubble.setBackgroundResource(R.drawable.image_bead_6);   break;
+            // pink
+            case 0:
+                _button_redbubble.setBackgroundResource(R.drawable.image_bead_4);
+                drawble = res.getDrawable(R.drawable.image_stick_pink);
+                break;
+            // red
+            case 1:
+                _button_redbubble.setBackgroundResource(R.drawable.image_bead_0);
+                drawble = res.getDrawable(R.drawable.image_stick_red);
+                break;
+            // yellow
+            case 2:
+                _button_redbubble.setBackgroundResource(R.drawable.image_bead_2);
+                drawble = res.getDrawable(R.drawable.image_stick_yellow);
+                break;
+            // green
+            case 3:
+                _button_redbubble.setBackgroundResource(R.drawable.image_bead_1);
+                drawble = res.getDrawable(R.drawable.image_stick_green);
+                break;
+            // phthalogreen
+            case 4:
+                _button_redbubble.setBackgroundResource(R.drawable.image_bead_5);
+                drawble = res.getDrawable(R.drawable.image_stick_green);
+                break;
+            // blue
+            case 5:
+                _button_redbubble.setBackgroundResource(R.drawable.image_bead_3);
+                drawble = res.getDrawable(R.drawable.image_stick_green);
+                break;
+            case 6:
+                _button_redbubble.setBackgroundResource(R.drawable.image_bead_6);
+                drawble = res.getDrawable(R.drawable.image_stick_green);
+                break;
         }
+
+        _joystick = new JoyStick(getApplicationContext() , _layout_joystick, drawble);
+        _joystick.setStickSize(250, 250);
+        _joystick.setLayoutSize(800, 800);
+        //js.setLayoutAlpha(150);
+        //js.setStickAlpha(100);
+        _joystick.setOffset(125);
+        //js.setMinimumDistance(50);
+
+        _joystick.draw(800 / 2, 800 / 2);
+        // touch event
+        _layout_joystick.setOnTouchListener(new View.OnTouchListener()
+        {
+            public boolean onTouch(View arg0, MotionEvent arg1)
+            {
+                _joystick.drawStick(arg1);
+                return true;
+            }
+        });
 
         // 현재 날자와 시간을 구한다.
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss", Locale.KOREA);
@@ -1215,7 +1318,6 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
 
         _button_client_mode_view_clearBubble = (Button) findViewById(R.id.button_client_mode_view_clearBubble);
         _button_client_mode_view_clearBubble.setOnClickListener(this);
-
 
         _layout_roomInfo = (LinearLayout) findViewById(R.id.layout_client_mode_room_info);
         _text_date = (TextView) findViewById(R.id.text_client_date);
@@ -1374,29 +1476,23 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
        // add_touchViewObject( (ImageView)findViewById(R.id.imageview_target_red) );
        // add_touchViewObject((ImageView) findViewById(R.id.imageview_target_yellow));
 
-
         ((Button)findViewById(R.id.imagebutton_interaction)).setOnClickListener(this);
         ((Button)findViewById(R.id.imagebutton_interaction_exit)).setOnClickListener(this);
 
+        // client pos
 
+        _button_clientpos_pink_left = (ImageButton)findViewById(R.id.imageButton_clientpos_pink_left);
+        _button_clientpos_pink_top = (ImageButton)findViewById(R.id.imageButton_clientpos_pink_top);
+        _button_clientpos_pink_right = (ImageButton)findViewById(R.id.imageButton_clientpos_pink_right);
+        _button_clientpos_pink_bottom = (ImageButton)findViewById(R.id.imageButton_clientpos_pink_bottom);
 
-        // joystick // _layout_bubbleImage
-//        _joyStick = new JoyStick(getApplicationContext(), _layout_bubbleImage, R.drawable._image_bubble_red);
-//        _joyStick.setStickSize(50, 50);
-//        _joyStick.setLayoutSize(100, 100);
-////        _joyStick.setLayoutAlpha(150);
-//        _joyStick.setOffset(90);
-//        _joyStick.setMinimumDistance(50);
-//
-//        _layout_bubbleImage.setOnTouchListener(new View.OnTouchListener()
-//        {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event)
-//            {
-//                _joyStick.drawStick(event);
-//                return false;
-//            }
-//        });
+        _button_clientpos_pink_left.setOnClickListener(this);
+        _button_clientpos_pink_top.setOnClickListener(this);
+        _button_clientpos_pink_right.setOnClickListener(this);
+        _button_clientpos_pink_bottom.setOnClickListener(this);
+
+        active_clientPos(R.id.imageButton_clientpos_pink_top);
+
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -17,7 +17,7 @@ import com.j2y.familypop.MainActivity;
 public abstract class BaseActivity extends Activity
 {
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    // /메인 함수
+    //메인 함수
     @Override
     protected  void onCreate(Bundle savedInstanceState)
     {
@@ -30,7 +30,6 @@ public abstract class BaseActivity extends Activity
         OnBase_Destroy();
         super.onDestroy();
     }
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
@@ -40,7 +39,6 @@ public abstract class BaseActivity extends Activity
             case KeyEvent.KEYCODE_BACK:
                 OnBase_Back();
                 break;
-
             default:
                 break;
         }

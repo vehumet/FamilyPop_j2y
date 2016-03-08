@@ -1,14 +1,17 @@
 package com.j2y.network.client;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.j2y.familypop.MainActivity;
 import com.j2y.familypop.activity.Activity_clientMain;
 import com.j2y.familypop.activity.Activity_serverMain;
 import com.j2y.familypop.activity.Interaction_Target;
+import com.j2y.familypop.activity.JoyStick;
 import com.j2y.familypop.client.FpcRoot;
 import com.j2y.familypop.client.FpcScenarioDirectorProxy;
 import com.j2y.familypop.server.FpsRoot;
@@ -22,6 +25,7 @@ import com.j2y.network.base.FpNetUtil;
 import com.j2y.network.base.FpPacketData;
 import com.j2y.network.base.FpPacketHeader;
 import com.j2y.network.base.data.FpNetDataNoti_changeScenario;
+import com.j2y.network.base.data.FpNetDataNoti_clientUpdate;
 import com.j2y.network.base.data.FpNetDataNoti_roomInfo;
 import com.j2y.network.base.data.FpNetDataNoti_serverInfo;
 import com.j2y.network.base.data.FpNetDataReq_TicTacToe_Start;
@@ -142,6 +146,10 @@ public class FpNetFacade_client extends FpNetFacade_base
         RegisterMessageCallBack(FpNetConstants.SCNoti_end_Tic_Tac_Toe, onNoti_endGame_Tic_Tac_Toe);
         RegisterMessageCallBack(FpNetConstants.SCReq_winUser_Tic_Tac_Toe, onReq_userWin_Tic_Tac_Toe);
         RegisterMessageCallBack(FpNetConstants.SCReq_loseUser_Tic_Tac_Toe, onReq_userLose_Tic_Tac_Toe);
+
+
+        //client update
+        RegisterMessageCallBack(FpNetConstants.SCNoti_clientUpdate, onNoti_clientUpdate);
 
 
     }
@@ -442,6 +450,26 @@ public class FpNetFacade_client extends FpNetFacade_base
         public void CallBack(FpNetIncomingMessage inMsg)
         {
             Activity_clientMain.Instance.OnEventSC_endBomb();
+        }
+    };
+
+    // 클라이언트 업데이트
+    FpNetMessageCallBack onNoti_clientUpdate = new FpNetMessageCallBack()
+    {
+        @Override
+        public void CallBack(FpNetIncomingMessage inMsg)
+        {
+            FpNetDataNoti_clientUpdate clientupdate = new FpNetDataNoti_clientUpdate();
+            clientupdate.Parse(inMsg);
+
+            Activity_clientMain.Instance._joystick.Remove_itemAll();
+
+            for(int i=0; i<clientupdate._clientInfos.size(); i++)
+            {
+                FpNetDataNoti_clientUpdate.clientInfo cInfo = clientupdate._clientInfos.get(i);
+                Activity_clientMain.Instance._joystick.AddItem(Integer.toString(cInfo._color), cInfo._posX, cInfo._posY);
+            }
+            //Activity_clientMain.Instance._joystick.AddItem();
         }
     };
 

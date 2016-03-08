@@ -354,7 +354,6 @@ public class Activity_serverMain extends PApplet
                     //if (user._attractor == null)
                     if( user._user_posid != -1)
                         user.CreateAttractor(_box2d, this.width, this.height);
-
                 }
 
                 FpsScenario_base activeScenario = FpsRoot.Instance._scenarioDirector.GetActiveScenario();
@@ -365,7 +364,6 @@ public class Activity_serverMain extends PApplet
                 // 스마일 이벤트
                 if (_smile_event)
                 {
-
                     long deltaTime = System.currentTimeMillis() - _smile_event_time;
                     if (deltaTime > 5000)
                         _smile_event = false;

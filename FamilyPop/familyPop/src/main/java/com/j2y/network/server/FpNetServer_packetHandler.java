@@ -16,6 +16,7 @@ import com.j2y.familypop.server.FpsTalkUser;
 import com.j2y.familypop.server.FpsTicTacToe;
 import com.j2y.familypop.server.render.FpsBubble;
 import com.j2y.network.base.FpNetConstants;
+import com.j2y.network.base.FpNetFacade_base;
 import com.j2y.network.base.FpNetIncomingMessage;
 import com.j2y.network.base.FpNetMessageCallBack;
 import com.j2y.network.base.data.FpNetDataNoti_changeScenario;
@@ -447,6 +448,12 @@ public class FpNetServer_packetHandler
             //if(client._clientID == 0)
             if(FpsScenarioDirector.Instance._activeScenarioType != data._changeScenario)
             {
+                // client update
+                if( data._changeScenario == FpNetConstants.SCENARIO_RECORD )
+                {
+                    FpNetFacade_server.Instance.Send_clientUpdate();
+                }
+
                 if((data._changeScenario == FpNetConstants.SCENARIO_GAME) && (FpsScenarioDirector.Instance.GetActiveScenarioType() == FpNetConstants.SCENARIO_RECORD))
                 {
                     ((FpsScenario_record) FpsScenarioDirector.Instance.GetActiveScenario()).Start_familyBomb();
@@ -554,6 +561,7 @@ public class FpNetServer_packetHandler
                 //Log.i("[J2Y]","x : "+data._dirX + "y : " + data._dirY);
 
                 Activity_serverMain.Instance.MoveUserBubble_add(data._dirX, data._dirY, data._clientid );
+                FpNetFacade_server.Instance.Send_clientUpdate();
             }
         }
     };

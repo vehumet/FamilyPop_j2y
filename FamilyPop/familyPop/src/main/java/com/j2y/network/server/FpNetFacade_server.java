@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import com.j2y.familypop.activity.Activity_clientMain;
 import com.j2y.familypop.activity.Activity_serverMain;
+import com.j2y.familypop.activity.Vector2;
 import com.j2y.familypop.server.FpsRoot;
 import com.j2y.familypop.server.FpsScenarioDirector;
 import com.j2y.familypop.server.FpsTalkUser;
@@ -146,7 +147,6 @@ public class FpNetFacade_server extends FpNetFacade_base
                 _clients.get(i).SendPacket(FpNetConstants.SCReq_loseUser_Tic_Tac_Toe, new FpNetData_base());
             }
         }
-
     }
     public void Send_Start_TicTacToe()
     {
@@ -200,6 +200,30 @@ public class FpNetFacade_server extends FpNetFacade_base
             }
         }
         SystemClock.sleep(50); // 기다려야 하나??
+    }
+
+    public void Send_clientUpdate()
+    {
+        FpNetDataNoti_clientUpdate outMsg = new FpNetDataNoti_clientUpdate();
+
+        for (FpsTalkUser user : Activity_serverMain.Instance._talk_users.values())
+        {
+            Vec2 vec2 = user._attractor.GetPosition();
+            //
+            float width = Activity_serverMain.Instance.width;
+            float height = Activity_serverMain.Instance.height;
+
+            float x = vec2.x - ((width/2));
+            float y = vec2.y - ((height/2));
+
+            double dv = Math.sqrt(x * x + y * y);
+
+            x /= dv;
+            y /= dv;
+
+            outMsg.AddClientData(x, y,user._bubble_color_type, user._net_client._clientID );
+        }
+        BroadcastPacket(FpNetConstants.SCNoti_clientUpdate, outMsg);
     }
 
 

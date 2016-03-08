@@ -16,9 +16,18 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageView;
+
+import com.j2y.familypop.MainActivity;
+import com.nclab.familypop.R;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 
 public class JoyStick
 {
+    // stick state
     public static final int STICK_NONE = 0;
     public static final int STICK_UP = 1;
     public static final int STICK_UPRIGHT = 2;
@@ -28,6 +37,31 @@ public class JoyStick
     public static final int STICK_DOWNLEFT = 6;
     public static final int STICK_LEFT = 7;
     public static final int STICK_UPLEFT = 8;
+
+
+
+    //        0xffE64496,     // pink
+//                0xffE44742,     // red
+//                0xffEBEC4B,     // yellow
+//                0xff45D18C,     // green
+//                0xff47D4CD,		// phthalogreen
+//                0xff4D82D6,     // blue
+//                0xff66ff66, 	// юс╫ц
+    // item
+    public static final String ITEM_PINK = "0";
+    public static final String ITEM_RED = "1";
+    public static final String ITEM_YELLOW = "2";
+    public static final String ITEM_GREEN = "3";
+    public static final String ITEM_PHTHALOGREEN = "4";
+    public static final String ITEM_BLUE = "5";
+
+    // stick style
+    public static final int STICK_STYLE_BLUE = 0;
+    public static final int STICK_STYLE_GREEN = 1;
+    public static final int STICK_STYLE_PHTHALOGREEN = 2;
+    public static final int STICK_STYLE_PINK = 3;
+    public static final int STICK_STYLE_RED = 4;
+    public static final int STICK_STYLE_YELLOW = 5;
 
     private int STICK_ALPHA = 200;
     private int LAYOUT_ALPHA = 200;
@@ -47,6 +81,10 @@ public class JoyStick
     private Bitmap stick;
 
     private boolean touch_state = false;
+
+
+    //
+    private HashMap<String, View> _drawItem = new HashMap<String, View>();;
 
     public JoyStick (Context context, ViewGroup layout, int stick_res_id)
     {
@@ -78,6 +116,8 @@ public class JoyStick
         paint = new Paint();
         mLayout = layout;
         params = mLayout.getLayoutParams();
+
+        //Init_item();
     }
 
     public void drawStick(MotionEvent arg1)
@@ -126,16 +166,35 @@ public class JoyStick
             draw.position(params.width / 2, params.height / 2);
             touch_state = false;
 
-//            new Thread(new Runnable()
-//            {
-//                @Override
-//                public void run()
-//                {
-//                    draw.position(params.width / 2, params.height / 2);
-//                    return;
-//                }
-//            }).start();
+            Runnable runnable = new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    long endTime = System.currentTimeMillis() + (long)0.5f * 1000;
 
+                    while(System.currentTimeMillis() < endTime)
+                    {
+                        synchronized (this)
+                        {
+                            try
+                            {
+                                wait(endTime-System.currentTimeMillis());
+                            }
+                            catch(Exception e)
+                            {
+
+                            }
+
+                        }
+                    }
+                    draw.position(params.width / 2, params.height / 2);
+                    touch_state = false;
+                }
+            };
+
+            Thread wait = new Thread(runnable);
+            wait.start();
         }
         else
         {
@@ -179,6 +238,10 @@ public class JoyStick
             return distance;
         }
         return 0;
+    }
+    public boolean gettouchState()
+    {
+        return touch_state;
     }
 
     public void setMinimumDistance(int minDistance) {
@@ -281,7 +344,8 @@ public class JoyStick
         return stick_height;
     }
 
-    public void setLayoutSize(int width, int height) {
+    public void setLayoutSize(int width, int height)
+    {
         params.width = width;
         params.height = height;
     }
@@ -307,10 +371,13 @@ public class JoyStick
     }
 
     //private void draw() {
-    public void draw() {
-        try {
+    public void draw()
+    {
+        try
+        {
             mLayout.removeView(draw);
-        } catch (Exception e) { }
+        }
+        catch (Exception e) { }
         mLayout.addView(draw);
     }
     public void draw(float x, float y)
@@ -329,36 +396,125 @@ public class JoyStick
         mLayout.addView(draw);
     }
 
-    private class DrawCanvas extends View{
+    private class DrawCanvas extends View
+    {
         float x, y;
 
         private DrawCanvas(Context mContext) {
             super(mContext);
         }
 
-        public void onDraw(Canvas canvas) {
+        public void onDraw(Canvas canvas)
+        {
             canvas.drawBitmap(stick, x, y, paint);
         }
 
-        private void position(float pos_x, float pos_y) {
+        private void position(float pos_x, float pos_y)
+        {
             x = pos_x - (stick_width / 2);
             y = pos_y - (stick_height / 2);
         }
     }
+
+//    // draw item test
+//    private void Init_item()
+//    {
+//        ImageView image = new ImageView(mContext);
+//        Resources res = mContext.getResources();
+//        Drawable drawble = res.getDrawable(R.drawable.image_stickupos_green);
+//        image.setImageDrawable(drawble);
+//        mLayout.addView(image);
+//
+//        float tempX = 1;
+//        float tempY = 0;
+//
+//        float x = (float) (Math.cos(Math.toRadians(cal_angle(tempX, tempY))) * ((params.width / 2) - OFFSET));
+//        float y = (float) (Math.sin(Math.toRadians(cal_angle(tempX, tempY))) * ((params.height / 2) - OFFSET));
+//        x += (params.width / 2);
+//        y += (params.height / 2);
+//        image.setX(x);
+//        image.setY(y);
+//
+//        //AddItem(ITEM_GREEN, image, 100, 100);
+//    }
+    public void AddItem(String key, float pos_x, float pos_y)
+    {
+
+
+        ImageView item = new ImageView(mContext);
+        Resources res = mContext.getResources();
+        Drawable drawble = null;
+        switch (key)
+        {
+            case JoyStick.ITEM_BLUE:            drawble = res.getDrawable(R.drawable.image_stickupos_non);      break;
+            case JoyStick.ITEM_GREEN:           drawble = res.getDrawable(R.drawable.image_stickupos_green);    break;
+            case JoyStick.ITEM_PHTHALOGREEN:    drawble = res.getDrawable(R.drawable.image_stickupos_non);      break;
+            case JoyStick.ITEM_PINK:            drawble = res.getDrawable(R.drawable.image_stickupos_pink);     break;
+            case JoyStick.ITEM_RED:             drawble = res.getDrawable(R.drawable.image_stickupos_red);      break;
+            case JoyStick.ITEM_YELLOW:          drawble = res.getDrawable(R.drawable.image_stickupos_yellow);   break;
+        }
+
+
+        item.setImageDrawable(drawble);
+        mLayout.addView(item);
+
+
+
+        float x = (float) (Math.cos(Math.toRadians(cal_angle(pos_x, pos_y))) * ((params.width / 2) - 32));
+        float y = (float) (Math.sin(Math.toRadians(cal_angle(pos_x, pos_y))) * ((params.height / 2) - 32));
+        x += (params.width / 2);
+        y += (params.height / 2);
+        item.setX(x-32);
+        item.setY(y-32);
+
+        _drawItem.put(key, item);
+    }
+    public void Remove_itemAll()
+    {
+        if( _drawItem == null) return;
+        if( _drawItem.size() == 0 ) return;
+
+        //mLayout.removeAllViews();
+        //_drawItem.clear();
+
+        _drawItem.values();
+       for( View v : _drawItem.values() )
+       {
+            mLayout.removeView((ImageView)v);
+       }
+        _drawItem.clear();
+    }
+    public void SetPos_Item(String key, float pos_x, float pos_y)
+    {
+        float x = (float) (Math.cos(Math.toRadians(cal_angle(pos_x, pos_y))) * ((params.width / 2) -32));
+        float y = (float) (Math.sin(Math.toRadians(cal_angle(pos_x, pos_y))) * ((params.height / 2) - 32));
+
+        x += (params.width / 2);
+        y += (params.height / 2);
+
+        _drawItem.get(key).setX(x);
+        _drawItem.get(key).setY(y);
+    }
+
     public static Bitmap drawableToBitmap (Drawable drawable)
     {
         Bitmap bitmap = null;
 
-        if (drawable instanceof BitmapDrawable) {
+        if (drawable instanceof BitmapDrawable)
+        {
             BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-            if(bitmapDrawable.getBitmap() != null) {
+            if(bitmapDrawable.getBitmap() != null)
+            {
                 return bitmapDrawable.getBitmap();
             }
         }
 
-        if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+        if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0)
+        {
             bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
-        } else {
+        }
+        else
+        {
             bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
         }
 

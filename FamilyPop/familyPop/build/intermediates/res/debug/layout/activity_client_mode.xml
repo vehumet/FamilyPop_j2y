@@ -116,7 +116,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <!-- 버블 클리어 버튼 -->
             <Button
@@ -828,6 +828,44 @@
         android:layout_alignWithParentIfMissing="false"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <RelativeLayout
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/image_clientpos_layout"
+        android:visibility="visible"
+        android:layout_alignBottom="@+id/image_sticklayout"
+        android:layout_alignParentEnd="true" >
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton_clientpos_pink_left"
+            android:src="@drawable/image_clientpos_pink_left"
+            android:visibility="visible"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton_clientpos_pink_top"
+            android:src="@drawable/image_clientpos_pink_top"
+            android:visibility="visible"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton_clientpos_pink_right"
+            android:src="@drawable/image_clientpos_pink_right"
+            android:visibility="visible"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton_clientpos_pink_bottom"
+            android:src="@drawable/image_clientpos_pink_bottom"
+            android:visibility="visible"/>
+
+    </RelativeLayout>
 </RelativeLayout>
 
 

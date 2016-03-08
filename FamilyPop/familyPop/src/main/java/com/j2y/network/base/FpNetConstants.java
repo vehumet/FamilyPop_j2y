@@ -69,7 +69,10 @@ public class FpNetConstants
 	// 사용자 메세지
 	public final static int CSReq_userInput_bubbleMove = 5000;
 	public final static int CSReq_userInteraction = 5001;
-	//public final static int CSReq_userInput_
+
+	// client update
+	public final static int SCNoti_clientUpdate = 5002;			// 버블 정보를 클라이언트 들 에게 전송해 갱신 하라는 메세제
+
 
     //----------------------------------------------------------------------------
 	// 시나리오
@@ -88,7 +91,6 @@ public class FpNetConstants
 		0xff45D18C,     // green
 		0xff47D4CD,		// phthalogreen
 		0xff4D82D6,     // blue
-        0xff66ff66, // 임시
-
+        0xff66ff66, 	// 임시
 	};
 }
