@@ -235,7 +235,7 @@ public class Activity_talkHistoryPlayback extends BaseActivity implements View.O
         }
         catch (Exception e)
         {
-            //Toast.makeText(this, "error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
         create_progessBar();

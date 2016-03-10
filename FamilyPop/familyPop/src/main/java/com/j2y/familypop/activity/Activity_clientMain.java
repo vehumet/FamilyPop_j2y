@@ -461,7 +461,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
 //                _layout_bubbleImage.setVisibility(View.GONE);
 
                 FpNetFacade_client.Instance.SendPacket_req_start_Tic_Tac_Toe();
-
+                _joystick.Deactive();
                 active_featureMenu(false);
                 break;
 
@@ -484,7 +484,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
 
                 _layout_roomInfo.setVisibility(View.VISIBLE);
                 _layout_bubbleImage.setVisibility(View.VISIBLE);
-
+                _joystick.Active();
                 break;
             case R.id.button_ttt_localization:
             case R.id.button_ttt_type:
@@ -527,12 +527,29 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
             // end interaction
 
             // client pos
-            case R.id.imageButton_clientpos_pink_left:    active_clientPos(R.id.imageButton_clientpos_pink_right);  break;
-            case R.id.imageButton_clientpos_pink_top:     active_clientPos(R.id.imageButton_clientpos_pink_left);   break;
-            case R.id.imageButton_clientpos_pink_right:   active_clientPos(R.id.imageButton_clientpos_pink_bottom); break;
-            case R.id.imageButton_clientpos_pink_bottom:  active_clientPos(R.id.imageButton_clientpos_pink_top);    break;
+            case R.id.imageButton_clientpos_pink_left:
+                _device_rotationCount++;
+                MainActivity.Instance._deviceRotation = 90;//, _button_rotation.getRotation();
+                active_clientPos(R.id.imageButton_clientpos_pink_right);
+                break;
+            case R.id.imageButton_clientpos_pink_top:
+                _device_rotationCount++;
+                MainActivity.Instance._deviceRotation = 90;// _button_rotation.getRotation();
+                active_clientPos(R.id.imageButton_clientpos_pink_left);
+                break;
+            case R.id.imageButton_clientpos_pink_right:
+                _device_rotationCount++;
+                MainActivity.Instance._deviceRotation = 270;//_button_rotation.getRotation();
+                active_clientPos(R.id.imageButton_clientpos_pink_bottom);
+                break;
+            case R.id.imageButton_clientpos_pink_bottom:
+                _device_rotationCount++;
+                MainActivity.Instance._deviceRotation = 270;//_button_rotation.getRotation();
+                active_clientPos(R.id.imageButton_clientpos_pink_top);
+                break;
             // end client pos
 		}
+        //_joystick.onClick(view);
 	}
     // client pos
     private void active_clientPos( int id )
@@ -729,6 +746,9 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
     {
         RelativeLayout menu = (RelativeLayout) findViewById(R.id.layout_dialogue_menu_feature);
         menu.setVisibility(View.INVISIBLE);
+
+
+
         return super.onTouchEvent(e);
     }
 
@@ -738,7 +758,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
     @Override
     public boolean dispatchTouchEvent(MotionEvent e)
     {
-
+        //_joystick.drawStick(e);
         if( _interaction )
         {
             int eventAction = e.getAction();
@@ -775,6 +795,8 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
                         FpNetFacade_client.Instance.SendPacket_req_userInteraction(target._clientId);
                     }
                     _effectButton = false;
+                    //_joystick.Action_up();
+
                     break;
             }
         }
@@ -1252,6 +1274,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         _layout_joystick = (RelativeLayout) findViewById(R.id.image_sticklayout);
         Resources res = getResources();
         Drawable drawble = null;
+        Drawable drawbleRotation = null;
 
         switch(FpcRoot.Instance._bubble_color_type)
         {
@@ -1259,38 +1282,46 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
             case 0:
                 _button_redbubble.setBackgroundResource(R.drawable.image_bead_4);
                 drawble = res.getDrawable(R.drawable.image_stick_pink);
+                drawbleRotation = res.getDrawable(R.drawable.image_clientpos_pink_top);
                 break;
             // red
             case 1:
                 _button_redbubble.setBackgroundResource(R.drawable.image_bead_0);
                 drawble = res.getDrawable(R.drawable.image_stick_red);
+                drawbleRotation = res.getDrawable(R.drawable.image_clientpos_red_top);
                 break;
             // yellow
             case 2:
                 _button_redbubble.setBackgroundResource(R.drawable.image_bead_2);
                 drawble = res.getDrawable(R.drawable.image_stick_yellow);
+                drawbleRotation = res.getDrawable(R.drawable.image_clientpos_yellow_top);
                 break;
             // green
             case 3:
                 _button_redbubble.setBackgroundResource(R.drawable.image_bead_1);
                 drawble = res.getDrawable(R.drawable.image_stick_green);
+                drawbleRotation = res.getDrawable(R.drawable.image_clientpos_green_top);
                 break;
             // phthalogreen
             case 4:
                 _button_redbubble.setBackgroundResource(R.drawable.image_bead_5);
                 drawble = res.getDrawable(R.drawable.image_stick_green);
+                drawbleRotation = res.getDrawable(R.drawable.image_clientpos_green_top);
                 break;
             // blue
             case 5:
                 _button_redbubble.setBackgroundResource(R.drawable.image_bead_3);
                 drawble = res.getDrawable(R.drawable.image_stick_green);
+                drawbleRotation = res.getDrawable(R.drawable.image_clientpos_green_top);
                 break;
             case 6:
                 _button_redbubble.setBackgroundResource(R.drawable.image_bead_6);
                 drawble = res.getDrawable(R.drawable.image_stick_green);
+                drawbleRotation = res.getDrawable(R.drawable.image_clientpos_green_top);
                 break;
         }
 
+        _layout_joystick.setClickable(true);
         _joystick = new JoyStick(getApplicationContext() , _layout_joystick, drawble);
         _joystick.setStickSize(250, 250);
         _joystick.setLayoutSize(800, 800);
@@ -1306,6 +1337,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
             public boolean onTouch(View arg0, MotionEvent arg1)
             {
                 _joystick.drawStick(arg1);
+                //_layout_joystick.invalidate();
                 return true;
             }
         });
@@ -1356,7 +1388,9 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         _button_regulation_clearBubble.setOnClickListener(this);
         _button_rotation = (ImageButton) findViewById(R.id.imagebutton_rotation);
         _button_rotation.setOnClickListener(this);
-
+        // 회전 버튼 이미지 변경.
+        //drawble = res.getDrawable(R.drawable.image_clientpos_pink_top);
+        _button_rotation.setImageDrawable(drawbleRotation);
 
         _seekBar_regulation_0 = (SeekBar) findViewById(R.id.seekBar_regulation_0);
         _seekBar_regulation_1 = (SeekBar) findViewById(R.id.seekBar_regulation_1);
@@ -1491,7 +1525,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         _button_clientpos_pink_right.setOnClickListener(this);
         _button_clientpos_pink_bottom.setOnClickListener(this);
 
-        active_clientPos(R.id.imageButton_clientpos_pink_top);
+        //active_clientPos(R.id.imageButton_clientpos_pink_top);
 
     }
 

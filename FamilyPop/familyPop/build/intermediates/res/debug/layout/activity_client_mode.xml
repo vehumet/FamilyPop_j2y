@@ -126,7 +126,8 @@
                 android:id="@+id/button_client_mode_view_clearBubble"
                 android:textColor="#ffffff"
                 android:layout_marginLeft="0dp"
-                android:layout_below="@+id/layout_client_mode_room_info" />
+                android:layout_below="@+id/layout_client_mode_room_info"
+                android:visibility="gone"/>
 
             <!-- 화자간 interaction 진입 버튼 -->
             <Button
@@ -136,15 +137,10 @@
                 android:layout_toRightOf="@+id/button_client_mode_view_clearBubble"
                 android:layout_alignTop="@+id/button_client_mode_view_clearBubble"
                 android:text="Interaction"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"
+                android:visibility="gone"/>
 
             <!-- 디바이스 회전 -->
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imagebutton_rotation"
-                android:layout_marginLeft="0dp"
-                android:background="@drawable/image_phone" />
 
         </LinearLayout>
 
@@ -842,28 +838,37 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageButton_clientpos_pink_left"
             android:src="@drawable/image_clientpos_pink_left"
-            android:visibility="visible"/>
+            android:visibility="gone"/>
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageButton_clientpos_pink_top"
             android:src="@drawable/image_clientpos_pink_top"
-            android:visibility="visible"/>
+            android:visibility="gone"/>
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageButton_clientpos_pink_right"
             android:src="@drawable/image_clientpos_pink_right"
-            android:visibility="visible"/>
+            android:visibility="gone"/>
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageButton_clientpos_pink_bottom"
             android:src="@drawable/image_clientpos_pink_bottom"
-            android:visibility="visible"/>
+            android:visibility="gone"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imagebutton_rotation"
+            android:layout_marginLeft="0dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:background="#ffffffff" />
 
     </RelativeLayout>
 </RelativeLayout>

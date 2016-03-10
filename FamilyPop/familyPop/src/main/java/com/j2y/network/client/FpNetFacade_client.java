@@ -264,6 +264,7 @@ public class FpNetFacade_client extends FpNetFacade_base
             }
             Activity_clientMain.Instance._selectScenario = FpNetConstants.SCENARIO_TIC_TAC_TOE;
             FpcRoot.Instance._scenarioDirectorProxy.ChangeScenario(FpNetConstants.SCENARIO_NONE);
+            Activity_clientMain.Instance._joystick.Deactive();
         }
     };
     // 틱텍토 종료
@@ -275,6 +276,7 @@ public class FpNetFacade_client extends FpNetFacade_base
             Activity_clientMain.Instance._layout_ttt.setVisibility(View.INVISIBLE);
             Activity_clientMain.Instance._layout_roomInfo.setVisibility(View.VISIBLE);
             Activity_clientMain.Instance._layout_bubbleImage.setVisibility(View.VISIBLE);
+            Activity_clientMain.Instance._joystick.Active();
         }
     };
     FpNetMessageCallBack onReq_userWin_Tic_Tac_Toe = new FpNetMessageCallBack()
@@ -467,7 +469,8 @@ public class FpNetFacade_client extends FpNetFacade_base
             for(int i=0; i<clientupdate._clientInfos.size(); i++)
             {
                 FpNetDataNoti_clientUpdate.clientInfo cInfo = clientupdate._clientInfos.get(i);
-                Activity_clientMain.Instance._joystick.AddItem(Integer.toString(cInfo._color), cInfo._posX, cInfo._posY);
+                //if( FpcRoot._client._)
+                Activity_clientMain.Instance._joystick.AddItem(Integer.toString(cInfo._color), cInfo._clientId,cInfo._posX, cInfo._posY);
             }
             //Activity_clientMain.Instance._joystick.AddItem();
         }

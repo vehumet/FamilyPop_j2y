@@ -87,7 +87,8 @@ public class Vector2 {
             angle += 360;
         return angle;
     }
-    public Vector2 rotate(float angle) {
+    public Vector2 rotate(float angle)
+    {
         float rad = angle * TO_RADIANS;
         float cos = FloatMath.cos(rad);
         float sin = FloatMath.sin(rad);
@@ -95,9 +96,11 @@ public class Vector2 {
         float newY = this.x * sin + this.y * cos;
         this.x = newX;
         this.y = newY;
+
         return this;
     }
-    public float dist(Vector2 other) {
+    public float dist(Vector2 other)
+    {
         float distX = this.x - other.x;
         float distY = this.y - other.y;
         return FloatMath.sqrt(distX * distX + distY * distY);

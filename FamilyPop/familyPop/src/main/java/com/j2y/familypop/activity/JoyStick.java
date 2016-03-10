@@ -12,13 +12,19 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.j2y.familypop.MainActivity;
+import com.j2y.network.client.FpNetFacade_client;
 import com.nclab.familypop.R;
 
 import java.util.ArrayList;
@@ -37,7 +43,6 @@ public class JoyStick
     public static final int STICK_DOWNLEFT = 6;
     public static final int STICK_LEFT = 7;
     public static final int STICK_UPLEFT = 8;
-
 
 
     //        0xffE64496,     // pink
@@ -82,9 +87,18 @@ public class JoyStick
 
     private boolean touch_state = false;
 
+    public static userPos _select_userPos = null;
 
     //
-    private HashMap<String, View> _drawItem = new HashMap<String, View>();;
+    public HashMap<String, userPos> _drawItems = new HashMap<String, userPos>();
+
+    public void deactive_userPos_all()
+    {
+        for( userPos u : _drawItems.values())
+        {
+            u.setDeactive();
+        }
+    }
 
     public JoyStick (Context context, ViewGroup layout, int stick_res_id)
     {
@@ -116,17 +130,21 @@ public class JoyStick
         paint = new Paint();
         mLayout = layout;
         params = mLayout.getLayoutParams();
-
         //Init_item();
     }
 
+    //
+    Handler handler = new Handler();
+
+    int numberOfTaps = 0;
+    long lastTapTimeMs = 0;
+    long touchDownMs = 0;
     public void drawStick(MotionEvent arg1)
     {
         position_x = (int) (arg1.getX() - (params.width / 2));
         position_y = (int) (arg1.getY() - (params.height / 2));
         distance = (float) Math.sqrt(Math.pow(position_x, 2) + Math.pow(position_y, 2));
         angle = (float) cal_angle(position_x, position_y);
-
 
         if(arg1.getAction() == MotionEvent.ACTION_DOWN)
         {
@@ -135,6 +153,8 @@ public class JoyStick
                 draw.position(arg1.getX(), arg1.getY());
                 draw();
                 touch_state = true;
+
+                Log.d("[joy]", "MotionEvent.ACTION_DOWN");
             }
         }
         else if(arg1.getAction() == MotionEvent.ACTION_MOVE && touch_state)
@@ -159,51 +179,81 @@ public class JoyStick
                 //mLayout.removeView(draw);
                 draw.position(params.width / 2, params.height / 2);
             }
+            Log.d("[joy]", "MotionEvent.ACTION_MOVE");
         }
         else if(arg1.getAction() == MotionEvent.ACTION_UP)
         {
+            Log.d("[joy]", "MotionEvent.ACTION_UP");
             //mLayout.removeView(draw);
             draw.position(params.width / 2, params.height / 2);
+
             touch_state = false;
-
-            Runnable runnable = new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    long endTime = System.currentTimeMillis() + (long)0.5f * 1000;
-
-                    while(System.currentTimeMillis() < endTime)
-                    {
-                        synchronized (this)
-                        {
-                            try
-                            {
-                                wait(endTime-System.currentTimeMillis());
-                            }
-                            catch(Exception e)
-                            {
-
-                            }
-
-                        }
-                    }
-                    draw.position(params.width / 2, params.height / 2);
-                    touch_state = false;
-                }
-            };
-
-            Thread wait = new Thread(runnable);
-            wait.start();
         }
         else
         {
             draw.position(params.width / 2, params.height / 2);
             touch_state = false;
         }
+
+
+        // double touch
+        switch (arg1.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                touchDownMs = System.currentTimeMillis();
+                break;
+            case MotionEvent.ACTION_UP:
+                handler.removeCallbacksAndMessages(null);
+
+                if ((System.currentTimeMillis() - touchDownMs) > ViewConfiguration.getTapTimeout()) {
+                    //it was not a tap
+
+                    numberOfTaps = 0;
+                    lastTapTimeMs = 0;
+                    break;
+                }
+
+                if (numberOfTaps > 0
+                        && (System.currentTimeMillis() - lastTapTimeMs) < ViewConfiguration.getDoubleTapTimeout()) {
+                    numberOfTaps += 1;
+                } else {
+                    numberOfTaps = 1;
+                }
+
+                lastTapTimeMs = System.currentTimeMillis();
+
+                if (numberOfTaps == 3)
+                {
+                    Toast.makeText(Activity_clientMain.Instance, "triple", Toast.LENGTH_SHORT).show();
+                    //handle triple tap
+                }
+                else if (numberOfTaps == 2)
+                {
+                    handler.postDelayed(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            //handle double tap
+                            //Toast.makeText(Activity_clientMain.Instance, "double", Toast.LENGTH_SHORT).show();
+                            if( _select_userPos != null)
+                            {
+                                if( _select_userPos != null){ FpNetFacade_client.Instance.SendPacket_req_userInteraction(_select_userPos._clientId); }
+                                deactive_userPos_all();
+                            }
+                        }
+                    }, ViewConfiguration.getDoubleTapTimeout());
+                }
+        }
+
+
     }
 
-
+    // event touch
+    public void Action_up()
+    {
+        draw.position(params.width / 2, params.height / 2);
+        touch_state = false;
+    }
 
     public int[] getPosition() {
         if(distance > min_distance && touch_state) {
@@ -437,52 +487,71 @@ public class JoyStick
 //
 //        //AddItem(ITEM_GREEN, image, 100, 100);
 //    }
-    public void AddItem(String key, float pos_x, float pos_y)
+    public void AddItem(String key, int clientId, float pos_x, float pos_y)
     {
-
-
-        ImageView item = new ImageView(mContext);
+        //ImageView item = new ImageView(mContext);
+        userPos item = new userPos(mContext);
         Resources res = mContext.getResources();
-        Drawable drawble = null;
+
+        item._clientId = clientId;
+        //Drawable drawble = null;
         switch (key)
         {
-            case JoyStick.ITEM_BLUE:            drawble = res.getDrawable(R.drawable.image_stickupos_non);      break;
-            case JoyStick.ITEM_GREEN:           drawble = res.getDrawable(R.drawable.image_stickupos_green);    break;
-            case JoyStick.ITEM_PHTHALOGREEN:    drawble = res.getDrawable(R.drawable.image_stickupos_non);      break;
-            case JoyStick.ITEM_PINK:            drawble = res.getDrawable(R.drawable.image_stickupos_pink);     break;
-            case JoyStick.ITEM_RED:             drawble = res.getDrawable(R.drawable.image_stickupos_red);      break;
-            case JoyStick.ITEM_YELLOW:          drawble = res.getDrawable(R.drawable.image_stickupos_yellow);   break;
+            case JoyStick.ITEM_BLUE:
+                item.active = res.getDrawable(R.drawable.image_stickupos_non);
+                item.deactive = res.getDrawable(R.drawable.image_stickupos_non);
+                break;
+            case JoyStick.ITEM_GREEN:
+                item.active = res.getDrawable(R.drawable.image_stickupos_green_active);
+                item.deactive = res.getDrawable(R.drawable.image_stickupos_green);
+                break;
+            case JoyStick.ITEM_PHTHALOGREEN:
+                item.active = res.getDrawable(R.drawable.image_stickupos_non);
+                item.deactive = res.getDrawable(R.drawable.image_stickupos_non);
+                break;
+            case JoyStick.ITEM_PINK:
+                item.active = res.getDrawable(R.drawable.image_stickupos_pink_active);
+                item.deactive = res.getDrawable(R.drawable.image_stickupos_pink);
+                break;
+            case JoyStick.ITEM_RED:
+                item.active = res.getDrawable(R.drawable.image_stickupos_red_active);
+                item.deactive = res.getDrawable(R.drawable.image_stickupos_red);
+                break;
+            case JoyStick.ITEM_YELLOW:
+                item.active = res.getDrawable(R.drawable.image_stickupos_yellow_active);
+                item.deactive = res.getDrawable(R.drawable.image_stickupos_yellow);
+                break;
         }
 
 
-        item.setImageDrawable(drawble);
-        mLayout.addView(item);
-
-
+        //item._button.setImageDrawable(drawble);
+        mLayout.addView(item._button);
+        item.setDeactive();
 
         float x = (float) (Math.cos(Math.toRadians(cal_angle(pos_x, pos_y))) * ((params.width / 2) - 32));
-        float y = (float) (Math.sin(Math.toRadians(cal_angle(pos_x, pos_y))) * ((params.height / 2) - 32));
+        float y = (float) (Math.sin(Math.toRadians(cal_angle(pos_x, pos_y))) * ((params.height / 2) - 16));
         x += (params.width / 2);
         y += (params.height / 2);
-        item.setX(x-32);
-        item.setY(y-32);
+        item._button.setX(x - 64);
+        item._button.setY(y - 32);
 
-        _drawItem.put(key, item);
+        _drawItems.put(key, item);
     }
     public void Remove_itemAll()
     {
-        if( _drawItem == null) return;
-        if( _drawItem.size() == 0 ) return;
+        if( _drawItems == null) return;
+        if( _drawItems.size() == 0 ) return;
 
         //mLayout.removeAllViews();
         //_drawItem.clear();
 
-        _drawItem.values();
-       for( View v : _drawItem.values() )
+        _drawItems.values();
+       for( userPos v : _drawItems.values() )
        {
-            mLayout.removeView((ImageView)v);
+           //mLayout.removeView((ImageView)v);
+           mLayout.removeView(v._button);
        }
-        _drawItem.clear();
+        _drawItems.clear();
     }
     public void SetPos_Item(String key, float pos_x, float pos_y)
     {
@@ -492,10 +561,21 @@ public class JoyStick
         x += (params.width / 2);
         y += (params.height / 2);
 
-        _drawItem.get(key).setX(x);
-        _drawItem.get(key).setY(y);
+        _drawItems.get(key)._button.setX(x);
+        _drawItems.get(key)._button.setY(y);
     }
 
+    public void Active()
+    {
+        mLayout.addView(draw);
+        mLayout.setVisibility(View.VISIBLE);
+    }
+    public void Deactive()
+    {
+        mLayout.removeView(draw);
+        deactive_userPos_all();
+        mLayout.setVisibility(View.GONE);
+    }
     public static Bitmap drawableToBitmap (Drawable drawable)
     {
         Bitmap bitmap = null;
@@ -522,6 +602,57 @@ public class JoyStick
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
         return bitmap;
+    }
+
+
+    //user item
+    public class userPos implements View.OnClickListener
+    {
+        public ImageButton _button = null;
+        private Context _Context;
+
+        public Drawable active;
+        public Drawable deactive;
+
+        public int _clientId;
+
+        public boolean _selectState = false;
+
+        public userPos(Context context)
+        {
+            _Context = context;
+            _button = new ImageButton(_Context);
+            _button.setOnClickListener(this);
+            _button.setBackgroundColor(256);
+        }
+
+        public void setActive()
+        {
+            _select_userPos = this;
+            _button.setImageDrawable(active);
+            _selectState = true;
+        }
+        public void setDeactive()
+        {
+            _select_userPos = null;
+            _button.setImageDrawable(deactive);
+            _selectState = false;
+        }
+
+        @Override
+        public void onClick(View v)
+        {
+            _selectState = _selectState ? false : true;
+            if( _selectState)
+            {
+                setActive();
+            }
+            else
+            {
+                setDeactive();
+            }
+           // if( _select_userPos != null){ FpNetFacade_client.Instance.SendPacket_req_userInteraction(_select_userPos._clientId); }
+        }
     }
 }
 
