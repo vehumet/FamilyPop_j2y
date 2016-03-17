@@ -84,6 +84,7 @@ public class JoyStick
     private DrawCanvas draw;
     private Paint paint;
     private Bitmap stick;
+    private Drawable oristick;
 
     private boolean touch_state = false;
 
@@ -130,6 +131,8 @@ public class JoyStick
         paint = new Paint();
         mLayout = layout;
         params = mLayout.getLayoutParams();
+
+        //mLayout.setRotation(70);
         //Init_item();
     }
 
@@ -141,8 +144,13 @@ public class JoyStick
     long touchDownMs = 0;
     public void drawStick(MotionEvent arg1)
     {
+//        Vector2 tmp = new Vector2(arg1.getX(), arg1.getY());
+//        tmp.rotate(-mullti_angle);
+
         position_x = (int) (arg1.getX() - (params.width / 2));
         position_y = (int) (arg1.getY() - (params.height / 2));
+//        position_x = (int) (tmp.x - (params.width / 2));
+//        position_y = (int) (tmp.y - (params.height / 2));
         distance = (float) Math.sqrt(Math.pow(position_x, 2) + Math.pow(position_y, 2));
         angle = (float) cal_angle(position_x, position_y);
 
@@ -151,6 +159,8 @@ public class JoyStick
             if(distance <= (params.width / 2) - OFFSET)
             {
                 draw.position(arg1.getX(), arg1.getY());
+                //draw.position(tmp.x, tmp.y);
+
                 draw();
                 touch_state = true;
 
@@ -162,6 +172,7 @@ public class JoyStick
             if(distance <= (params.width / 2) - OFFSET)
             {
                 draw.position(arg1.getX(), arg1.getY());
+                //draw.position(tmp.x, tmp.y);
                 draw();
             }
             else if(distance > (params.width / 2) - OFFSET)
@@ -171,6 +182,7 @@ public class JoyStick
                 x += (params.width / 2);
                 y += (params.height / 2);
                 draw.position(x, y);
+
                 //draw.position(params.width / 2, params.height / 2);
                 draw();
             }
@@ -223,7 +235,7 @@ public class JoyStick
 
                 if (numberOfTaps == 3)
                 {
-                    Toast.makeText(Activity_clientMain.Instance, "triple", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Activity_clientMain.Instance, "triple", Toast.LENGTH_SHORT).show();
                     //handle triple tap
                 }
                 else if (numberOfTaps == 2)
@@ -244,8 +256,7 @@ public class JoyStick
                     }, ViewConfiguration.getDoubleTapTimeout());
                 }
         }
-
-
+        mullti_touch(arg1);
     }
 
     // event touch
@@ -408,7 +419,8 @@ public class JoyStick
         return params.height;
     }
 
-    private double cal_angle(float x, float y) {
+    private double cal_angle(float x, float y)
+    {
         if(x >= 0 && y >= 0)
             return Math.toDegrees(Math.atan(y / x));
         else if(x < 0 && y >= 0)
@@ -604,6 +616,92 @@ public class JoyStick
         return bitmap;
     }
 
+    //
+    int mullti_lastX, mullti_lastY;
+    int mullti_deltaX, mullti_deltaY;
+    int mullti_lastAngle;
+    int mullti_thisAngle;
+    int mullti_deltaAngle;
+    //layout 회전
+    int mullti_rotateX, mullti_rotateY; // 회전축 중심
+    int mullti_angle; //현재 회전판 각도
+    boolean mullti_touch_state = false;
+
+
+
+    public int getMullti_angle()
+    {
+        return mullti_angle;
+    }
+    private void mullti_touch(MotionEvent arg1)
+    {
+        final int action = arg1.getAction();
+        if( arg1.getPointerCount() ==2 )
+        {
+            mullti_rotateX = mLayout.getWidth()/2;
+            mullti_rotateY = mLayout.getHeight()/2;
+
+            int x1 = (int)arg1.getX(0);
+            int y1 = (int)arg1.getY(0);
+            int x2 = (int)arg1.getX(1);
+            int y2 = (int)arg1.getY(1);
+
+            mullti_thisAngle = (int)Math.toDegrees(Math.atan2(-(y2-y1), x2-x1));
+            if(mullti_lastAngle == 0)
+            {
+                // 처음 터치
+                mullti_lastAngle = mullti_thisAngle;
+            }
+
+            // 각도 변화량 계산.
+            mullti_deltaAngle = mullti_thisAngle-mullti_lastAngle;
+
+            //계산된 각도를 반영
+            mullti_angle += -mullti_deltaAngle;
+            mullti_lastAngle = mullti_thisAngle;
+
+            Log.i("[angle]", "angle : " + mullti_angle);
+
+            //draw.setRotation(mullti_angle);
+            mLayout.setRotation(mullti_angle);
+
+
+//            switch (action & MotionEvent.ACTION_MASK)
+//            {
+//                case MotionEvent.ACTION_POINTER_DOWN:
+//                    // 터치가 두 개 이상일 때 눌러졌을 때
+//                    Toast.makeText(Activity_clientMain.Instance, "ACTION_POINTER_DOWN", Toast.LENGTH_SHORT).show();
+//                    break;
+//
+//                case MotionEvent.ACTION_POINTER_UP:
+//                    // 터치가 두 개 이상일 때 떼어졌을 때
+//                    Toast.makeText(Activity_clientMain.Instance, "ACTION_POINTER_UP", Toast.LENGTH_SHORT).show();
+//                    break;
+//                default:
+//                    break;
+//            }
+        }
+        else
+        {
+            mullti_thisAngle = 0;
+            mullti_lastAngle = 0;
+        }
+    }
+
+    public void onMullti_down()
+    {
+        // 터치가 두 개 이상일 때 눌러졌을 때
+        Toast.makeText(Activity_clientMain.Instance, "ACTION_POINTER_DOWN", Toast.LENGTH_SHORT).show();
+    }
+    public void onMullti_move()
+    {
+
+    }
+    public void onMullti_up()
+    {
+        // 터치가 두 개 이상일 때 떼어졌을 때
+        Toast.makeText(Activity_clientMain.Instance, "ACTION_POINTER_UP", Toast.LENGTH_SHORT).show();
+    }
 
     //user item
     public class userPos implements View.OnClickListener
@@ -653,6 +751,8 @@ public class JoyStick
             }
            // if( _select_userPos != null){ FpNetFacade_client.Instance.SendPacket_req_userInteraction(_select_userPos._clientId); }
         }
+
+
     }
 }
 

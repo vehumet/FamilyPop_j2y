@@ -1,12 +1,15 @@
 package com.nclab.sociophone.record;
 
+
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
 
 import com.nclab.sociophone.ContextAPI;
+import com.nclab.sociophone.SocioPhone;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -31,6 +34,7 @@ public class AudioRecorderService extends Service
     public static String finalPath = "/sdcard/AudioRecorder/AudioREC_test";
     private boolean isActive = false;
 
+    private SharedPreferences _soundInfo = null;
 //	private final Handler mHandler = null;
 
     public static boolean isRECToggleOn() {
@@ -81,6 +85,7 @@ public class AudioRecorderService extends Service
         }*/
         tempcount++;
         waveName = "";
+
         return START_STICKY;
     }
 
@@ -109,13 +114,23 @@ public class AudioRecorderService extends Service
 
         if(!file.exists())
         {
-            file.mkdirs();        Log.e("FILE", file.getAbsolutePath() + "/" + System.currentTimeMillis() + AUDIO_RECORDER_FILE_EXT_WAV);
-
+            file.mkdirs();
+            Log.e("FILE", file.getAbsolutePath() + "/" + System.currentTimeMillis() + AUDIO_RECORDER_FILE_EXT_WAV);
         }
 
         if( waveName == "" )
         {
-            waveName +=  System.currentTimeMillis();
+            //_soundInfo = getSharedPreferences("soundInfo",MODE_PRIVATE);
+            SharedPreferences Info = SocioPhone.Instance.mContext.getSharedPreferences("soundInfo",0);
+
+            int num = Info.getInt("waveName", 0);
+            waveName = Integer.toString(num);//System.currentTimeMillis();
+
+            SharedPreferences.Editor editor = Info.edit();
+
+            num++;
+            editor.putInt("waveName",num);
+            editor.commit();
         }
 
         //return file.getAbsolutePath() + "/" + System.currentTimeMillis() + AUDIO_RECORDER_FILE_EXT_WAV;
@@ -271,7 +286,7 @@ public class AudioRecorderService extends Service
         Log.i("JSIM", "AudioRecorderService destroy");
 
         tempcount++;
-        waveName = "";
+        //waveName = "";
     }
 
     @Override

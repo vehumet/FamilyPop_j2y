@@ -51,8 +51,6 @@ public class FpsBubble
             _colorId = colorId;
             _rad = rad;
 
-
-
 			// Define a _body
 			BodyDef bd_ = new BodyDef();
 			bd_.type = BodyType.DYNAMIC;
@@ -61,14 +59,14 @@ public class FpsBubble
 			bd_.position = _box2d.coordPixelsToWorld(x, y);
 			body = _box2d.world.createBody(bd_);
 
-
+            body.setFixedRotation(false);
+            body.setBullet(false);
 
 			// Make the _body's shape a circle
 			CircleShape cs_ = new CircleShape();
 			cs_.m_radius = _box2d.scalarPixelsToWorld(this._rad);
 
-	  
-			// Define a fixture
+            			// Define a fixture
 			FixtureDef fd_ = new FixtureDef();
 			fd_.shape = cs_;
 		  

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/test_listview_layout"
+    android:gravity="left"
+    android:focusable="false"
+    android:descendantFocusability="blocksDescendants"
+    android:background="#00000000">
+
+    <!--android:layout_width="wrap_content"-->
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_list_item_history_leftpoint"
+        android:background="@drawable/image_timeline_point"
+        android:layout_marginTop="31dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_list_item_history_rightpoint"
+        android:background="@drawable/image_timeline_point"
+        android:layout_alignTop="@+id/imageView_list_item_history_leftpoint"
+        android:layout_toRightOf="@+id/frameLayout"
+        android:layout_marginTop="31dp" />
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_history_topmenu"
+        android:layout_toRightOf="@+id/imageView_list_item_history_leftpoint"
+        android:id="@+id/frameLayout">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView5"
+            android:background="@drawable/background_history_listitem_temp2"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="60dp" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/test_listview_layout_background"
+            android:background="#00000000">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="0:00:32"
+                android:id="@+id/listitem_history_text_playtime"
+                android:textColor="#ffcdf0ff"
+                android:singleLine="true"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="CAMPING TIME"
+                android:id="@+id/listitem_history_text_name"
+                android:textColor="#ff04c0e0"
+                android:singleLine="true"
+                android:textStyle="bold"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="2015.05.05"
+                android:id="@+id/listitem_history_text_day"
+                android:textColor="@color/color_white"
+                android:singleLine="true"
+                android:textStyle="bold"
+                android:textSize="27dp" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_listview_item_history_left"
+                android:background="@drawable/style_button_play"
+                android:layout_gravity="center" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_listview_item_history_delete1"
+                android:layout_gravity="center_horizontal"
+                android:visibility="visible"
+                android:layout_centerInParent="true"
+                android:background="@drawable/image_trash" />
+
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+
+
+</RelativeLayout>
+

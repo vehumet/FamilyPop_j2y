@@ -1027,24 +1027,29 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
                 {
                     Vector2 v2 = new Vector2(_joystick.getX(),_joystick.getY());
 
-                    if( _device_rotationCount % 2 == 0 )
-                    {
-                        //_touchMove._touchDirVectorRotation = MainActivity.Instance._deviceRotation;
-                        v2.rotate(MainActivity.Instance._deviceRotation);
-                    }
-                    else
-                    {
-                        //_touchMove._touchDirVectorRotation = MainActivity.Instance._deviceRotation * -1;
-                        v2.rotate(MainActivity.Instance._deviceRotation * -1);
-                    }
+//                    if( _device_rotationCount % 2 == 0 )
+//                    {
+//                        //_touchMove._touchDirVectorRotation = MainActivity.Instance._deviceRotation;
+//                        //v2.rotate(MainActivity.Instance._deviceRotation);
+//                        //v2.rotate(_joystick.getMullti_angle());
+//                        //v2.rotate(_layout_joystick.getRotation());
+//                    }
+//                    else
+//                    {
+//                        //_touchMove._touchDirVectorRotation = MainActivity.Instance._deviceRotation * -1;
+//                        //v2.rotate(MainActivity.Instance._deviceRotation * -1);
+//                        //v2.rotate(_joystick.getMullti_angle() * -1);
+//                        //v2.rotate(_layout_joystick.getRotation() * -1);
+//                    }
 
                     //double dv = Math.sqrt(_joystick.getX() * _joystick.getX() + _joystick.getY() * _joystick.getY());
 //                    float dirX = (float)_joystick.getX()/(float)dv;
 //                    float dirY = (float)_joystick.getY()/(float)dv;
 
+                    //v2.rotate(_joystick.getMullti_angle());
                     Vector2 n = v2.nor();
 
-                    FpNetFacade_client.Instance.SendPacket_req_userInput_bubbleMove(n.x, -n.y);
+                    FpNetFacade_client.Instance.SendPacket_req_userInput_bubbleMove(n.x, n.y);
                 }
             }
             super.onProgressUpdate(values);
@@ -1275,6 +1280,8 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         Resources res = getResources();
         Drawable drawble = null;
         Drawable drawbleRotation = null;
+
+        //_layout_joystick.setRotation(50);
 
         switch(FpcRoot.Instance._bubble_color_type)
         {
@@ -1658,7 +1665,6 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
             }
         };
         msgbox.show();
-
     }
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

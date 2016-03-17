@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.util.Log;
 
@@ -27,12 +28,13 @@ import com.nclab.sociophone.record.RecordProcessThread;
  */
 public class SocioPhone
 {
+    public static  SocioPhone Instance;
 
     private SignalHandler sHandler;
     private DisplayHandler dHandler;
     private NetworkManager mNetworkManager;
     private AudioManager mAudioManager;
-    private Context mContext;
+    public Context mContext;
     private boolean isOrderMode = true, isAllowingOverlap = false, isUsingBluetoothHeadset = false;
     private RecordProcessThread recordThread;
     private SoundProcessManager processManager;
@@ -45,7 +47,6 @@ public class SocioPhone
     private ContextAPI CAPI;
     private Intent audioRecordIntent;
     private AudioRecorderService _audioRecordService;
-
 
     /**
      * @param context          The context of an activity
@@ -89,6 +90,8 @@ public class SocioPhone
 
         CAPI = new ContextAPI(mContext);
         boolean isSucceeded = CAPI.registerQuery("GetVolume 100 101 0");
+
+        Instance = this;
     }
 
     /**
