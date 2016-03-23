@@ -886,14 +886,14 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         Log.i("[J2Y]", "OnEventSC_smileEvent:" + eventTime);
 
         // todo: 스마일 이미지 그리기 On/Off
-        _button_redbubble.setVisibility(View.INVISIBLE);
+        _button_redbubble.setVisibility(View.GONE);
         _image_smilebubble.setVisibility(View.VISIBLE);
 
 
         new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
             @Override
             public void run() {
-                _button_redbubble.setVisibility(View.VISIBLE);
+                _button_redbubble.setVisibility(View.GONE);
                 _image_smilebubble.setVisibility(View.INVISIBLE);
             }
         }, 5000);
@@ -902,20 +902,20 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
 
     public void OnEventSC_bang()
     {
-        _button_redbubble.setVisibility(View.INVISIBLE);
+        _button_redbubble.setVisibility(View.GONE);
         _image_boomChosen.setVisibility(View.VISIBLE);
 
         new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
             @Override
             public void run() {
-                _button_redbubble.setVisibility(View.VISIBLE);
+                _button_redbubble.setVisibility(View.GONE);
                 _image_boomChosen.setVisibility(View.INVISIBLE);
             }
         }, 5000);
     }
     public void OnEventSC_win_Tic_Tac_toe()
     {
-        _button_redbubble.setVisibility(View.INVISIBLE);
+        _button_redbubble.setVisibility(View.GONE);
 
         _imageview_ttt_winner.setBackgroundResource(R.drawable.image_ttt_youwin);
         _imageview_ttt_winner.setVisibility(View.VISIBLE);
@@ -924,14 +924,14 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
             @Override
             public void run()
             {
-                _button_redbubble.setVisibility(View.VISIBLE);
+                _button_redbubble.setVisibility(View.GONE);
                 _imageview_ttt_winner.setVisibility(View.INVISIBLE);
             }
         }, 5000);
     }
     public void OnEventSC_lose_Tic_Tac_Toe()
     {
-        _button_redbubble.setVisibility(View.INVISIBLE);
+        _button_redbubble.setVisibility(View.GONE);
 
         _imageview_ttt_winner.setBackgroundResource(R.drawable.image_ttt_youlose);
         _imageview_ttt_winner.setVisibility(View.VISIBLE);
@@ -940,7 +940,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
             @Override
             public void run()
             {
-                _button_redbubble.setVisibility(View.VISIBLE);
+                _button_redbubble.setVisibility(View.GONE);
                 _imageview_ttt_winner.setVisibility(View.INVISIBLE);
             }
         }, 5000);

@@ -1,5 +1,8 @@
 package com.j2y.familypop.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,8 +13,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -89,6 +95,8 @@ public class Activity_serverMain extends PApplet
 
     public PImage _image_server_righttop;
 
+    public PImage _testImage;
+
     // tic tac toe
 //    public enum eTictactoeImageIndex
 //    {   RED_EMPTY(0), RED_O(1), RED_X(2);
@@ -133,8 +141,6 @@ public class Activity_serverMain extends PApplet
             _ttt_prvUser = null;
             _prvStyle = 0;
             _ttt_userIndex=0;
-
-
         }
     }
     // familybomb 메세지
@@ -217,6 +223,26 @@ public class Activity_serverMain extends PApplet
         {
             StrictMode.enableDefaults();
         }
+
+
+        //text to image test
+        TextView tv = new TextView(this);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(80, 100);
+        tv.setLayoutParams(layoutParams);
+        tv.setText("testing 1 2 3");
+        tv.setTextColor(Color.WHITE);
+        tv.setBackgroundColor(Color.BLACK);
+
+        Bitmap testB;
+
+        testB = Bitmap.createBitmap(80,100, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(testB);
+        tv.layout(0, 0, 80, 100);
+        tv.draw(c);
+
+        //_testImage = testB;
+        //_image_server_righttop = this.loadImage("image_server_righttop.png");
+
     }
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     // [렌더링 쓰레드??]
