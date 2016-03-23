@@ -87,7 +87,7 @@ public class Activity_serverMain extends PApplet
     private boolean _onEvent_winner_o = false;
     private boolean _onEvent_winner_x = false;
 
-    private PImage _image_server_righttop;
+    public PImage _image_server_righttop;
 
     // tic tac toe
 //    public enum eTictactoeImageIndex

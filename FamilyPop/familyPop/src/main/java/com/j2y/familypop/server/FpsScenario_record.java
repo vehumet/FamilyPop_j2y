@@ -593,6 +593,9 @@ public class FpsScenario_record extends FpsScenario_base
         process_turn_data_average(Activity_serverMain.Instance._regulation_seekBar_2);
 
         _applet.text("printing some text to the message window!", 50, 0);
+        //if(Activity_serverMain.Instance != null )
+        //_applet.image(Activity_serverMain.Instance._image_server_righttop, _applet.width - Activity_serverMain.Instance.width, Activity_serverMain.Instance.height);
+        _applet.image(Activity_serverMain.Instance._image_server_righttop, _applet.width-100, 0);
 
         try {
             _lock_turn_data.lock();
@@ -606,6 +609,8 @@ public class FpsScenario_record extends FpsScenario_base
         {
             _lock_turn_data.unlock();
         }
+
+        //this.image(_image_server_righttop, this.width-_image_server_righttop.width, _image_server_righttop.height);
 
         if(_shareImage != null)
         {
