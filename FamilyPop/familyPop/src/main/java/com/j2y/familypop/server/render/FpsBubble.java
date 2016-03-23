@@ -4,6 +4,7 @@ import com.j2y.familypop.activity.Activity_serverMain;
 
 import shiffman.box2d.*;
 
+import org.jbox2d.collision.AABB;
 import org.jbox2d.collision.shapes.*;
 import org.jbox2d.common.*;
 import org.jbox2d.dynamics.*;
@@ -59,6 +60,13 @@ public class FpsBubble
 			bd_.position = _box2d.coordPixelsToWorld(x, y);
 			body = _box2d.world.createBody(bd_);
 
+
+
+            AABB aabb = new AABB();
+
+            aabb.lowerBound.set(-100.0f, -100.0f);
+
+
             body.setFixedRotation(false);
             body.setBullet(false);
 
@@ -66,13 +74,19 @@ public class FpsBubble
 			CircleShape cs_ = new CircleShape();
 			cs_.m_radius = _box2d.scalarPixelsToWorld(this._rad);
 
-            			// Define a fixture
+
+            // Define a fixture
 			FixtureDef fd_ = new FixtureDef();
+
 			fd_.shape = cs_;
-		  
+
 			fd_.density = 0.0001f;
 			fd_.friction = 1;
 			fd_.restitution = 0.0000001f;
+
+            fd_.filter.groupIndex = colorId;
+
+
 
 			fd = body.createFixture(fd_);
 			body.setLinearVelocity(new Vec2(0, 0));

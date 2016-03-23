@@ -197,6 +197,10 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
     private ImageButton _button_clientpos_pink_right;
     private ImageButton _button_clientpos_pink_bottom;
 
+    private ImageButton _button_topmenu_bomb;
+    private ImageButton _button_topmenu_keyword;
+    private ImageButton _button_topmenu_sharephotos;
+
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // 초기화/종료
     //
@@ -241,7 +245,6 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         }
         // # localization  클라이언트용 접속.
         FpcRoot.Instance.InitLocalization();
-
 
         deactive_interactionView();
         allDeactive_targetImage();
@@ -318,7 +321,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         // 토크 버튼 중복 방지.
         if( FpcScenarioDirectorProxy.Instance._activeScenarioType != FpNetConstants.SCENARIO_RECORD){ _temp_send_talk = false; }
 
-        if(view.getId() == R.id.button_client_featuremenu_sharephotos)
+        if(view.getId() == R.id.button_client_featuremenu_sharephotos || view.getId() == R.id.button_client_dialogue_topmenu_sharephotos  )
         {
             //Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
@@ -346,7 +349,6 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
             startActivityForResult(intent, 0);
              */
         }
-
 		//scenario select
 		switch(view.getId())
 		{
@@ -370,8 +372,6 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
                         _layout_bubbleImage.setVisibility(View.VISIBLE);
                         //OnEventSC_endBomb();
                     }
-
-
                     _selectScenario = FpNetConstants.SCENARIO_RECORD;
 
                     FpNetFacade_client.Instance.SendPacket_req_changeScenario(_selectScenario);
@@ -548,6 +548,13 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
                 active_clientPos(R.id.imageButton_clientpos_pink_top);
                 break;
             // end client pos
+
+            case R.id.button_client_dialogue_topmenu_keyword:
+
+                break;
+            case R.id.button_client_dialogue_topmenu_bomb:
+                OnClock_bomb_instruction();
+                break;
 		}
         //_joystick.onClick(view);
 	}
@@ -1049,7 +1056,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
                     //v2.rotate(_joystick.getMullti_angle());
                     Vector2 n = v2.nor();
 
-                    FpNetFacade_client.Instance.SendPacket_req_userInput_bubbleMove(n.x, n.y);
+                    FpNetFacade_client.Instance.SendPacket_req_userInput_bubbleMove(n.x, -n.y);
                 }
             }
             super.onProgressUpdate(values);
@@ -1280,6 +1287,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         Resources res = getResources();
         Drawable drawble = null;
         Drawable drawbleRotation = null;
+        Drawable drawbleStickLayout = null;
 
         //_layout_joystick.setRotation(50);
 
@@ -1288,47 +1296,58 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
             // pink
             case 0:
                 _button_redbubble.setBackgroundResource(R.drawable.image_bead_4);
+                //drawble = res.getDrawable(R.drawable.image_stick_pink);
                 drawble = res.getDrawable(R.drawable.image_stick_pink);
                 drawbleRotation = res.getDrawable(R.drawable.image_clientpos_pink_top);
+                drawbleStickLayout = res.getDrawable(R.drawable.image_sticklayout_pink);
+
+
                 break;
             // red
             case 1:
                 _button_redbubble.setBackgroundResource(R.drawable.image_bead_0);
                 drawble = res.getDrawable(R.drawable.image_stick_red);
                 drawbleRotation = res.getDrawable(R.drawable.image_clientpos_red_top);
+                drawbleStickLayout = res.getDrawable(R.drawable.image_sticklayout_red);
                 break;
             // yellow
             case 2:
                 _button_redbubble.setBackgroundResource(R.drawable.image_bead_2);
                 drawble = res.getDrawable(R.drawable.image_stick_yellow);
                 drawbleRotation = res.getDrawable(R.drawable.image_clientpos_yellow_top);
+                drawbleStickLayout = res.getDrawable(R.drawable.image_sticklayout_yellow);
                 break;
             // green
             case 3:
                 _button_redbubble.setBackgroundResource(R.drawable.image_bead_1);
                 drawble = res.getDrawable(R.drawable.image_stick_green);
                 drawbleRotation = res.getDrawable(R.drawable.image_clientpos_green_top);
+                drawbleStickLayout = res.getDrawable(R.drawable.image_sticklayout_green);
                 break;
             // phthalogreen
             case 4:
                 _button_redbubble.setBackgroundResource(R.drawable.image_bead_5);
-                drawble = res.getDrawable(R.drawable.image_stick_green);
+                drawble = res.getDrawable(R.drawable.image_stick_phthalogreen);
                 drawbleRotation = res.getDrawable(R.drawable.image_clientpos_green_top);
+                drawbleStickLayout = res.getDrawable(R.drawable.image_sticklayout_phthalogreen);
                 break;
             // blue
             case 5:
                 _button_redbubble.setBackgroundResource(R.drawable.image_bead_3);
-                drawble = res.getDrawable(R.drawable.image_stick_green);
+                drawble = res.getDrawable(R.drawable.image_stick_blue);
                 drawbleRotation = res.getDrawable(R.drawable.image_clientpos_green_top);
+                drawbleStickLayout = res.getDrawable(R.drawable.image_sticklayout_blue);
                 break;
             case 6:
                 _button_redbubble.setBackgroundResource(R.drawable.image_bead_6);
                 drawble = res.getDrawable(R.drawable.image_stick_green);
                 drawbleRotation = res.getDrawable(R.drawable.image_clientpos_green_top);
+                drawbleStickLayout = res.getDrawable(R.drawable.image_sticklayout_green);
                 break;
         }
 
         _layout_joystick.setClickable(true);
+        _layout_joystick.setBackground(drawbleStickLayout);
         _joystick = new JoyStick(getApplicationContext() , _layout_joystick, drawble);
         _joystick.setStickSize(250, 250);
         _joystick.setLayoutSize(800, 800);
@@ -1397,7 +1416,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         _button_rotation.setOnClickListener(this);
         // 회전 버튼 이미지 변경.
         //drawble = res.getDrawable(R.drawable.image_clientpos_pink_top);
-        _button_rotation.setImageDrawable(drawbleRotation);
+        //_button_rotation.setImageDrawable(drawbleRotation);
 
         _seekBar_regulation_0 = (SeekBar) findViewById(R.id.seekBar_regulation_0);
         _seekBar_regulation_1 = (SeekBar) findViewById(R.id.seekBar_regulation_1);
@@ -1534,6 +1553,13 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
 
         //active_clientPos(R.id.imageButton_clientpos_pink_top);
 
+        // topmenu button
+        _button_topmenu_sharephotos = (ImageButton)findViewById(R.id.button_client_dialogue_topmenu_sharephotos);
+        _button_topmenu_sharephotos.setOnClickListener(this);
+        _button_topmenu_keyword = (ImageButton)findViewById(R.id.button_client_dialogue_topmenu_keyword);
+        _button_topmenu_keyword.setOnClickListener(this);
+        _button_topmenu_bomb = (ImageButton)findViewById(R.id.button_client_dialogue_topmenu_bomb);
+        _button_topmenu_bomb.setOnClickListener(this);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------

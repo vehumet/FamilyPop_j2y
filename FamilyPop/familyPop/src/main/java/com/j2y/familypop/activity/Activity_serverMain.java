@@ -87,6 +87,8 @@ public class Activity_serverMain extends PApplet
     private boolean _onEvent_winner_o = false;
     private boolean _onEvent_winner_x = false;
 
+    private PImage _image_server_righttop;
+
     // tic tac toe
 //    public enum eTictactoeImageIndex
 //    {   RED_EMPTY(0), RED_O(1), RED_X(2);
@@ -131,6 +133,8 @@ public class Activity_serverMain extends PApplet
             _ttt_prvUser = null;
             _prvStyle = 0;
             _ttt_userIndex=0;
+
+
         }
     }
     // familybomb 메세지
@@ -244,6 +248,8 @@ public class Activity_serverMain extends PApplet
         _ttt_image_winner_o = this.loadImage("widget_ttt_server_owin.png");
         _ttt_image_winner_x = this.loadImage("widget_ttt_server_xwin.png");
 
+        _image_server_righttop = this.loadImage("image_server_righttop.png");
+
         // is not locator device
         _image_isNotLocatorDevice = this.loadImage("image_isnot_locator_device.png");
 
@@ -330,6 +336,8 @@ public class Activity_serverMain extends PApplet
         try
         {
             _lock_user.lock();
+
+            this.image(_image_server_righttop, this.width-_image_server_righttop.width, _image_server_righttop.height);
 
             if( FpsRoot.Instance._exitServer) return;
 

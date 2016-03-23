@@ -51,7 +51,7 @@ public class JoyStick
 //                0xff45D18C,     // green
 //                0xff47D4CD,		// phthalogreen
 //                0xff4D82D6,     // blue
-//                0xff66ff66, 	// ÀÓ½Ã
+//                0xff66ff66, 	// ï¿½Ó½ï¿½
     // item
     public static final String ITEM_PINK = "0";
     public static final String ITEM_RED = "1";
@@ -120,7 +120,6 @@ public class JoyStick
     {
         mContext = context;
 
-
         //stick = ((BitmapDrawable)drw).getBitmap();
         stick = drawableToBitmap(drw);
 
@@ -128,6 +127,7 @@ public class JoyStick
         stick_height = stick.getHeight();
 
         draw = new DrawCanvas(mContext);
+        //draw.setRotation();
         paint = new Paint();
         mLayout = layout;
         params = mLayout.getLayoutParams();
@@ -510,27 +510,27 @@ public class JoyStick
         switch (key)
         {
             case JoyStick.ITEM_BLUE:
-                item.active = res.getDrawable(R.drawable.image_stickupos_non);
-                item.deactive = res.getDrawable(R.drawable.image_stickupos_non);
+                item.active = res.getDrawable(R.drawable.image_stickupos_blue);
+                item.deactive = res.getDrawable(R.drawable.image_stickupos_blue);
                 break;
             case JoyStick.ITEM_GREEN:
-                item.active = res.getDrawable(R.drawable.image_stickupos_green_active);
+                item.active = res.getDrawable(R.drawable.image_stickupos_green);
                 item.deactive = res.getDrawable(R.drawable.image_stickupos_green);
                 break;
             case JoyStick.ITEM_PHTHALOGREEN:
-                item.active = res.getDrawable(R.drawable.image_stickupos_non);
-                item.deactive = res.getDrawable(R.drawable.image_stickupos_non);
+                item.active = res.getDrawable(R.drawable.image_stickupos_phthalogreen);
+                item.deactive = res.getDrawable(R.drawable.image_stickupos_phthalogreen);
                 break;
             case JoyStick.ITEM_PINK:
-                item.active = res.getDrawable(R.drawable.image_stickupos_pink_active);
+                item.active = res.getDrawable(R.drawable.image_stickupos_pink);
                 item.deactive = res.getDrawable(R.drawable.image_stickupos_pink);
                 break;
             case JoyStick.ITEM_RED:
-                item.active = res.getDrawable(R.drawable.image_stickupos_red_active);
+                item.active = res.getDrawable(R.drawable.image_stickupos_red);
                 item.deactive = res.getDrawable(R.drawable.image_stickupos_red);
                 break;
             case JoyStick.ITEM_YELLOW:
-                item.active = res.getDrawable(R.drawable.image_stickupos_yellow_active);
+                item.active = res.getDrawable(R.drawable.image_stickupos_yellow);
                 item.deactive = res.getDrawable(R.drawable.image_stickupos_yellow);
                 break;
         }
@@ -622,9 +622,9 @@ public class JoyStick
     int mullti_lastAngle;
     int mullti_thisAngle;
     int mullti_deltaAngle;
-    //layout È¸Àü
-    int mullti_rotateX, mullti_rotateY; // È¸ÀüÃà Áß½É
-    int mullti_angle; //ÇöÀç È¸ÀüÆÇ °¢µµ
+    //layout È¸ï¿½ï¿½
+    int mullti_rotateX, mullti_rotateY; // È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ß½ï¿½
+    int mullti_angle; //ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     boolean mullti_touch_state = false;
 
 
@@ -649,14 +649,14 @@ public class JoyStick
             mullti_thisAngle = (int)Math.toDegrees(Math.atan2(-(y2-y1), x2-x1));
             if(mullti_lastAngle == 0)
             {
-                // Ã³À½ ÅÍÄ¡
+                // Ã³ï¿½ï¿½ ï¿½ï¿½Ä¡
                 mullti_lastAngle = mullti_thisAngle;
             }
 
-            // °¢µµ º¯È­·® °è»ê.
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½.
             mullti_deltaAngle = mullti_thisAngle-mullti_lastAngle;
 
-            //°è»êµÈ °¢µµ¸¦ ¹Ý¿µ
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ý¿ï¿½
             mullti_angle += -mullti_deltaAngle;
             mullti_lastAngle = mullti_thisAngle;
 
@@ -669,12 +669,12 @@ public class JoyStick
 //            switch (action & MotionEvent.ACTION_MASK)
 //            {
 //                case MotionEvent.ACTION_POINTER_DOWN:
-//                    // ÅÍÄ¡°¡ µÎ °³ ÀÌ»óÀÏ ¶§ ´­·¯Á³À» ¶§
+//                    // ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 //                    Toast.makeText(Activity_clientMain.Instance, "ACTION_POINTER_DOWN", Toast.LENGTH_SHORT).show();
 //                    break;
 //
 //                case MotionEvent.ACTION_POINTER_UP:
-//                    // ÅÍÄ¡°¡ µÎ °³ ÀÌ»óÀÏ ¶§ ¶¼¾îÁ³À» ¶§
+//                    // ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 //                    Toast.makeText(Activity_clientMain.Instance, "ACTION_POINTER_UP", Toast.LENGTH_SHORT).show();
 //                    break;
 //                default:
@@ -690,7 +690,7 @@ public class JoyStick
 
     public void onMullti_down()
     {
-        // ÅÍÄ¡°¡ µÎ °³ ÀÌ»óÀÏ ¶§ ´­·¯Á³À» ¶§
+        // ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         Toast.makeText(Activity_clientMain.Instance, "ACTION_POINTER_DOWN", Toast.LENGTH_SHORT).show();
     }
     public void onMullti_move()
@@ -699,7 +699,7 @@ public class JoyStick
     }
     public void onMullti_up()
     {
-        // ÅÍÄ¡°¡ µÎ °³ ÀÌ»óÀÏ ¶§ ¶¼¾îÁ³À» ¶§
+        // ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         Toast.makeText(Activity_clientMain.Instance, "ACTION_POINTER_UP", Toast.LENGTH_SHORT).show();
     }
 
@@ -727,7 +727,7 @@ public class JoyStick
         public void setActive()
         {
             _select_userPos = this;
-            _button.setImageDrawable(active);
+            //_button.setImageDrawable(active);
             _selectState = true;
         }
         public void setDeactive()
@@ -749,7 +749,8 @@ public class JoyStick
             {
                 setDeactive();
             }
-           // if( _select_userPos != null){ FpNetFacade_client.Instance.SendPacket_req_userInteraction(_select_userPos._clientId); }
+
+            if( _select_userPos != null){ FpNetFacade_client.Instance.SendPacket_req_userInteraction(_select_userPos._clientId); }
         }
 
 

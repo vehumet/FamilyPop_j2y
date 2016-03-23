@@ -13,11 +13,10 @@
         android:layout_gravity="center_horizontal"
         android:background="@drawable/button_state_1"
         android:textColor="@color/color_default_string"
-        android:layout_marginTop="52dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/button_start_role_topmenu_home"
-        android:layout_alignTop="@+id/imageView15" />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
+    <!-- locator -->
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +27,8 @@
         android:textColor="@color/color_default_string"
         android:layout_below="@+id/button_role_client"
         android:layout_alignLeft="@+id/button_role_client"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:visibility="gone"/>
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -38,9 +38,9 @@
         android:layout_gravity="center_horizontal"
         android:background="@drawable/button_state_1"
         android:textColor="@color/color_default_string"
-        android:layout_below="@+id/button_role_locator"
-        android:layout_alignLeft="@+id/button_role_locator"
-        android:layout_marginTop="20dp" />
+        android:layout_below="@+id/imageView15"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -51,10 +51,10 @@
         android:textColor="@color/color_default_string"
         android:button="@drawable/style_checkbox_start_role"
         android:checked="false"
-        android:layout_marginTop="35dp"
-        android:layout_below="@+id/button_role_server"
+        android:paddingLeft="10dp"
+        android:layout_below="@+id/button_role_client"
         android:layout_centerHorizontal="true"
-        android:paddingLeft="10dp" />
+        android:layout_marginTop="45dp" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
         android:background="@drawable/style_button_next"
         android:layout_below="@+id/checkBox"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="39dp" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -106,13 +106,14 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="LOCATOR"
         android:id="@+id/textView30"
-        android:layout_alignTop="@+id/button_role_locator"
-        android:layout_alignLeft="@+id/button_role_locator"
         android:textColor="#ffffff"
         android:textStyle="bold"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp"
-        android:textSize="15dp" />
+        android:layout_marginTop="58dp"
+        android:textSize="15dp"
+        android:layout_below="@+id/imageView16"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -133,9 +134,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageView15"
         android:background="@drawable/text_signup_please_select_a_roll_a_dialogue"
-        android:layout_below="@+id/button_start_role_topmenu_home"
+        android:layout_below="@+id/imageView16"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="68dp" />
 
     <ImageView
         android:layout_width="wrap_content"

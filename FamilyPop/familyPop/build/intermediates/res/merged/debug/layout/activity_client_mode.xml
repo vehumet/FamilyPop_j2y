@@ -36,7 +36,7 @@
         android:orientation="vertical"
         android:id="@+id/layout_client_mode_room_info"
         android:layout_marginTop="50dp"
-        android:visibility="visible">
+        android:visibility="gone">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="250dp"
         android:id="@+id/layout_image_view"
-        android:visibility="gone"
+        android:visibility="visible"
         >
 
         <ImageButton
@@ -163,7 +163,7 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:gravity="center"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:layout_gravity="center"/>
 
         <ImageView
@@ -561,7 +561,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="5dp"
+        android:visibility="gone"/>
 
     <!-- menu button -->
     <ImageButton
@@ -572,7 +573,47 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/button_client_dialogue_topmenu_home"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:visibility="visible"/>
+
+    <!-- top menu button -->
+    <!-- sharephotos -->
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_client_dialogue_topmenu_sharephotos"
+        android:background="@drawable/button_photo"
+        android:layout_marginLeft="10dp"
+        android:visibility="visible"
+        android:layout_below="@+id/layout_client_mode_room_info"
+        android:layout_toEndOf="@+id/button_client_dialogue_topmenu_feature"
+        android:layout_marginStart="91dp"
         android:layout_marginTop="5dp" />
+
+    <!-- keyword -->
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_client_dialogue_topmenu_keyword"
+        android:background="@drawable/button_keyword"
+        android:layout_marginLeft="10dp"
+        android:visibility="visible"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/button_client_dialogue_topmenu_sharephotos"
+        android:layout_marginTop="5dp" />
+
+    <!-- bomb -->
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_client_dialogue_topmenu_bomb"
+        android:background="@drawable/button_bomb"
+        android:layout_marginLeft="10dp"
+        android:visibility="visible"
+        android:layout_alignBottom="@+id/button_client_dialogue_topmenu_feature"
+        android:layout_toEndOf="@+id/button_client_dialogue_topmenu_keyword"
+        android:layout_marginStart="90dp" />
+
 
     <!-- topmenu_featuremenu -->
     <RelativeLayout
@@ -716,7 +757,8 @@
         android:id="@+id/imageView14"
         android:layout_centerHorizontal="true"
         android:background="@drawable/text_dialogue"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="15dp"
+        android:visibility="gone" />
 
     <!--user interaction-->
     <LinearLayout
@@ -814,12 +856,13 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:id="@+id/image_clientpos_layout"
         android:visibility="visible"
-        android:layout_alignBottom="@+id/image_sticklayout"
-        android:layout_alignParentEnd="true" >
+
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/button_topmenu_setting">
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -863,7 +906,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/layout_stickbase">
+        android:id="@+id/layout_stickbase"
+        android:visibility="visible"
+        android:layout_alignParentTop="true">
 
         <RelativeLayout
             android:layout_width="236dp"
@@ -874,8 +919,8 @@
             android:background="@drawable/image_sticklayout_green"
             android:visibility="visible"
             android:layout_alignWithParentIfMissing="false"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignParentBottom="false"
+            android:layout_centerInParent="true" />
     </RelativeLayout>
 </RelativeLayout>
 
