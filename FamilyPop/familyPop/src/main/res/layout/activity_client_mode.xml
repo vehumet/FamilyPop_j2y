@@ -188,7 +188,7 @@
             android:id="@+id/image_message_bomb_running"
             android:layout_gravity="center"
             android:background="@drawable/image_bomb_is_running"
-            android:visibility="invisible"/>
+            android:visibility="gone"/>
 
         <ImageView
             android:layout_width="match_parent"

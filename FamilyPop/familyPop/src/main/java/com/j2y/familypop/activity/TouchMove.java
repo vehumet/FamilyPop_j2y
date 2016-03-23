@@ -34,7 +34,7 @@ public class TouchMove implements View.OnTouchListener
 
     public float _touchDirVectorRotation = 0.0f;
 
-    // Ãæµ¹
+    // ï¿½æµ¹
     protected ArrayList<View> _collisionViews;
     protected int _collisionView_ID;
 
@@ -53,7 +53,6 @@ public class TouchMove implements View.OnTouchListener
             _src.setY(_startPosy);
         }
     }
-
     @Override
     public boolean onTouch(View v, MotionEvent event)
     {
@@ -62,7 +61,7 @@ public class TouchMove implements View.OnTouchListener
             int eventaction = event.getAction();
             switch (eventaction)
             {
-                case MotionEvent.ACTION_DOWN: // ¼Õ°¡¶ôÀÌ ½ºÅ©¸°¿¡ ´ê¾ÒÀ» ¶§
+                case MotionEvent.ACTION_DOWN: // ï¿½Õ°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 
                     _normalX = 0.0f;
                     _normalY = 0.0f;
@@ -87,7 +86,7 @@ public class TouchMove implements View.OnTouchListener
                     _isClick = true;
 
                     break;
-                case MotionEvent.ACTION_MOVE: // ´êÀº Ã¤·Î ¼Õ°¡¶ôÀ» ¿òÁ÷ÀÏ ¶§
+                case MotionEvent.ACTION_MOVE: // ï¿½ï¿½ï¿½ï¿½ Ã¤ï¿½ï¿½ ï¿½Õ°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 
                     int posx = (int) ((event.getRawX()) - (_offset_x - _startPosx));
                     int posy = (int) (event.getRawY() - _offset_y);
@@ -126,7 +125,7 @@ public class TouchMove implements View.OnTouchListener
 
                     //Log.i("[J2Y]", "x : " + _normalX + " y : " + _normalY);
                     break;
-                case MotionEvent.ACTION_UP: // ´ê¾Ò´ø ¼Õ°¡¶ôÀ» ½ºÅ©¸°¿¡¼­ ¶¿¶§
+                case MotionEvent.ACTION_UP: // ï¿½ï¿½Ò´ï¿½ ï¿½Õ°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                     _isMoving = _END_DRAG;
                     _actionDown = false;
 
