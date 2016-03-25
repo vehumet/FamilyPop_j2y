@@ -49,7 +49,8 @@ public class FpsRoot implements TurnDataListener, DisplayInterface, EventDataLis
     public static boolean _using_sociophone_voice = false;  // [페밀리 토크] 소시오폰 라이브러리 사용 또는 J2y에서 개발된 모드 사용
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------
-    public FpsRoot() {
+    public FpsRoot()
+    {
         Instance = this;
 
         _server = new FpNetFacade_server();

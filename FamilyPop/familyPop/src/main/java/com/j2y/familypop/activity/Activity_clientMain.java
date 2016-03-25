@@ -799,7 +799,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
                     Interaction_Target target = collision_chack(e.getX(), e.getY());
                     if( target != null)
                     {
-                        FpNetFacade_client.Instance.SendPacket_req_userInteraction(target._clientId);
+                        FpNetFacade_client.Instance.SendPacket_req_userInteraction(target._clientId, FpcRoot.Instance._clientId);
                     }
                     _effectButton = false;
                     //_joystick.Action_up();
@@ -990,16 +990,16 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
             if(FpcRoot.Instance._socioPhone != null)
             {
                 double amplitude = FpcRoot.Instance._socioPhone.GetSoundAmplitue();
-                double curTime = ((double) System.currentTimeMillis()) / 1000;
-                double speed = 1;
-
-                int size = (int) (_bubble_size + Math.sin(curTime * (speed) ) * 50);// * (amplitude));
-                _button_redbubble.getLayoutParams().width = size;
-                _button_redbubble.getLayoutParams().height = size;
-                _button_redbubble.requestLayout();
+//                double curTime = ((double) System.currentTimeMillis()) / 1000;
+//                double speed = 1;
+//
+//                int size = (int) (_bubble_size + Math.sin(curTime * (speed) ) * 50);// * (amplitude));
+//                _button_redbubble.getLayoutParams().width = size;
+//                _button_redbubble.getLayoutParams().height = size;
+//                _button_redbubble.requestLayout();
                 _text_voiceAmplitude.setText("Voice:" + (int) amplitude);
 
-                if( speed < 0 ) {speed = 0;}
+//                if( speed < 0 ) {speed = 0;}
 
                 // 0.2초 동안의 평균 보이스 크기를 서버로 보낸다.
                 ++_voiceAvgCount;
@@ -1295,7 +1295,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         {
             // pink
             case 0:
-                _button_redbubble.setBackgroundResource(R.drawable.image_bead_4);
+                //_button_redbubble.setBackgroundResource(R.drawable.image_bead_4);
                 //drawble = res.getDrawable(R.drawable.image_stick_pink);
                 drawble = res.getDrawable(R.drawable.image_stick_pink);
                 drawbleRotation = res.getDrawable(R.drawable.image_clientpos_pink_top);
@@ -1305,41 +1305,41 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
                 break;
             // red
             case 1:
-                _button_redbubble.setBackgroundResource(R.drawable.image_bead_0);
+                //_button_redbubble.setBackgroundResource(R.drawable.image_bead_0);
                 drawble = res.getDrawable(R.drawable.image_stick_red);
                 drawbleRotation = res.getDrawable(R.drawable.image_clientpos_red_top);
                 drawbleStickLayout = res.getDrawable(R.drawable.image_sticklayout_red);
                 break;
             // yellow
             case 2:
-                _button_redbubble.setBackgroundResource(R.drawable.image_bead_2);
+               // _button_redbubble.setBackgroundResource(R.drawable.image_bead_2);
                 drawble = res.getDrawable(R.drawable.image_stick_yellow);
                 drawbleRotation = res.getDrawable(R.drawable.image_clientpos_yellow_top);
                 drawbleStickLayout = res.getDrawable(R.drawable.image_sticklayout_yellow);
                 break;
             // green
             case 3:
-                _button_redbubble.setBackgroundResource(R.drawable.image_bead_1);
+               // _button_redbubble.setBackgroundResource(R.drawable.image_bead_1);
                 drawble = res.getDrawable(R.drawable.image_stick_green);
                 drawbleRotation = res.getDrawable(R.drawable.image_clientpos_green_top);
                 drawbleStickLayout = res.getDrawable(R.drawable.image_sticklayout_green);
                 break;
             // phthalogreen
             case 4:
-                _button_redbubble.setBackgroundResource(R.drawable.image_bead_5);
+                //_button_redbubble.setBackgroundResource(R.drawable.image_bead_5);
                 drawble = res.getDrawable(R.drawable.image_stick_phthalogreen);
                 drawbleRotation = res.getDrawable(R.drawable.image_clientpos_green_top);
                 drawbleStickLayout = res.getDrawable(R.drawable.image_sticklayout_phthalogreen);
                 break;
             // blue
             case 5:
-                _button_redbubble.setBackgroundResource(R.drawable.image_bead_3);
+                //_button_redbubble.setBackgroundResource(R.drawable.image_bead_3);
                 drawble = res.getDrawable(R.drawable.image_stick_blue);
                 drawbleRotation = res.getDrawable(R.drawable.image_clientpos_green_top);
                 drawbleStickLayout = res.getDrawable(R.drawable.image_sticklayout_blue);
                 break;
             case 6:
-                _button_redbubble.setBackgroundResource(R.drawable.image_bead_6);
+               // _button_redbubble.setBackgroundResource(R.drawable.image_bead_6);
                 drawble = res.getDrawable(R.drawable.image_stick_green);
                 drawbleRotation = res.getDrawable(R.drawable.image_clientpos_green_top);
                 drawbleStickLayout = res.getDrawable(R.drawable.image_sticklayout_green);

@@ -225,6 +225,14 @@ public class FpNetFacade_server extends FpNetFacade_base
         }
         BroadcastPacket(FpNetConstants.SCNoti_clientUpdate, outMsg);
     }
+    public void Send_connect_clientId(FpsTalkUser user)
+    {
+        //user._net_client.SendPacket(FpNetConstants.SCReq_userBang, new FpNetData_base());
+        FpNetDataReq_connectId data = new FpNetDataReq_connectId();
+        data._clientId = user._net_client._clientID;
+        user._net_client.SendPacket(FpNetConstants.SCReq_connect_clientId, data);
+
+    }
 
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -269,6 +277,8 @@ public class FpNetFacade_server extends FpNetFacade_base
 
         if(Activity_serverMain.Instance != null)
             Activity_serverMain.Instance.AddTalkUser(client);
+
+        //
     }
     public void RemoveClient(FpNetServer_client client)
     {

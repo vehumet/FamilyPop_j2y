@@ -106,6 +106,12 @@ public class FpNetServer_packetHandler
 //
 //            int clientIndex = _net_server._clients.size()-1;
 //            _net_server.Send_ServerState(_net_server.GetClientByIndex((clientIndex)));
+
+            //FpNetServer_client client = (FpNetServer_client)inMsg._obj;
+            //FpsTalkUser taget = Activity_serverMain.Instance.FindTalkUser_byId(client._clientID);
+            int clientId = FpNetServer_client._index-1;
+            FpsTalkUser taget = Activity_serverMain.Instance.FindTalkUser_byId(clientId);
+            _net_server.Send_connect_clientId(taget);
         }
     };
     //------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -153,6 +159,7 @@ public class FpNetServer_packetHandler
             client._user_name = data._userName;
             client._bubble_color_type = data._bubbleColorType;
             client._user_posid = data._user_posid;
+            //client._clientID = data._clientId;
 
 
 
@@ -571,6 +578,7 @@ public class FpNetServer_packetHandler
         public void CallBack(FpNetIncomingMessage inMsg)
         {
 
+
             FpNetData_userInteraction data = new FpNetData_userInteraction();
             data.Parse(inMsg);
 
@@ -582,7 +590,8 @@ public class FpNetServer_packetHandler
                 {
                     if( user._net_client._clientID == data._clientid)
                     {
-                        record.Create_smile_bubble(user);
+                        //record.Create_smile_bubble(user);
+                        record.Create_good_bubble(user,data._send_client_id );
                         break;
                     }
                 }

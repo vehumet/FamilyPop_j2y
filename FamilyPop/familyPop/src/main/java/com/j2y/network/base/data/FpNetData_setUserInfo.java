@@ -15,6 +15,7 @@ public class FpNetData_setUserInfo extends FpNetData_base
     public String _userName;
     public int _bubbleColorType;
     public int _user_posid;
+//    public int _clientId;
 
     //----------------------------------------------------------------
     // 메시지 파싱
@@ -26,6 +27,7 @@ public class FpNetData_setUserInfo extends FpNetData_base
         _userName = inMsg.ReadString();
         _bubbleColorType = inMsg.ReadInt();
         _user_posid = inMsg.ReadInt();
+        //_clientId = inMsg.ReadInt();
     }
 
     //----------------------------------------------------------------
@@ -38,5 +40,6 @@ public class FpNetData_setUserInfo extends FpNetData_base
         outMsg.Write(_userName);
         outMsg.Write(_bubbleColorType);
         outMsg.Write(_user_posid);
+        //outMsg.Write(_clientId);
     }
 }

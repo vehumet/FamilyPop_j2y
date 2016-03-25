@@ -9,23 +9,28 @@ import com.j2y.network.base.FpNetOutgoingMessage;
 public class FpNetData_userInteraction extends FpNetData_base
 {
     public int _clientid;
+    public int _send_client_id;
+
+    //public int _colorid
     //----------------------------------------------------------------
-    // ¸Þ½ÃÁö ÆÄ½Ì
+    // ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½Ä½ï¿½
     @Override
     public void Parse(FpNetIncomingMessage inMsg)
     {
         super.Parse(inMsg);
 
         _clientid = inMsg.ReadInt();
+        _send_client_id = inMsg.ReadInt();
     }
 
     //----------------------------------------------------------------
-    // ¸Þ½ÃÁö ÆÐÅ·
+    // ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½Å·
     @Override
     public void Packing(FpNetOutgoingMessage outMsg)
     {
         super.Packing(outMsg);
 
         outMsg.Write(_clientid);
+        outMsg.Write(_send_client_id);
     }
 }

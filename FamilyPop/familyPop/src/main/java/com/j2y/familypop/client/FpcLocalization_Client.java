@@ -20,6 +20,7 @@ import cps.mobilemaestro.library.MMMeasureResult;
 public class FpcLocalization_Client
 {
     public MMClient _client;
+    //public int _clientId;
 
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -32,6 +33,7 @@ public class FpcLocalization_Client
     public void ConnectToServer(Context context, String id, boolean isLocator, String serverIpAddr)
     {
         Log.i("Locator", ""+id);
+        //_clientId = Integer.valueOf(id);
         _client = new MMClient(context, _messageHandler, id, isLocator, serverIpAddr);
         _client.start();
     }

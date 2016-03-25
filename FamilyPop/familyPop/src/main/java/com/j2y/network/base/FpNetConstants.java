@@ -16,6 +16,7 @@ public class FpNetConstants
 	public final static int ClientAccepted = 3;
 	public final static int ClientDisconnected = 4;
 	public final static int ServerDisconnected = 5;
+	public final static int SCReq_connect_clientId = 6;
 
 	//----------------------------------------------------------------------------
 	// Packet Protocol

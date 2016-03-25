@@ -22,6 +22,7 @@ public class FpsBubble
 {
     public final static int Type_Normal = 0;
     public final static int Type_Smile = 1;
+    public final static int Type_Good = 2;
 
 	// We need to keep track of a Body and a radius
     public int _type;
@@ -29,6 +30,7 @@ public class FpsBubble
     public float _rad;
 	int _color;
     public int _colorId;
+    public int _colorGood = -1;
 	Fixture fd;
 
     Box2DProcessing _box2d;
@@ -38,6 +40,9 @@ public class FpsBubble
     public int _end_time;
 
     private ProcessingImage_base _image_smile;
+
+    private ProcessingImage_base _image_good;
+
 
     private ProcessingImage_base _image_bubble;
 
@@ -99,6 +104,22 @@ public class FpsBubble
             {
                 _image_smile = new ProcessingImage_base(applet, "image_bubble_orange_smile.png");
                 _image_smile.SetPosition(new Vec2(x, y));
+            }
+            else if( _type == Type_Good)
+            {
+                switch (_colorGood)
+                {
+                    case 0: _image_good = new ProcessingImage_base(applet, "image_good_pink.png");   break;      // pink
+                    case 1: _image_good = new ProcessingImage_base(applet, "image_good_red.png");   break;      // red
+                    case 2: _image_good = new ProcessingImage_base(applet, "image_good_yellow.png");   break;      // yellow
+                    case 3: _image_good = new ProcessingImage_base(applet, "image_good_green.png");   break;      // green
+                    case 4: _image_good = new ProcessingImage_base(applet, "image_good_phthalogreen.png");   break;      // phthalogreen
+                    case 5: _image_good = new ProcessingImage_base(applet, "image_good_blue.png");   break;      // blue
+                    case -1: _image_good = new ProcessingImage_base(applet, "image_bead_6.png");   break;
+                }
+
+                _image_good.SetPosition(new Vec2(x, y));
+
             }
             else
             {
@@ -182,13 +203,21 @@ public class FpsBubble
 	    // We look at each _body and get its screen position
 		Vec2 pos = _box2d.getBodyPixelCoord(body);
 
-        if(_type == Type_Smile) {
+        if(_type == Type_Smile || _type == Type_Good)
+        {
 
             int size = (int)(_rad * 2);
             pos.x -= (size / 2);
             pos.y -= (size / 2);
 
-            _image_smile.Display(applet, (int)pos.x, (int)pos.y, size, size);
+            if( _type == Type_Smile)
+            {
+                _image_smile.Display(applet, (int)pos.x, (int)pos.y, size, size);
+            }
+            else if( _type == Type_Good)
+            {
+                _image_good.Display(applet, (int)pos.x, (int)pos.y, size, size);
+            }
         }
         else
         {

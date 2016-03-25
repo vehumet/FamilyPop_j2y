@@ -24,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.j2y.familypop.MainActivity;
+import com.j2y.familypop.client.FpcRoot;
+import com.j2y.familypop.server.FpsRoot;
 import com.j2y.network.client.FpNetFacade_client;
 import com.nclab.familypop.R;
 
@@ -249,7 +251,7 @@ public class JoyStick
                             //Toast.makeText(Activity_clientMain.Instance, "double", Toast.LENGTH_SHORT).show();
                             if( _select_userPos != null)
                             {
-                                if( _select_userPos != null){ FpNetFacade_client.Instance.SendPacket_req_userInteraction(_select_userPos._clientId); }
+                                if( _select_userPos != null){ FpNetFacade_client.Instance.SendPacket_req_userInteraction(_select_userPos._clientId, FpcRoot.Instance._clientId); }
                                 deactive_userPos_all();
                             }
                         }
@@ -750,7 +752,7 @@ public class JoyStick
                 setDeactive();
             }
 
-            if( _select_userPos != null){ FpNetFacade_client.Instance.SendPacket_req_userInteraction(_select_userPos._clientId); }
+            if( _select_userPos != null){ FpNetFacade_client.Instance.SendPacket_req_userInteraction(_select_userPos._clientId, FpcRoot.Instance._clientId); }
         }
 
 

@@ -563,7 +563,33 @@ public class FpsScenario_record extends FpsScenario_base
         bpos.x += dir.x;
         bpos.y += dir.y;
 
+        // user._net_client._clientID
+
         boolean res = bubble.CreateMover(_applet, _box2d, 80.0f, bpos.x, bpos.y, 0, 100, FpsBubble.Type_Smile);
+
+        if (res)
+        {
+            bubble._start_time = (int) FpsRoot.Instance._socioPhone.GetRecordTime();
+            bubble.StartMover(0);
+            user._bubble.add(bubble);
+        }
+    }
+    public void Create_good_bubble(FpsTalkUser user, int sendUserId)
+    {
+
+        FpsTalkUser start = Activity_serverMain.Instance.FindTalkUser_byId(sendUserId);
+
+        FpsBubble bubble = new FpsBubble();
+        bubble._colorGood = start._bubble_color_type;
+        Vec2 bpos = start._attractor.GetPosition();//new Vec2(_applet.width / 2f, _applet.height / 2f);
+        Vec2 userPos = user._attractor.GetPosition();
+        Vec2 dir = new Vec2((userPos.x - bpos.x) * 0.1f, (userPos.y - bpos.y) * 0.1f);
+        bpos.x += dir.x;
+        bpos.y += dir.y;
+
+        // user._net_client._clientID
+
+        boolean res = bubble.CreateMover(_applet, _box2d, 80.0f, bpos.x, bpos.y, 0, 100, FpsBubble.Type_Good);
 
         if (res)
         {

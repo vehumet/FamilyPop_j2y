@@ -1,8 +1,10 @@
 package com.j2y.familypop.activity;
 
+import android.content.ContentValues;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,7 +19,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +50,7 @@ import com.j2y.familypop.server.FpsScenario_record;
 import com.j2y.familypop.server.FpsTalkUser;
 import com.j2y.familypop.server.FpsTicTacToe;
 import com.j2y.network.base.FpNetConstants;
+import com.j2y.network.base.FpNetUtil;
 import com.j2y.network.server.FpNetFacade_server;
 import com.j2y.network.server.FpNetServer_client;
 import com.nclab.familypop.R;
@@ -133,6 +146,10 @@ public class Activity_serverMain extends PApplet
     public int _regulation_seekBar_smileEffect;
     public float _plusMoverRadius;
 
+
+    // topic
+    public TopicRenderer _topic;
+
     public void Initialization_tictactoe()
     {
         if( _tictactoe != null)
@@ -224,29 +241,14 @@ public class Activity_serverMain extends PApplet
             StrictMode.enableDefaults();
         }
 
-
         //text to image test
-        TextView tv = new TextView(this);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(80, 100);
-        tv.setLayoutParams(layoutParams);
-        tv.setText("testing 1 2 3");
-        tv.setTextColor(Color.WHITE);
-        tv.setBackgroundColor(Color.BLACK);
-
-        Bitmap testB;
-
-        testB = Bitmap.createBitmap(80,100, Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(testB);
-        tv.layout(0, 0, 80, 100);
-        tv.draw(c);
-
-        //_testImage = testB;
-        //_image_server_righttop = this.loadImage("image_server_righttop.png");
-
+        //DownloadWebpageTask task = new DownloadWebpageTask();
+        //task.execute("http://143.248.135.84:2080");
+        //_topic = new TopicRenderer();
+        //_topic.Add_text(this, this, task._webText);
     }
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     // [렌더링 쓰레드??]
-
     @Override
 	public void setup()
 	{
@@ -363,7 +365,10 @@ public class Activity_serverMain extends PApplet
         {
             _lock_user.lock();
 
-            this.image(_image_server_righttop, this.width-_image_server_righttop.width, _image_server_righttop.height);
+            this.image(_image_server_righttop, this.width - _image_server_righttop.width, _image_server_righttop.height);
+
+            //this.image(_testImage, this.width/2, this.height/2);
+            //_topic.draw(this);
 
             if( FpsRoot.Instance._exitServer) return;
 
@@ -796,5 +801,94 @@ public class Activity_serverMain extends PApplet
                 user._attractor.body.setTransform(worldPos, 0f);
             }
         }
+    }
+
+    //HTTP TEST
+    private String downloadUrl(String myurl) throws IOException
+    {
+        InputStream is = null;
+        // Only display the first 500 characters of the retrieved
+        // web page content.
+        int len = 500;
+
+        try {
+            Log.d("kookm", myurl);
+            URL url = new URL(myurl);
+
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(10000 /* milliseconds */);
+            conn.setConnectTimeout(15000 /* milliseconds */);
+
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);
+
+
+            ContentValues values = new ContentValues();
+            OutputStream os = conn.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            StringBuilder sb = new StringBuilder();
+            sb.append(URLEncoder.encode("username", "UTF-8"));
+            sb.append("=");
+            sb.append(URLEncoder.encode("J2y", "UTF-8"));
+            writer.write(sb.toString());
+            writer.flush();
+            writer.close();
+
+
+            // Starts the query
+            conn.connect();
+            Log.d("kookm", "success");
+            int response = conn.getResponseCode();
+            Log.d("kookm" ,"The response is: " + response);
+            is = conn.getInputStream();
+
+            // Convert the InputStream into a string
+            String contentAsString = readIt(is, len);
+            Log.d("kookm", contentAsString);
+            return contentAsString;
+
+            // Makes sure that the InputStream is closed after the app is
+            // finished using it.
+        }
+        finally
+        {
+            if (is != null)
+            {
+                is.close();
+            }
+        }
+    }
+    public class DownloadWebpageTask extends AsyncTask<String, Void, String>
+    {
+        String _webText = "";
+        @Override
+        protected String doInBackground(String... urls)
+        {
+
+            // params comes from the execute() call: params[0] is the url.
+            try
+            {
+                _webText = downloadUrl(urls[0]);
+                return _webText;
+            }
+            catch (IOException e)
+            {
+                return "Unable to retrieve web page. URL may be invalid.";
+            }
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result)
+        {
+        }
+    }
+    public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException
+    {
+        Reader reader = null;
+        reader = new InputStreamReader(stream, "UTF-8");
+        char[] buffer = new char[len];
+        reader.read(buffer);
+        return new String(buffer);
     }
 }

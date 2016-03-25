@@ -32,6 +32,7 @@ import com.j2y.network.base.data.FpNetDataReq_TicTacToe_Start;
 import com.j2y.network.base.data.FpNetDataReq_TicTacToe_index;
 import com.j2y.network.base.data.FpNetDataReq_bubbleMove;
 import com.j2y.network.base.data.FpNetDataReq_changeScenario;
+import com.j2y.network.base.data.FpNetDataReq_connectId;
 import com.j2y.network.base.data.FpNetDataReq_regulation_info;
 import com.j2y.network.base.data.FpNetDataReq_shareImage;
 import com.j2y.network.base.data.FpNetDataRes_recordInfoList;
@@ -125,6 +126,7 @@ public class FpNetFacade_client extends FpNetFacade_base
     {
         RegisterMessageCallBack(FpNetConstants.Connected, onConnected);
         RegisterMessageCallBack(FpNetConstants.ServerDisconnected, onDisConnected);
+        RegisterMessageCallBack(FpNetConstants.SCReq_connect_clientId, onReq_ConnectClientID);
 
         //RegisterMessageCallBack(FpNetConstants.SCNoti_getServerState, onServerState);
         //RegisterMessageCallBack(FpNetConstants.SCNoti_OnStartScenario, onNotiStartScenario
@@ -476,6 +478,21 @@ public class FpNetFacade_client extends FpNetFacade_base
         }
     };
 
+
+    FpNetMessageCallBack onReq_ConnectClientID = new FpNetMessageCallBack()
+    {
+        @Override
+        public void CallBack(FpNetIncomingMessage inMsg)
+        {
+
+            FpNetDataReq_connectId data = new FpNetDataReq_connectId();
+            data.Parse(inMsg);
+            FpcRoot.Instance._clientId = data._clientId;
+            //Activity_clientMain.Instance.OnEventSC_bang();
+
+        }
+    };
+
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // 메시지 보내기
     //
@@ -638,10 +655,11 @@ public class FpNetFacade_client extends FpNetFacade_base
         sendMessage(FpNetConstants.CSReq_userInput_bubbleMove, reqPaket);
     }
 
-    public void SendPacket_req_userInteraction(int clientId)
+    public void SendPacket_req_userInteraction(int clientId, int send_clientId)
     {
         FpNetData_userInteraction reqPaket = new FpNetData_userInteraction();
         reqPaket._clientid = clientId;
+        reqPaket._send_client_id = send_clientId;
 
         sendMessage(FpNetConstants.CSReq_userInteraction, reqPaket);
     }

@@ -34,6 +34,7 @@ public class FpcRoot implements TurnDataListener, DisplayInterface, EventDataLis
 
     private Context _main_context;
     public SocioPhone _socioPhone;
+    public int _clientId;
 
     // # localization  클라이언트용 선언
     public FpcLocalization_Client _localization;
@@ -56,6 +57,7 @@ public class FpcRoot implements TurnDataListener, DisplayInterface, EventDataLis
         _main_context = context;
 
         _scenarioDirectorProxy = new FpcScenarioDirectorProxy();
+        _clientId = -1;
     }
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
