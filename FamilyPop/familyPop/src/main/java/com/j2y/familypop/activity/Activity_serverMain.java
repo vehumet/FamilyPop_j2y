@@ -242,10 +242,29 @@ public class Activity_serverMain extends PApplet
         }
 
         //text to image test
-        //DownloadWebpageTask task = new DownloadWebpageTask();
-        //task.execute("http://143.248.135.84:2080");
-        //_topic = new TopicRenderer();
-        //_topic.Add_text(this, this, task._webText);
+        final DownloadWebpageTask task = new DownloadWebpageTask();
+        task.execute("http://143.248.135.84:2080");
+
+        _topic = new TopicRenderer();
+
+
+        new Thread (new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                while (true)
+                {
+                    if( task._webText != "" ) break;
+                }
+
+
+                _topic.Add_text(Instance, Instance, task._webText);
+                task._webText = "";
+            }
+        }).start();
+
+
     }
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     // [렌더링 쓰레드??]
@@ -368,7 +387,7 @@ public class Activity_serverMain extends PApplet
             this.image(_image_server_righttop, this.width - _image_server_righttop.width, _image_server_righttop.height);
 
             //this.image(_testImage, this.width/2, this.height/2);
-            //_topic.draw(this);
+            _topic.draw(this);
 
             if( FpsRoot.Instance._exitServer) return;
 
@@ -809,12 +828,11 @@ public class Activity_serverMain extends PApplet
         InputStream is = null;
         // Only display the first 500 characters of the retrieved
         // web page content.
-        int len = 500;
+        int len = 15;
 
         try {
             Log.d("kookm", myurl);
             URL url = new URL(myurl);
-
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(10000 /* milliseconds */);
@@ -822,7 +840,6 @@ public class Activity_serverMain extends PApplet
 
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
-
 
             ContentValues values = new ContentValues();
             OutputStream os = conn.getOutputStream();

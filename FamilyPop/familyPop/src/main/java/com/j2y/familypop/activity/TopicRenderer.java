@@ -24,11 +24,9 @@ public class TopicRenderer
     final int SHOW  = 0;
     final int STAY  = 1;
 
-
     private int _topicStatic = NON;
     private long _rotate_time = 0;
     private long _stay_time = 0;
-
 
     private void rotateTime(long millTime)
     {
@@ -67,7 +65,7 @@ public class TopicRenderer
 
         _topicStatic = SHOW;
         counter = 0;
-        rotateTime(5000);
+        rotateTime(2000);
 
     }
     int counter = 0;
@@ -91,11 +89,12 @@ public class TopicRenderer
 //                    applet.image(_topic,0,0);
 
                     //applet.HALF_PI
+                    // 회전
                     int posX, posY;
                     posX = applet.width/2;
                     posY = applet.height/2;
 
-                    // object rotation
+//                    // object rotation
                     applet.pushMatrix();
                     counter+=30;
                     applet.translate(posX + (_topic.width / 2), posY + (_topic.height / 2));
@@ -103,6 +102,8 @@ public class TopicRenderer
                     applet.translate(-(posX + _topic.width / 2), -(posY + _topic.height / 2));
                     applet.image(_topic, posX,  posY);
                     applet.popMatrix();
+
+                    //applet.image(_topic, applet.width / 2, applet.height / 2);
                 }
                 else
                 {
