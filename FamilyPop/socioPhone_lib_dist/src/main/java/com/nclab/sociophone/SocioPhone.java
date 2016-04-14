@@ -5,7 +5,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.util.Log;
 
@@ -89,7 +88,7 @@ public class SocioPhone
         }
 
         CAPI = new ContextAPI(mContext);
-        boolean isSucceeded = CAPI.registerQuery("GetVolume 100 101 0");
+        boolean isSucceeded = CAPI.registerQuery("GetVolume 50 50 0");
 
         Instance = this;
     }
