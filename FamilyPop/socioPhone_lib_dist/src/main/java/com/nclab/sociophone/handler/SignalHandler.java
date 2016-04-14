@@ -15,7 +15,8 @@ import com.nclab.sociophone.processors.VolumeWindow;
  * @author Chanyou
  */
 
-public class SignalHandler extends Handler {
+public class SignalHandler extends Handler
+{
 
     SocioPhone mSocioPhone;
     NetworkManager mNetworkManager;

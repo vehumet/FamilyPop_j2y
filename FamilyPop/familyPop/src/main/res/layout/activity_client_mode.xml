@@ -615,151 +615,6 @@
         android:layout_marginStart="90dp" />
 
 
-    <!-- topmenu_featuremenu -->
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button_client_dialogue_topmenu_home"
-        android:id="@+id/layout_dialogue_menu_feature"
-        android:visibility="gone"
-        android:layout_marginLeft="13dp"
-        android:layout_marginTop="5dp">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="false"
-            android:layout_alignParentLeft="false"
-            android:background="@drawable/image_clientmode_topmenu_panel"
-            android:id="@+id/layout_clientmode_feature_menulist"
-            android:orientation="vertical">
-            <Button
-                android:layout_width="155dp"
-                android:layout_height="22dp"
-                android:id="@+id/button_client_featuremenu_sharephotos"
-                android:background="@drawable/text_clientmode_topmenu_sharephotos"
-                android:textColor="@color/color_default_string"
-                android:layout_below="@+id/button2"
-                android:layout_alignRight="@+id/button2"
-                android:layout_marginTop="45dp"
-                android:layout_marginLeft="23dp" />
-            <Button
-                android:layout_width="155dp"
-                android:layout_height="22dp"
-                android:id="@+id/button_client_featuremenu_savedialogue"
-                android:background="@drawable/text_clientmode_topmenu_savedialogue"
-                android:textColor="@color/color_default_string"
-                android:layout_above="@+id/button_client_featuremenu_dialoguehistory"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="12dp"
-                android:layout_marginLeft="23dp" />
-            <Button
-                android:layout_width="155dp"
-                android:layout_height="22dp"
-                android:id="@+id/button_client_featuremenu_quitdialogue"
-                android:background="@drawable/text_clientmode_topmenu_quitdialogue"
-                android:textColor="@color/color_default_string"
-                android:layout_centerVertical="true"
-                android:layout_alignRight="@+id/button2"
-                android:layout_marginTop="12dp"
-                android:layout_marginLeft="23dp" />
-            <Button
-                android:layout_width="175dp"
-                android:layout_height="22dp"
-                android:id="@+id/button_client_featuremenu_dialoguehistory"
-                android:background="@drawable/text_clientmode_topmenu_dialoguehistory"
-                android:textColor="@color/color_default_string"
-                android:layout_alignBottom="@+id/button_client_featuremenu_familybomb"
-                android:layout_alignLeft="@+id/button_client_featuremenu_familybomb"
-                android:layout_marginTop="12dp"
-                android:layout_marginLeft="23dp" />
-            <Button
-                android:layout_width="55dp"
-                android:layout_height="20dp"
-                android:id="@+id/button_client_featuremenu_talk"
-                android:background="@drawable/text_clientmode_topmenu_talk"
-                android:textColor="@color/color_default_string"
-                android:layout_below="@+id/button_client_featuremenu_quitdialogue"
-                android:layout_alignLeft="@+id/button_client_featuremenu_sharephotos"
-                android:layout_marginLeft="23dp"
-                android:layout_marginTop="12dp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView30"
-                android:background="@drawable/text_clientmode_topmenu_line"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="23dp" />
-
-            <Button
-                android:layout_width="150dp"
-                android:layout_height="22dp"
-                android:id="@+id/button_client_featuremenu_smile_event"
-                android:background="@drawable/text_clientmode_topmenu_smileevent"
-                android:textColor="@color/color_default_string"
-                android:layout_below="@+id/button_client_featuremenu_quitdialogue"
-                android:layout_alignLeft="@+id/button_client_featuremenu_sharephotos"
-                android:layout_marginLeft="23dp"
-                android:layout_marginTop="12dp" />
-            <Button
-                android:layout_width="150dp"
-                android:layout_height="22dp"
-                android:id="@+id/button_client_featuremenu_familybomb"
-                android:background="@drawable/text_clientmode_topmenu_familybomb"
-                android:textColor="@color/color_default_string"
-                android:layout_below="@+id/button_client_featuremenu_talk"
-                android:layout_alignLeft="@+id/button_client_featuremenu_sharephotos"
-                android:layout_marginLeft="23dp"
-                android:layout_marginTop="12dp" />
-
-            <Button
-                android:layout_width="125dp"
-                android:layout_height="22dp"
-                android:id="@+id/button_client_featuremenu_regulation"
-                android:layout_marginLeft="23dp"
-                android:background="@drawable/text_clientmode_topmenu_parameters"
-                android:textColor="#ffffff"
-                android:layout_marginTop="12dp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView31"
-                android:background="@drawable/text_clientmode_topmenu_line"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="23dp" />
-
-            <Button
-                android:layout_width="110dp"
-                android:layout_height="22dp"
-                android:id="@+id/button_client_featuremenu_tictactoe"
-                android:layout_marginLeft="23dp"
-                android:background="@drawable/text_clientmode_topmenu_tictactoe"
-                android:textColor="#ffffff"
-                android:layout_marginTop="12dp" />
-            <Button
-                android:layout_width="75dp"
-                android:layout_height="20dp"
-                android:id="@+id/button_client_featuremenu_bubbleclear"
-                android:layout_marginLeft="23dp"
-                android:background="@drawable/text_clientmode_topmenu_clean"
-                android:textColor="#ffffff"
-                android:layout_marginTop="12dp"
-                android:textStyle="bold"
-                android:textSize="20dp" />
-        </LinearLayout>
-    </RelativeLayout>
-    <!-- next button -->
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView14"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/text_dialogue"
-        android:layout_marginTop="15dp"
-        android:visibility="gone" />
-
     <!--user interaction-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -910,6 +765,7 @@
         android:visibility="visible"
         android:layout_alignParentTop="true">
 
+        <!--236-->
         <RelativeLayout
             android:layout_width="236dp"
             android:layout_height="236dp"
@@ -922,6 +778,153 @@
             android:layout_alignParentBottom="false"
             android:layout_centerInParent="true" />
     </RelativeLayout>
+
+    <!-- topmenu_featuremenu -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_client_dialogue_topmenu_home"
+        android:id="@+id/layout_dialogue_menu_feature"
+        android:visibility="gone"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="5dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentLeft="false"
+            android:background="@drawable/image_clientmode_topmenu_panel"
+            android:id="@+id/layout_clientmode_feature_menulist"
+            android:orientation="vertical">
+            <Button
+                android:layout_width="155dp"
+                android:layout_height="22dp"
+                android:id="@+id/button_client_featuremenu_sharephotos"
+                android:background="@drawable/text_clientmode_topmenu_sharephotos"
+                android:textColor="@color/color_default_string"
+                android:layout_below="@+id/button2"
+                android:layout_alignRight="@+id/button2"
+                android:layout_marginTop="45dp"
+                android:layout_marginLeft="23dp" />
+            <Button
+                android:layout_width="155dp"
+                android:layout_height="22dp"
+                android:id="@+id/button_client_featuremenu_savedialogue"
+                android:background="@drawable/text_clientmode_topmenu_savedialogue"
+                android:textColor="@color/color_default_string"
+                android:layout_above="@+id/button_client_featuremenu_dialoguehistory"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="23dp" />
+            <Button
+                android:layout_width="155dp"
+                android:layout_height="22dp"
+                android:id="@+id/button_client_featuremenu_quitdialogue"
+                android:background="@drawable/text_clientmode_topmenu_quitdialogue"
+                android:textColor="@color/color_default_string"
+                android:layout_centerVertical="true"
+                android:layout_alignRight="@+id/button2"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="23dp" />
+            <Button
+                android:layout_width="175dp"
+                android:layout_height="22dp"
+                android:id="@+id/button_client_featuremenu_dialoguehistory"
+                android:background="@drawable/text_clientmode_topmenu_dialoguehistory"
+                android:textColor="@color/color_default_string"
+                android:layout_alignBottom="@+id/button_client_featuremenu_familybomb"
+                android:layout_alignLeft="@+id/button_client_featuremenu_familybomb"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="23dp" />
+            <Button
+                android:layout_width="55dp"
+                android:layout_height="20dp"
+                android:id="@+id/button_client_featuremenu_talk"
+                android:background="@drawable/text_clientmode_topmenu_talk"
+                android:textColor="@color/color_default_string"
+                android:layout_below="@+id/button_client_featuremenu_quitdialogue"
+                android:layout_alignLeft="@+id/button_client_featuremenu_sharephotos"
+                android:layout_marginLeft="23dp"
+                android:layout_marginTop="12dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView30"
+                android:background="@drawable/text_clientmode_topmenu_line"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="23dp" />
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="22dp"
+                android:id="@+id/button_client_featuremenu_smile_event"
+                android:background="@drawable/text_clientmode_topmenu_smileevent"
+                android:textColor="@color/color_default_string"
+                android:layout_below="@+id/button_client_featuremenu_quitdialogue"
+                android:layout_alignLeft="@+id/button_client_featuremenu_sharephotos"
+                android:layout_marginLeft="23dp"
+                android:layout_marginTop="12dp" />
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="22dp"
+                android:id="@+id/button_client_featuremenu_familybomb"
+                android:background="@drawable/text_clientmode_topmenu_familybomb"
+                android:textColor="@color/color_default_string"
+                android:layout_below="@+id/button_client_featuremenu_talk"
+                android:layout_alignLeft="@+id/button_client_featuremenu_sharephotos"
+                android:layout_marginLeft="23dp"
+                android:layout_marginTop="12dp" />
+
+            <Button
+                android:layout_width="125dp"
+                android:layout_height="22dp"
+                android:id="@+id/button_client_featuremenu_regulation"
+                android:layout_marginLeft="23dp"
+                android:background="@drawable/text_clientmode_topmenu_parameters"
+                android:textColor="#ffffff"
+                android:layout_marginTop="12dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView31"
+                android:background="@drawable/text_clientmode_topmenu_line"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="23dp" />
+
+            <Button
+                android:layout_width="110dp"
+                android:layout_height="22dp"
+                android:id="@+id/button_client_featuremenu_tictactoe"
+                android:layout_marginLeft="23dp"
+                android:background="@drawable/text_clientmode_topmenu_tictactoe"
+                android:textColor="#ffffff"
+                android:layout_marginTop="12dp" />
+            <Button
+                android:layout_width="75dp"
+                android:layout_height="20dp"
+                android:id="@+id/button_client_featuremenu_bubbleclear"
+                android:layout_marginLeft="23dp"
+                android:background="@drawable/text_clientmode_topmenu_clean"
+                android:textColor="#ffffff"
+                android:layout_marginTop="12dp"
+                android:textStyle="bold"
+                android:textSize="20dp" />
+        </LinearLayout>
+    </RelativeLayout>
+    <!-- next button -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView14"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/text_dialogue"
+        android:layout_marginTop="15dp"
+        android:visibility="gone" />
+
+
 </RelativeLayout>
 
 

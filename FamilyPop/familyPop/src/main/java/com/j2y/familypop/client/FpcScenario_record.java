@@ -23,8 +23,6 @@ public class FpcScenario_record extends FpcScenario_base
 	{
 		
 	}
-
-
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     @Override
     public void OnActivated()
@@ -50,9 +48,6 @@ public class FpcScenario_record extends FpcScenario_base
         //Log.i("[J2Y]", "[SocioPhone] stopRecord ");
         //MainActivity.Instance._socioPhone.stopRecord();
     }
-
-
-
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     @Override
     public void OnTurnDataReceived(int[] speakerID)

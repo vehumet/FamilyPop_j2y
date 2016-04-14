@@ -261,7 +261,8 @@ public class SocioPhone
         return (recordThread != null) ? recordThread.GetSoundAmplitue() : 0.0;
     }
 
-    public long GetRecordTime() {
+    public long GetRecordTime()
+    {
         return (System.currentTimeMillis() - _record_start_time);
     }
 

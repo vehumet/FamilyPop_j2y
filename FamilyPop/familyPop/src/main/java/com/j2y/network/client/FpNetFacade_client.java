@@ -471,8 +471,10 @@ public class FpNetFacade_client extends FpNetFacade_base
             for(int i=0; i<clientupdate._clientInfos.size(); i++)
             {
                 FpNetDataNoti_clientUpdate.clientInfo cInfo = clientupdate._clientInfos.get(i);
-                //if( FpcRoot._client._)
-                Activity_clientMain.Instance._joystick.AddItem(Integer.toString(cInfo._color), cInfo._clientId,cInfo._posX, cInfo._posY);
+                if( FpcRoot.Instance._clientId != cInfo._clientId)
+                {
+                    Activity_clientMain.Instance._joystick.AddItem(Integer.toString(cInfo._color), cInfo._clientId,cInfo._posX, cInfo._posY);
+                }
             }
             //Activity_clientMain.Instance._joystick.AddItem();
         }

@@ -542,12 +542,13 @@ public class JoyStick
         mLayout.addView(item._button);
         item.setDeactive();
 
-        float x = (float) (Math.cos(Math.toRadians(cal_angle(pos_x, pos_y))) * ((params.width / 2) - 32));
-        float y = (float) (Math.sin(Math.toRadians(cal_angle(pos_x, pos_y))) * ((params.height / 2) - 16));
-        x += (params.width / 2);
-        y += (params.height / 2);
-        item._button.setX(x - 64);
-        item._button.setY(y - 32);
+        float x = (float) (Math.cos(Math.toRadians(cal_angle(pos_x, pos_y))) * ((params.width / 2) - 70));
+        float y = (float) (Math.sin(Math.toRadians(cal_angle(pos_x, pos_y))) * ((params.height / 2) - 70));
+        x += ((params.width / 2));
+        y += ((params.height / 2));
+
+        item._button.setX(x-70);
+        item._button.setY(y-70);
 
         _drawItems.put(key, item);
     }
@@ -569,8 +570,8 @@ public class JoyStick
     }
     public void SetPos_Item(String key, float pos_x, float pos_y)
     {
-        float x = (float) (Math.cos(Math.toRadians(cal_angle(pos_x, pos_y))) * ((params.width / 2) -32));
-        float y = (float) (Math.sin(Math.toRadians(cal_angle(pos_x, pos_y))) * ((params.height / 2) - 32));
+        float x = (float) (Math.cos(Math.toRadians(cal_angle(pos_x, pos_y))) * ((params.width / 2) -0));
+        float y = (float) (Math.sin(Math.toRadians(cal_angle(pos_x, pos_y))) * ((params.height / 2) - 0));
 
         x += (params.width / 2);
         y += (params.height / 2);

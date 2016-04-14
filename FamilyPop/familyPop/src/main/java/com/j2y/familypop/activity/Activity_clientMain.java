@@ -368,7 +368,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
                     {
                         FpNetFacade_client.Instance.SendPacket_req_end_Tic_Tac_Toe();
 
-                        _layout_roomInfo.setVisibility(View.VISIBLE);
+                        //_layout_roomInfo.setVisibility(View.VISIBLE);
                         _layout_bubbleImage.setVisibility(View.VISIBLE);
                         //OnEventSC_endBomb();
                     }
@@ -408,10 +408,11 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
             case R.id.button_client_featuremenu_regulation:
                 _layout_regulation.setVisibility(View.VISIBLE);
 
-                _layout_roomInfo.setVisibility(View.GONE);
+                //_layout_roomInfo.setVisibility(View.GONE);
                 _layout_bubbleImage.setVisibility(View.GONE);
 
                 active_featureMenu(false);
+                _layout_joystick.setVisibility(View.GONE);
                 break;
             case R.id.button_client_mode_regulation_send: // 설정 값을 서버로 보냄
 
@@ -424,15 +425,17 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
                 int smileEffect = _seekBar_regulation_smileEffect.getProgress();
                 int plusBubbleSize = _seekBar_plus_bubble_size.getProgress();
 
-                FpNetFacade_client.Instance.SendPacket_req_regulation_info(s0, s1, s2, s3,voice_hold, mode, smileEffect, plusBubbleSize);
+                FpNetFacade_client.Instance.SendPacket_req_regulation_info(s0, s1, s2, s3, voice_hold, mode, smileEffect, plusBubbleSize);
+
 
                 break;
 
             case R.id.button_client_mode_regulation_cancel: // 취소함
                 _layout_regulation.setVisibility(View.INVISIBLE);
 
-                _layout_roomInfo.setVisibility(View.VISIBLE);
-                _layout_bubbleImage.setVisibility(View.VISIBLE);
+                //_layout_roomInfo.setVisibility(View.VISIBLE);
+                //_layout_bubbleImage.setVisibility(View.VISIBLE);
+                _layout_joystick.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.button_client_mode_view_clearBubble:
@@ -482,7 +485,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
             case R.id.button_ttt_exit:
                 FpNetFacade_client.Instance.SendPacket_req_end_Tic_Tac_Toe();
 
-                _layout_roomInfo.setVisibility(View.VISIBLE);
+                //_layout_roomInfo.setVisibility(View.VISIBLE);
                 _layout_bubbleImage.setVisibility(View.VISIBLE);
                 _joystick.Active();
                 break;
@@ -1569,10 +1572,12 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         if(active )
         {
             menu.setVisibility(View.VISIBLE);
+            //_layout_joystick.setVisibility(View.GONE);
         }
         else
         {
             menu.setVisibility(View.INVISIBLE);
+            //_layout_joystick.setVisibility(View.VISIBLE);
         }
     }
 
@@ -1833,12 +1838,12 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
         ImageView ret = null;
         switch(bubble_color_type)
         {
-            case 0: ret = (ImageView)findViewById(R.id.imageview_target_pink);              break;      // pink
-            case 1: ret = (ImageView)findViewById(R.id.imageview_target_red);                break;      // red
+            case 0: ret = (ImageView)findViewById(R.id.imageview_target_pink);                  break;      // pink
+            case 1: ret = (ImageView)findViewById(R.id.imageview_target_red);                   break;      // red
             case 2: ret = (ImageView)findViewById(R.id.imageview_target_yellow);                break;      // yellow
-            case 3: ret = (ImageView)findViewById(R.id.imageview_target_green);                break;      // green
-            case 4: ret = (ImageView)findViewById(R.id.imageview_target_phthalogreen);                break;      // phthalogreen
-            case 5: ret = (ImageView)findViewById(R.id.imageview_target_blue);                break;      // blue
+            case 3: ret = (ImageView)findViewById(R.id.imageview_target_green);                 break;      // green
+            case 4: ret = (ImageView)findViewById(R.id.imageview_target_phthalogreen);          break;      // phthalogreen
+            case 5: ret = (ImageView)findViewById(R.id.imageview_target_blue);                  break;      // blue
             //case 6: findViewById(R.id.imageview_target_pink).setVisibility(View.VISIBLE);   break;
         }
 

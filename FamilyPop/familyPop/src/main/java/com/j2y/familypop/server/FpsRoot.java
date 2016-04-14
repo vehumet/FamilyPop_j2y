@@ -60,6 +60,8 @@ public class FpsRoot implements TurnDataListener, DisplayInterface, EventDataLis
         _scenarioDirector = new FpsScenarioDirector();
 
         _exitServer = true;
+
+
     }
 
 
@@ -86,7 +88,8 @@ public class FpsRoot implements TurnDataListener, DisplayInterface, EventDataLis
 
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------
-    public void CloseServer() {
+    public void CloseServer()
+    {
         DestroySocioPhone();
         DestroyLocalization();
 
