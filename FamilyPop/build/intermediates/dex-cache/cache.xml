@@ -1,3 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="D:\J2YSoft\familypop_16_02_04\FamilyPop_j2y\FamilyPop_j2y\FamilyPop\familyPop\build\intermediates\exploded-aar\FamilyPop\socioPhone_lib_dist\unspecified\jars\libs\jtransforms-2.4.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5481e91171954648ea16e3260c8f7ee71ff54156">
+        <dex dex="D:\J2YSoft\familypop_16_02_04\FamilyPop_j2y\FamilyPop_j2y\FamilyPop\familyPop\build\intermediates\transforms\dex\debug\folders\1000\8\jtransforms-2.4_9119d14531ba29ec2ff72f4b5da1f8eb69e22624\classes.dex" />
+    </item>
+    <item
+        jar="D:\J2YSoft\familypop_16_02_04\FamilyPop_j2y\FamilyPop_j2y\FamilyPop\familyPop\build\intermediates\exploded-aar\FamilyPop\socioPhone_lib_dist\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ec818c6bb58f6654212c763716d5510b22dfb6b3">
+        <dex dex="D:\J2YSoft\familypop_16_02_04\FamilyPop_j2y\FamilyPop_j2y\FamilyPop\familyPop\build\intermediates\transforms\dex\debug\folders\1000\4\FamilyPop-socioPhone_lib_dist-unspecified_65b2dd53b8915e338e3626915aec5ffc9622966d\classes.dex" />
+    </item>
+    <item
+        jar="D:\J2YSoft\familypop_16_02_04\FamilyPop_j2y\FamilyPop_j2y\FamilyPop\familyPop\build\intermediates\exploded-aar\FamilyPop\mmlib\unspecified\jars\libs\Jama-1.0.3.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="90c1a1c069b7ed5e17a3f8b41f55d2a17477f0bf">
+        <dex dex="D:\J2YSoft\familypop_16_02_04\FamilyPop_j2y\FamilyPop_j2y\FamilyPop\familyPop\build\intermediates\transforms\dex\debug\folders\1000\8\Jama-1.0.3_4ab306949a7c34bd05b6d41ffa3674edadfb86d8\classes.dex" />
+    </item>
+    <item
+        jar="D:\J2YSoft\familypop_16_02_04\FamilyPop_j2y\FamilyPop_j2y\FamilyPop\familyPop\build\intermediates\exploded-aar\FamilyPop\mmlib\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="77b844f41f1ea51d80c8896991c22a172c1ac6f6">
+        <dex dex="D:\J2YSoft\familypop_16_02_04\FamilyPop_j2y\FamilyPop_j2y\FamilyPop\familyPop\build\intermediates\transforms\dex\debug\folders\1000\4\FamilyPop-mmlib-unspecified_07d096c9ab389ce5dff94857c453c91f8fff817b\classes.dex" />
+    </item>
+
+</items>
