@@ -3,6 +3,8 @@ package com.j2y.familypop.server;
 import com.j2y.familypop.activity.Activity_serverMain;
 import com.j2y.familypop.server.render.FpsBubble;
 import com.j2y.familypop.server.render.FpsGameBomb;
+import com.j2y.familypop.server.render.FpsGameBubble;
+import com.j2y.network.base.FpNetConstants;
 import com.j2y.network.server.FpNetFacade_server;
 
 import org.jbox2d.common.Vec2;
@@ -16,6 +18,10 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
+import java.util.ArrayList;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
 // FpsFamilyBomb
@@ -28,6 +34,9 @@ public class FpsFamilyBomb
     private FpsScenario_record _scenario_record;
     private FpsGameBomb _bomb;
     private int _bomb_target_index;
+
+    private ArrayList<FpsGameBubble> _bubbles; // debug
+    private Lock _lock_bubbles = new ReentrantLock();
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // 초기화
@@ -55,6 +64,8 @@ public class FpsFamilyBomb
 	{
         _scenario_record = scenario_record;
         ChangeState(state_wait);
+
+        _bubbles = new ArrayList<FpsGameBubble>();
 	}
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     public void Destroy()
@@ -87,6 +98,23 @@ public class FpsFamilyBomb
                 _bomb.ApplyForce(force, _bomb._attractor.GetAttractorPos(box2d));
             }
             _bomb.Display(applet);
+        }
+
+        try {
+            _lock_bubbles.lock();
+            Activity_serverMain main = Activity_serverMain.Instance;
+
+            for(FpsGameBubble bubble : _bubbles) {
+
+                if(null != bubble._attractor) {
+                    Vec2 force = bubble._attractor.attract(bubble._body);
+                    bubble.ApplyForce(force, bubble._attractor.GetAttractorPos(main._box2d));
+                }
+                bubble.Display(main);
+            }
+        }
+        finally {
+            _lock_bubbles.unlock();
         }
 	}
 
@@ -147,6 +175,9 @@ public class FpsFamilyBomb
                 _bomb_start_time = System.currentTimeMillis();
                 _bomb_target_index = getRandomMath(0, getUserCount());
                 WaitTime(1000);
+
+                // 160422 test
+                test_fire_bubble();
             }
             break;
 
@@ -251,6 +282,49 @@ public class FpsFamilyBomb
         float dy = v1.y -  v2.y;
         float dist = (float)Math.sqrt(dx * dx + dy * dy);
         return dist;
+    }
+    private void test_fire_bubble()
+    {
+        int userCount = Activity_serverMain.Instance.GetTalkUserCount();
+        int targetUserId = getRandomMath(0, userCount);
+
+        FpsTalkUser user = Activity_serverMain.Instance.FindTalkUser_byId(targetUserId);
+        if(null == user)
+            return;
+
+        Activity_serverMain main = Activity_serverMain.Instance;
+
+        int drawCount = 100;
+        int addHeight = 20;
+        int addWidth = 0;
+        for(int i=0; i<drawCount; ++i)
+        {
+            FpsGameBubble bubble = new FpsGameBubble(main, user._attractor);
+
+            if( addWidth > main.width)
+            {
+                addWidth = 0;
+
+                addHeight+= 20;
+                addHeight+=1;
+            }
+            //float _worldX = ((addWidth-(_applet.width/2))*12f)/(_applet.width/2);
+            //float _worldY = ((addHeight-(_applet.height/2))*-20f)/(_applet.height/2);
+
+            int c = getRandomMath(0, 4);
+            int bubble_color = FpNetConstants.ColorArray[c];
+            //if (eventCode == MotionEvent.ACTION_UP)
+            {
+                //_physicsWorld.addBox(_worldX, _worldY, .98f, .98f, 0f, false);
+                bubble.CreateMover(main._box2d, 10, addWidth, addHeight,  bubble_color);
+                // _applet.image(Activity_serverMain.Instance._image_server_righttop, addWidth, addHeight);
+            }
+
+            addWidth += 20f;
+            addWidth += 1;
+
+            _bubbles.add(bubble);
+        }
     }
 
 }

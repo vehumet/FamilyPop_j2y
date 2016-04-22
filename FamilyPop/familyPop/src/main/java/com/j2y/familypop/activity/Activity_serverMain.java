@@ -79,7 +79,7 @@ import org.jbox2d.dynamics.World;
 public class Activity_serverMain extends PApplet
 {
 	public static Activity_serverMain Instance;
-    private Box2DProcessing _box2d;
+    public Box2DProcessing _box2d;
 
     public HashMap<FpNetServer_client, FpsTalkUser> _talk_users = new HashMap<FpNetServer_client, FpsTalkUser>();
     private Lock _lock_user = new ReentrantLock();
@@ -327,6 +327,9 @@ public class Activity_serverMain extends PApplet
         }
         //FpsRoot.Instance._scenarioDirector.ChangeScenario(FpNetConstants.SCENARIO_GAME);
         Log.i("[J2Y]", "ThreadID:[Activity_serverMain:setup]" + (int) Thread.currentThread().getId());
+
+
+
 	}
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -384,7 +387,28 @@ public class Activity_serverMain extends PApplet
         {
             _lock_user.lock();
 
-            this.image(_image_server_righttop, this.width - _image_server_righttop.width, _image_server_righttop.height);
+//            int drawCount = 100;
+//            int addHeight = _image_server_righttop.height;
+//            int addWidth = 0;//_image_server_righttop.width;
+//
+//            for( int i=0; i<drawCount; ++i)
+//            {
+//                if( addWidth > this.width)
+//                {
+//                    addWidth = 0;
+//
+//                    addHeight+=_image_server_righttop.height;
+//                    addHeight +=1;
+//                }
+//                this.image(_image_server_righttop,addWidth ,addHeight);
+//                addWidth +=_image_server_righttop.width;
+//                addWidth += 1;
+//                //this.image(_image_server_righttop, this.width - _image_server_righttop.width, _image_server_righttop.height);
+//            }
+
+
+            // 서버 오른쪽 위에 흰박스.
+            //this.image(_image_server_righttop, this.width - _image_server_righttop.width, _image_server_righttop.height);
 
             //this.image(_testImage, this.width/2, this.height/2);
             _topic.draw(this);
@@ -483,7 +507,7 @@ public class Activity_serverMain extends PApplet
         {
             _lock_user.unlock();
         }
-		smooth();
+        smooth();
 	}
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // 네트워크 이벤트

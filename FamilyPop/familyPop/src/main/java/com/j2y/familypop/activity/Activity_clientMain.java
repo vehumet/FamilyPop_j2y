@@ -1762,7 +1762,7 @@ public class Activity_clientMain extends BaseActivity implements OnClickListener
 
                     FpNetFacade_client.Instance.SendPacket_req_startGame();
 
-                    _selectScenario = FpNetConstants.SCENARIO_GAME;
+                    //_selectScenario = FpNetConstants.SCENARIO_GAME;
                     FpNetFacade_client.Instance.SendPacket_req_changeScenario(FpNetConstants.SCENARIO_GAME);
                 }
                 break;

@@ -574,6 +574,7 @@ public class FpsScenario_record extends FpsScenario_base
             user._bubble.add(bubble);
         }
     }
+
     public void Create_good_bubble(FpsTalkUser user, int sendUserId)
     {
 
@@ -622,6 +623,28 @@ public class FpsScenario_record extends FpsScenario_base
         //if(Activity_serverMain.Instance != null )
         //_applet.image(Activity_serverMain.Instance._image_server_righttop, _applet.width - Activity_serverMain.Instance.width, Activity_serverMain.Instance.height);
         _applet.image(Activity_serverMain.Instance._image_server_righttop, _applet.width-100, 0);
+
+        //test_image draw
+//        int drawCount = 100;
+//        int addHeight = Activity_serverMain.Instance._image_server_righttop.height;
+//        int addWidth = 0;//_image_server_righttop.width;
+//
+//        for( int i=0; i<drawCount; ++i)
+//        {
+//            if( addWidth > _applet.width)
+//            {
+//                addWidth = 0;
+//
+//                addHeight+=Activity_serverMain.Instance._image_server_righttop.height;
+//                addHeight +=1;
+//            }
+//            _applet.image(Activity_serverMain.Instance._image_server_righttop, addWidth, addHeight);
+//            addWidth +=Activity_serverMain.Instance._image_server_righttop.width;
+//            addWidth += 1;
+//            //this.image(_image_server_righttop, this.width - _image_server_righttop.width, _image_server_righttop.height);
+//        }
+
+
 
         try {
             _lock_turn_data.lock();

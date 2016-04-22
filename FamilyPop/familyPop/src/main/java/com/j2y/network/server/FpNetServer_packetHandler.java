@@ -254,7 +254,8 @@ public class FpNetServer_packetHandler
 
             //if(client._clientID == 0)
             {
-                if(FpsScenarioDirector.Instance.GetActiveScenarioType() == FpNetConstants.SCENARIO_GAME) {
+                if(FpsScenarioDirector.Instance.GetActiveScenarioType() == FpNetConstants.SCENARIO_GAME)
+                {
                     ((FpsScenario_game) FpsScenarioDirector.Instance.GetActiveScenario()).StartGame();
 
                     _net_server.BroadcastPacket(FpNetConstants.SCNoti_startGame);

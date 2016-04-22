@@ -204,6 +204,7 @@ public class FpsScenario_game extends FpsScenario_base
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------
+
     public  void UpdateGameState()
     {
         if(_wait_time > System.currentTimeMillis())
@@ -214,19 +215,25 @@ public class FpsScenario_game extends FpsScenario_base
             case state_wait: {
                 ChangeState(state_fireBubbles);
                 WaitTime(100);
+
+                // 160422 test
+                test_fire_bubble();
             }
             break;
 
-            case state_fireBubbles: {
+            case state_fireBubbles:
+            {
+// test back 160422
+//                fire_bubble();
+//                if(_bubbles.size() > 30) {
+//                    ChangeState(state_fireBomb);
+//                    WaitTime(1000); // 1초 대기
+//                }
+//                else {
+//                    WaitTime(300); // 0.3초 대기
+//                }
 
-                fire_bubble();
-                if(_bubbles.size() > 30) {
-                    ChangeState(state_fireBomb);
-                    WaitTime(1000); // 1초 대기
-                }
-                else {
-                    WaitTime(300); // 0.3초 대기
-                }
+
             }
             break;
 
@@ -283,7 +290,8 @@ public class FpsScenario_game extends FpsScenario_base
 
         fire_bubble(targetUserId);
     }
-    private void fire_bubble(int targetUserId) {
+    private void fire_bubble(int targetUserId)
+    {
 
         FpsTalkUser user = Activity_serverMain.Instance.FindTalkUser_byId(targetUserId);
         if(null == user)
@@ -301,7 +309,47 @@ public class FpsScenario_game extends FpsScenario_base
 
         _bubbles.add(bubble);
     }
+    private void test_fire_bubble()
+    {
+        int userCount = Activity_serverMain.Instance.GetTalkUserCount();
+        int targetUserId = getRandomMath(0, userCount);
 
+        FpsTalkUser user = Activity_serverMain.Instance.FindTalkUser_byId(targetUserId);
+        if(null == user)
+            return;
+
+        int drawCount = 100;
+        int addHeight = 20;
+        int addWidth = 0;
+        for(int i=0; i<drawCount; ++i)
+        {
+            FpsGameBubble bubble = new FpsGameBubble(_applet, user._attractor);
+
+            if( addWidth > _applet.width)
+            {
+                addWidth = 0;
+
+                addHeight+= 20;
+                addHeight+=1;
+            }
+            //float _worldX = ((addWidth-(_applet.width/2))*12f)/(_applet.width/2);
+            //float _worldY = ((addHeight-(_applet.height/2))*-20f)/(_applet.height/2);
+
+            int c = getRandomMath(0, 4);
+            int bubble_color = FpNetConstants.ColorArray[c];
+            //if (eventCode == MotionEvent.ACTION_UP)
+            {
+                //_physicsWorld.addBox(_worldX, _worldY, .98f, .98f, 0f, false);
+                bubble.CreateMover(_box2d, 10, addWidth, addHeight,  bubble_color);
+                // _applet.image(Activity_serverMain.Instance._image_server_righttop, addWidth, addHeight);
+            }
+
+            addWidth += 20f;
+            addWidth += 1;
+
+            _bubbles.add(bubble);
+        }
+    }
     private void ExplodeBomb() {
 
         _explosion_time = System.currentTimeMillis();

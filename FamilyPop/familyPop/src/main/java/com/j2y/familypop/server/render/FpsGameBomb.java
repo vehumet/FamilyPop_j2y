@@ -47,7 +47,8 @@ public class FpsGameBomb extends ProcessingBody_base
             ++index;
         }
 
-        for(int i = 0; i < 14; ++i) {
+        for(int i = 0; i < 14; ++i)
+        {
             _image_buffer[index] = new ProcessingImage_base(applet, String.format("explo_%d.png", i));
             _image_buffer[index].SetPosition(new Vec2(initX, initY));
             ++index;

@@ -159,6 +159,7 @@ public class FpsBubble
     public void StartMover(int record_end_time)
     {
         _isMoving = true;
+        //_isMoving = false;
         body.setActive(true);
 
         _end_time = record_end_time;
