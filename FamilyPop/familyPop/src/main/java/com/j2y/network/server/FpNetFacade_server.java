@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 import com.j2y.familypop.activity.Activity_clientMain;
 import com.j2y.familypop.activity.Activity_serverMain;
@@ -34,14 +37,16 @@ public class FpNetFacade_server extends FpNetFacade_base
 {
 	public static FpNetFacade_server Instance;
 	
-	private FpTCPAccepter _accepter;
-	private ServerSocket _serverSocket;
+	//private FpTCPAccepter _accepter;
+	//private ServerSocket _serverSocket;
     private FpNetServer_packetHandler _packet_handler;
     //
 
 
 	public ArrayList<FpNetServer_client> _clients = new ArrayList<FpNetServer_client>();
-
+    public Map<String, FpNetServer_client> _thingId_clients_map = new HashMap();
+    public ArrayList<String> _clients_thing_ids = new ArrayList<String>();
+    public HashSet<String> _clients_thing_ids_set = new HashSet<String>();
     //private HashMap<int, FpNetServer_client> _clientsTest;
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -60,15 +65,21 @@ public class FpNetFacade_server extends FpNetFacade_base
     @Override
 	public boolean IsConnected() 
 	{
+        return _connected;
+        /*
 		if(_serverSocket == null)
 			return false;
 		
 		return _serverSocket.isBound();
+		*/
 	}
 	
 	//------------------------------------------------------------------------------------------------------------------------------------------------------
 	public void StartServer(int port) 
 	{
+        // This is automatically done
+        _connected = true;
+        /*
 		try {
 			_serverSocket = new ServerSocket(port);
 			_serverSocket.setReuseAddress(true);
@@ -85,6 +96,8 @@ public class FpNetFacade_server extends FpNetFacade_base
 				e1.printStackTrace();
 			}			
 		}
+        */
+
 	}
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -94,13 +107,16 @@ public class FpNetFacade_server extends FpNetFacade_base
 		try{
             send_quitRoom();
 
-			_serverSocket.close();
-			_accepter.destroy();
+			//_serverSocket.close();
+
+			//_accepter.destroy();
+            _connected = false;
 
             for(FpNetServer_client client : _clients)
                 client.Disconnect();
 
             _clients.clear();
+            _thingId_clients_map.clear();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -270,10 +286,12 @@ public class FpNetFacade_server extends FpNetFacade_base
     // 클라이언트 관리
     //
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    public void AddClient(Socket socket)
-    {
-        FpNetServer_client client = new FpNetServer_client(socket, _messageHandler, FpsRoot.Instance._scenarioDirector.GetActiveScenario());
+
+    public void AddClient(String thingId) {
+
+        FpNetServer_client client = new FpNetServer_client(thingId, _messageHandler, FpsRoot.Instance._scenarioDirector.GetActiveScenario());
         _clients.add(client);
+        _thingId_clients_map.put(thingId, client);
 
         if(Activity_serverMain.Instance != null)
             Activity_serverMain.Instance.AddTalkUser(client);

@@ -94,4 +94,8 @@ public class FpNetConstants
 		0xff4D82D6,     // blue
         0xff66ff66, 	// 임시
 	};
+
+	// IoTAppWrapper
+	public final static int PeerAdded = 995001;
+	public final static int PeerRemoved = 995002;
 }

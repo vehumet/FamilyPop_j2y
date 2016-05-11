@@ -15,6 +15,7 @@ public class FpNetIncomingMessage
 	public FpNetFacade_base _obj;
 	public FpPacketData _packetData;
     public int _packetIndex;
+    public String _thingId;
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     public void FpNetIncomingMessage()

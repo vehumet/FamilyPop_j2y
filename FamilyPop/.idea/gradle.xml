@@ -15,6 +15,14 @@
             <option value="$PROJECT_DIR$/socioPhone_lib_dist" />
           </set>
         </option>
+        <option name="myModules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/familyPop" />
+            <option value="$PROJECT_DIR$/mmlib" />
+            <option value="$PROJECT_DIR$/socioPhone_lib_dist" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>

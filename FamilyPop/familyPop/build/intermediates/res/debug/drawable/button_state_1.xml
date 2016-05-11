@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:drawable="@drawable/button_base_off" android:state_pressed="true"/>
-    <item android:drawable="@drawable/button_base_off" android:state_focused="true"/>
-    <item android:drawable="@drawable/button_base_on"/>
-
-</selector><!-- From: file:/D:/J2YSoft/familypop_16_02_04/FamilyPop_j2y/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/drawable/button_state_1.xml -->

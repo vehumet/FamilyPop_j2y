@@ -1,7 +1,10 @@
 package com.j2y.familypop.client;
 
+import android.os.RemoteException;
 import com.j2y.familypop.MainActivity;
 import com.j2y.familypop.activity.Activity_clientMain;
+import com.j2y.network.base.FpNetConstants;
+import com.j2y.network.base.FpNetIncomingMessage;
 import com.j2y.network.base.data.FpNetDataRes_recordInfoList;
 import com.j2y.network.client.FpNetFacade_client;
 import com.nclab.sociophone.SocioPhone;
@@ -15,10 +18,17 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
+import kr.ac.kaist.resl.cmsp.iotapp.library.IoTAppService;
+import kr.ac.kaist.resl.cmsp.iotapp.library.ThingServiceInfo;
+import kr.ac.kaist.resl.cmsp.iotapp.library.impl.AndroidIoTAppService;
+import kr.ac.kaist.resl.cmsp.iotappwrapper.FamilyPopService;
+import kr.ac.kaist.resl.cmsp.iotappwrapper.FamilyPopServiceImpl;
+import kr.ac.kaist.resl.cmsp.iotappwrapper.FpsUtil;
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
@@ -49,6 +59,13 @@ public class FpcRoot implements TurnDataListener, DisplayInterface, EventDataLis
 
     private String _serverIP;
 
+    // For IoTApp
+    private static final String ID_HEADER_SERVER = "FamilyPop_Server_";
+    private static final String ID_HEADER_CLIENT= "FamilyPop_Client_";
+    public static String _myThingId = null;
+    public static String _serverThingId = null;
+    public static IoTAppService _iotAppService;
+    public static FamilyPopService _fpService;
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------
 	public void Initialize(Context context)
@@ -58,6 +75,11 @@ public class FpcRoot implements TurnDataListener, DisplayInterface, EventDataLis
 
         _scenarioDirectorProxy = new FpcScenarioDirectorProxy();
         _clientId = -1;
+
+        // For IoTApp
+        _iotAppService = new AndroidIoTAppService(_main_context);
+        _iotAppService.connectPlatform(null);
+        _myThingId = ID_HEADER_CLIENT + FpsUtil.getLocalIpAddress();
     }
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -73,10 +95,69 @@ public class FpcRoot implements TurnDataListener, DisplayInterface, EventDataLis
         InitSocioPhone();
         //InitLocalization(ip);
         _client = new FpNetFacade_client();
-        _client.ConnectServer(ip);
+        // Don't connect, because the connection would be done by IoTApp Platform
+        //_client.ConnectServer(ip);
+        // Pass _client as parameter, to utilize its callback functions
+        _fpService = new FamilyPopServiceImpl(_main_context, _myThingId, FamilyPopService.class.getSimpleName(), _client);
+
+        // Wait until server object joins cluster
+        (new Thread(new Runnable() {
+            @Override
+            public void run() {
+                boolean connected = false;
+                try {
+                    _iotAppService.registerLocalServiceObject(FamilyPopService.class, _fpService);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+                while (!connected) {
+                    try {
+                        Thread.sleep(1000);
+                        try {
+                            if (getServerObject() != null) {
+                                Log.d("IoTApp", "Got service object of server");
+                                FpNetIncomingMessage msg = new FpNetIncomingMessage();
+                                msg._socket = null;
+                                _client._messageHandler.obtainMessage(FpNetConstants.Connected, msg).sendToTarget();
+                                _client._recv_connected_message = true;
+                                connected = true;
+                            }
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        })).start();
+
         _socioPhone.connectToServer(ip);
 
         //_localization._client.start();
+
+    }
+
+    public static FamilyPopService getServerObject() throws RemoteException {
+        if (_serverThingId == null) {
+            List<ThingServiceInfo> infos = _iotAppService.getAvailableServicesNoScan(FamilyPopService.class);
+            for (ThingServiceInfo info : infos) {
+                if (info.getThingId().startsWith(ID_HEADER_SERVER)) {
+                    Log.d("IoTApp", "Found FamilyPop server: " + info.getThingId());
+                    _serverThingId = info.getThingId();
+                    break;
+                }
+            }
+        }
+        if (_serverThingId != null) {
+            FamilyPopService serverObj = _iotAppService.getServiceObject(FamilyPopService.class, _serverThingId);
+            if (serverObj == null)
+                Log.e("IoTApp", "FamilyPop server is out of the cluster");
+            return serverObj;
+        } else {
+            //Log.e("IoTApp", "There is no FamilyPop server object in the cluster");
+            return null;
+        }
     }
 
 
@@ -86,9 +167,21 @@ public class FpcRoot implements TurnDataListener, DisplayInterface, EventDataLis
         DestroySocioPhone();
         DestroyLocalization();
 
-        if(_client != null)
-        {
-            _client.destroy();
+        (new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    _iotAppService.unregisterLocalServiceObject(_fpService);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+                _fpService = null;
+            }
+        })).start();
+
+        if(_client != null) {
+            // Don't destroy, because there is no connection to destroy
+            //_client.destroy();
             _client = null;
         }
         //MainActivity.Sleep(500);

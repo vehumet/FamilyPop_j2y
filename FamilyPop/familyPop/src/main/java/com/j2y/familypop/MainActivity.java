@@ -86,7 +86,7 @@ public class MainActivity extends Activity
 
 		startActivity(new Intent(this, Activity_title.class));
 
-		_fpsRoot = new FpsRoot();
+		_fpsRoot = new FpsRoot(getApplicationContext());
 		_fpcRoot = new FpcRoot();
         _fpcRoot.Initialize(this);
 

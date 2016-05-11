@@ -97,7 +97,8 @@ public class FpNetServer_packetHandler
         public void CallBack(FpNetIncomingMessage inMsg)
         {
             Log.i("[J2Y]", "[Network] 클라 연결");
-            _net_server.AddClient(inMsg._socket);
+            //_net_server.AddClient(inMsg._socket);
+            _net_server.AddClient(inMsg._thingId);
 
             Object a = Activity_serverMain.Instance;
 

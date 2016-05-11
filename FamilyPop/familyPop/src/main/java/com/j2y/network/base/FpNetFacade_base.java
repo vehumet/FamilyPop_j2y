@@ -9,6 +9,7 @@ import android.os.Message;
 
 import com.j2y.network.base.FpNetIncomingMessage;
 import com.j2y.network.base.FpNetMessageCallBack;
+import kr.ac.kaist.resl.cmsp.iotapp.library.IoTAppService;
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
@@ -19,7 +20,8 @@ import com.j2y.network.base.FpNetMessageCallBack;
 
 public class FpNetFacade_base 
 {
-	public Socket _socket;
+	//public Socket _socket;
+    public boolean _connected;
     public HashMap<Integer, FpNetMessageCallBack> _messageCallbacks;
 	
 	//------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -31,16 +33,23 @@ public class FpNetFacade_base
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     public boolean IsConnected()
     {
+        /*
         if(_socket == null)
             return false;
 
         return _socket.isConnected();
+        */
+        return _connected;
     }
     public void Disconnect()
     {
+        _connected = false;
+        
+        /*
         if(false == IsConnected())
             return;
-
+            */
+        /*
         try
         {
             _socket.close();
@@ -50,6 +59,7 @@ public class FpNetFacade_base
         {
             e.printStackTrace();
         }
+        */
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------

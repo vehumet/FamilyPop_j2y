@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\socioPhone_lib_dist\\src\\main\\aidl\\com\\nclab\\partitioning\\interfaces\\IPartitioningInterface.aidl
+ * Original file: /home/shheo/FamilyPop_j2y/FamilyPop/socioPhone_lib_dist/src/main/aidl/com/nclab/partitioning/interfaces/IPartitioningInterface.aidl
  */
 package com.nclab.partitioning.interfaces;
 // Declare any non-default types here with import statements

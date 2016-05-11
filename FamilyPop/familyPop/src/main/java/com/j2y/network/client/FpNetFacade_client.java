@@ -2,6 +2,7 @@ package com.j2y.network.client;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,10 +18,8 @@ import com.j2y.familypop.client.FpcScenarioDirectorProxy;
 import com.j2y.familypop.server.FpsRoot;
 import com.j2y.network.base.FpNetConstants;
 import com.j2y.network.base.FpNetFacade_base;
-import com.j2y.network.base.FpNetIOStream;
 import com.j2y.network.base.FpNetIncomingMessage;
 import com.j2y.network.base.FpNetMessageCallBack;
-import com.j2y.network.base.FpNetOutgoingMessage;
 import com.j2y.network.base.FpNetUtil;
 import com.j2y.network.base.FpPacketData;
 import com.j2y.network.base.FpPacketHeader;
@@ -43,6 +42,13 @@ import com.j2y.network.base.data.FpNetData_smileEvent;
 import com.j2y.network.base.data.FpNetData_userInteraction;
 import com.nclab.familypop.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import kr.ac.kaist.resl.cmsp.iotappwrapper.FamilyPopService;
+import kr.ac.kaist.resl.cmsp.iotappwrapper.FpServiceOutgoingMessage;
+import kr.ac.kaist.resl.cmsp.iotapp.library.IoTAppService;
+
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
 // FpNetFacade_client
@@ -53,15 +59,15 @@ import com.nclab.familypop.R;
 public class FpNetFacade_client extends FpNetFacade_base
 {
 	public static FpNetFacade_client Instance;
-	private FpTCPConnector _connector;
-	private FpNetIOStream _ioStream;
+	//private FpTCPConnector _connector;
+	//private FpNetIOStream _ioStream;
 	public boolean _recv_connected_message;
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------
 	public FpNetFacade_client()
 	{
 		Instance = this;
-		_ioStream = null;
+		//_ioStream = null;
 
         RegisterMessageCallBackList();
 	}
@@ -75,12 +81,24 @@ public class FpNetFacade_client extends FpNetFacade_base
 	//------------------------------------------------------------------------------------------------------------------------------------------------------
 	public boolean ConnectServer(String targetIP) 
 	{
+        /*
 		_connector = new FpTCPConnector(targetIP, 7778, _messageHandler);
 		_connector.start();
         _recv_connected_message = false;
+		*/
 		
 		return true;
 	}
+
+    @Override
+    public void Disconnect() {
+        try {
+            FpcRoot._iotAppService.unregisterLocalServiceObject(FpcRoot._fpService);
+            _connected = false;
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
 	
 
 
@@ -88,16 +106,18 @@ public class FpNetFacade_client extends FpNetFacade_base
 	//------------------------------------------------------------------------------------------------------------------------------------------------------
 	public void destroy() 
 	{
+        /*
 		_connector.destroy();
         _connector = null;
 
         Disconnect();
+        */
 	}
 
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------
-	public void sendMessage(int msgID, FpNetData_base outPacket)
-	{
+	public void sendMessage(final int msgID, final FpNetData_base outPacket) {
+        /*
         if(_ioStream != null)
         {
             FpNetOutgoingMessage outMsg = new FpNetOutgoingMessage();
@@ -111,6 +131,27 @@ public class FpNetFacade_client extends FpNetFacade_base
 
             _ioStream.SendPacket(packetData);
         }
+        */
+        (new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    FpServiceOutgoingMessage outMsg = new FpServiceOutgoingMessage();
+                    outPacket.Packing(outMsg);
+                    JSONObject jsonObj = new JSONObject();
+                    jsonObj.put(FamilyPopService.THING_ID, FpcRoot._myThingId);
+                    jsonObj.put(FamilyPopService.KEY_TYPE, msgID);
+                    jsonObj.put(msgID + "", outMsg._dataArray);
+
+                    FamilyPopService serverObject = FpcRoot.getServerObject();
+                    if (serverObject != null) {
+                        serverObject.processStringNoReturn(jsonObj.toString());
+                    }
+                } catch (JSONException | RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        })).start();
 	}
 
 
@@ -164,13 +205,14 @@ public class FpNetFacade_client extends FpNetFacade_base
         @Override
         public void CallBack(FpNetIncomingMessage inMsg)
         {
-            _socket = inMsg._socket;
-            _ioStream = new FpNetIOStream(FpNetFacade_client.Instance, false, _messageHandler);
-            _ioStream.start();
+            //_socket = inMsg._socket;
+            //_ioStream = new FpNetIOStream(FpNetFacade_client.Instance, false, _messageHandler);
+            //_ioStream.start();
 
             Log.i("[J2Y]", "[Network] 서버 연결");
 
             _recv_connected_message = true;
+            _connected = true;
         }
     };
 
@@ -182,6 +224,7 @@ public class FpNetFacade_client extends FpNetFacade_base
         public void CallBack(FpNetIncomingMessage inMsg)
         {
             Log.i("[J2Y]", "[Network] 서버 연결 끊김");
+            _connected = false;
 
         }
     };

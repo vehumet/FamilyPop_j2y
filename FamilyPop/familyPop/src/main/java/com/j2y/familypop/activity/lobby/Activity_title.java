@@ -194,7 +194,7 @@ public class Activity_title extends BaseActivity implements View.OnClickListener
 //                    @Override
 //                    public void onClick(DialogInterface dialog, int which)
 //                    {
-//                        // ÇÁ·Î¼¼½º Á¾·á.
+//                        // í”„ë¡œì„¸ìŠ¤ ì¢…ë£Œ.
 //                        android.os.Process.killProcess(android.os.Process.myPid());
 //                    }
 //                })

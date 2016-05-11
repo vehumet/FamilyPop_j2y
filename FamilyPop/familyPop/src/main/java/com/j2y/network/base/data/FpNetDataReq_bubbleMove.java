@@ -13,7 +13,7 @@ public class FpNetDataReq_bubbleMove extends FpNetData_base
     public float _dirY;
     public int _clientid;
     //----------------------------------------------------------------
-    // ¸Þ½ÃÁö ÆÄ½Ì
+    // ë©”ì‹œì§€ íŒŒì‹±
     @Override
     public void Parse(FpNetIncomingMessage inMsg)
     {
@@ -25,7 +25,7 @@ public class FpNetDataReq_bubbleMove extends FpNetData_base
     }
 
     //----------------------------------------------------------------
-    // ¸Þ½ÃÁö ÆÐÅ·
+    // ë©”ì‹œì§€ íŒ¨í‚¹
     @Override
     public void Packing(FpNetOutgoingMessage outMsg)
     {

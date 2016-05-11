@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="iotmap-library">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/familyPop/libs/iotmap-library.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$USER_HOME$/IoTAppDev/IdeaProjects/IoTAppLibrary/iotapp_library/src/main/java" />
+    </SOURCES>
+  </library>
+</component>

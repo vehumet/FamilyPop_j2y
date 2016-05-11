@@ -34,7 +34,7 @@ public class Activity_locatorWaitingForConnection extends BaseActivity implement
         _button_home = (ImageButton) findViewById(R.id.button_start_locator_waiting_topmenu_home);
         _button_home.setOnClickListener(this);
 
-        //  ±×³É 3ÃÊÈÄ¿¡ ºñ±³ ÇØº¸°í ±â¸é ¾ÀÀüÈ¯ ¾Æ´Ï¸é Àü È­¸éÀ¸·Î.
+        //  ê·¸ëƒ¥ 3ì´ˆí›„ì— ë¹„êµ í•´ë³´ê³  ê¸°ë©´ ì”¬ì „í™˜ ì•„ë‹ˆë©´ ì „ í™”ë©´ìœ¼ë¡œ.
         new Handler().postDelayed(new Runnable()
         {
             @Override

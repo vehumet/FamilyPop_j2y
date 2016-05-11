@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <!--<item android:drawable="@drawable/button" android:state_pressed="true"/>-->
-    <!--<item android:drawable="@color/color_button_state_onclick" android:state_focused="true"/>-->
-    <!--<item android:drawable="@color/color_button_state_normal"/>-->
-
-</selector><!-- From: file:/D:/J2YSoft/familypop_16_02_04/FamilyPop_j2y/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/drawable/style_button_topmenu_feature.xml -->

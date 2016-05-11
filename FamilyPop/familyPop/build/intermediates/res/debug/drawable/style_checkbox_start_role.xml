@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:state_checked="true" android:drawable="@drawable/check_non" ></item>
-    <item android:state_checked="false" android:drawable="@drawable/check_select"></item>
-
-</selector><!-- From: file:/D:/J2YSoft/familypop_16_02_04/FamilyPop_j2y/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/drawable/style_checkbox_start_role.xml -->

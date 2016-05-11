@@ -19,7 +19,7 @@ import com.j2y.network.base.FpNetIncomingMessage;
 //
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+/*
 public class FpNetIOStream extends Thread
 {
 	private InputStream _inputStream;
@@ -32,7 +32,7 @@ public class FpNetIOStream extends Thread
 	//------------------------------------------------------------------------------------------------------------------------------------------------------
 	public FpNetIOStream(FpNetFacade_base netFacade, boolean isServer, Handler listenHandler)
 	{
-		try 
+		try
 		{
 			_netFacade = netFacade;
 			_inputStream = _netFacade._socket.getInputStream();
@@ -40,8 +40,8 @@ public class FpNetIOStream extends Thread
 
 			_isServer = isServer;
 			_listenHandler = listenHandler;
-		} 
-		catch (IOException e) 
+		}
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
@@ -175,3 +175,4 @@ public class FpNetIOStream extends Thread
         }
     }
 }
+*/

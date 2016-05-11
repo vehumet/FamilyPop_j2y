@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\socioPhone_lib_dist\\build\\intermediates\\res\\merged\\androidTest\\debug\\values\\values.xml",
+        "outputFile": "/home/shheo/FamilyPop_j2y/FamilyPop/socioPhone_lib_dist/build/intermediates/res/merged/androidTest/debug/values/values.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 102
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\socioPhone_lib_dist\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/socioPhone_lib_dist/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -31,7 +31,7 @@
                     "endOffset": 393
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\socioPhone_lib_dist\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/socioPhone_lib_dist/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -52,7 +52,7 @@
                     "endOffset": 553
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\socioPhone_lib_dist\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/socioPhone_lib_dist/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,

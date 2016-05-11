@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
+        "outputFile": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/values/values.xml",
         "map": [
             {
                 "to": {
@@ -11,13 +11,13 @@
                     "endOffset": 90
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 51,
                         "startColumn": 4,
-                        "startOffset": 1873,
+                        "startOffset": 1822,
                         "endColumn": 39,
-                        "endOffset": 1908
+                        "endOffset": 1857
                     }
                 }
             },
@@ -30,13 +30,13 @@
                     "endOffset": 129
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 44,
                         "startColumn": 4,
-                        "startOffset": 1578,
+                        "startOffset": 1534,
                         "endColumn": 38,
-                        "endOffset": 1612
+                        "endOffset": 1568
                     }
                 }
             },
@@ -49,13 +49,13 @@
                     "endOffset": 189
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 29,
                         "startColumn": 4,
-                        "startOffset": 1090,
+                        "startOffset": 1061,
                         "endColumn": 61,
-                        "endOffset": 1147
+                        "endOffset": 1118
                     }
                 }
             },
@@ -68,13 +68,13 @@
                     "endOffset": 250
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 30,
                         "startColumn": 4,
-                        "startOffset": 1153,
+                        "startOffset": 1123,
                         "endColumn": 62,
-                        "endOffset": 1211
+                        "endOffset": 1181
                     }
                 }
             },
@@ -87,13 +87,13 @@
                     "endOffset": 312
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 31,
                         "startColumn": 4,
-                        "startOffset": 1217,
+                        "startOffset": 1186,
                         "endColumn": 63,
-                        "endOffset": 1276
+                        "endOffset": 1245
                     }
                 }
             },
@@ -106,13 +106,13 @@
                     "endOffset": 371
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 22,
                         "startColumn": 4,
-                        "startOffset": 789,
+                        "startOffset": 767,
                         "endColumn": 60,
-                        "endOffset": 845
+                        "endOffset": 823
                     }
                 }
             },
@@ -125,13 +125,13 @@
                     "endOffset": 426
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 23,
                         "startColumn": 4,
-                        "startOffset": 851,
+                        "startOffset": 828,
                         "endColumn": 56,
-                        "endOffset": 903
+                        "endOffset": 880
                     }
                 }
             },
@@ -144,13 +144,13 @@
                     "endOffset": 482
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 24,
                         "startColumn": 4,
-                        "startOffset": 909,
+                        "startOffset": 885,
                         "endColumn": 57,
-                        "endOffset": 962
+                        "endOffset": 938
                     }
                 }
             },
@@ -163,13 +163,13 @@
                     "endOffset": 538
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 25,
                         "startColumn": 4,
-                        "startOffset": 968,
+                        "startOffset": 943,
                         "endColumn": 57,
-                        "endOffset": 1021
+                        "endOffset": 996
                     }
                 }
             },
@@ -182,13 +182,13 @@
                     "endOffset": 594
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 26,
                         "startColumn": 4,
-                        "startOffset": 1027,
+                        "startOffset": 1001,
                         "endColumn": 57,
-                        "endOffset": 1080
+                        "endOffset": 1054
                     }
                 }
             },
@@ -201,13 +201,13 @@
                     "endOffset": 640
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 19,
                         "startColumn": 4,
-                        "startOffset": 690,
+                        "startOffset": 671,
                         "endColumn": 47,
-                        "endOffset": 733
+                        "endOffset": 714
                     }
                 }
             },
@@ -220,13 +220,13 @@
                     "endOffset": 685
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 21,
                         "startColumn": 4,
-                        "startOffset": 741,
+                        "startOffset": 720,
                         "endColumn": 46,
-                        "endOffset": 783
+                        "endOffset": 762
                     }
                 }
             },
@@ -239,13 +239,13 @@
                     "endOffset": 727
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 48,
                         "startColumn": 4,
-                        "startOffset": 1742,
+                        "startOffset": 1694,
                         "endColumn": 41,
-                        "endOffset": 1779
+                        "endOffset": 1731
                     }
                 }
             },
@@ -258,13 +258,13 @@
                     "endOffset": 767
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 43,
                         "startColumn": 4,
-                        "startOffset": 1537,
+                        "startOffset": 1494,
                         "endColumn": 39,
-                        "endOffset": 1572
+                        "endOffset": 1529
                     }
                 }
             },
@@ -277,13 +277,13 @@
                     "endOffset": 806
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 46,
                         "startColumn": 4,
-                        "startOffset": 1660,
+                        "startOffset": 1614,
                         "endColumn": 38,
-                        "endOffset": 1694
+                        "endOffset": 1648
                     }
                 }
             },
@@ -296,13 +296,13 @@
                     "endOffset": 853
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 50,
                         "startColumn": 4,
-                        "startOffset": 1825,
+                        "startOffset": 1775,
                         "endColumn": 46,
-                        "endOffset": 1867
+                        "endOffset": 1817
                     }
                 }
             },
@@ -315,13 +315,13 @@
                     "endOffset": 892
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 49,
                         "startColumn": 4,
-                        "startOffset": 1785,
+                        "startOffset": 1736,
                         "endColumn": 38,
-                        "endOffset": 1819
+                        "endOffset": 1770
                     }
                 }
             },
@@ -334,13 +334,13 @@
                     "endOffset": 933
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 47,
                         "startColumn": 4,
-                        "startOffset": 1700,
+                        "startOffset": 1653,
                         "endColumn": 40,
-                        "endOffset": 1736
+                        "endOffset": 1689
                     }
                 }
             },
@@ -353,13 +353,13 @@
                     "endOffset": 971
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 42,
                         "startColumn": 4,
-                        "startOffset": 1498,
+                        "startOffset": 1456,
                         "endColumn": 37,
-                        "endOffset": 1531
+                        "endOffset": 1489
                     }
                 }
             },
@@ -372,13 +372,13 @@
                     "endOffset": 1012
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 45,
                         "startColumn": 4,
-                        "startOffset": 1618,
+                        "startOffset": 1573,
                         "endColumn": 40,
-                        "endOffset": 1654
+                        "endOffset": 1609
                     }
                 }
             },
@@ -391,13 +391,13 @@
                     "endOffset": 1398
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\dimens.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/dimens.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
-                        "startOffset": 92,
+                        "startOffset": 89,
                         "endColumn": 57,
-                        "endOffset": 145
+                        "endOffset": 142
                     }
                 }
             },
@@ -410,13 +410,13 @@
                     "endOffset": 1454
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\dimens.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/dimens.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
-                        "startOffset": 151,
+                        "startOffset": 147,
                         "endColumn": 55,
-                        "endOffset": 202
+                        "endOffset": 198
                     }
                 }
             },
@@ -429,13 +429,13 @@
                     "endOffset": 1507
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\strings.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/strings.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
-                        "startOffset": 107,
+                        "startOffset": 103,
                         "endColumn": 52,
-                        "endOffset": 155
+                        "endOffset": 151
                     }
                 }
             },
@@ -448,13 +448,13 @@
                     "endOffset": 1554
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\strings.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/strings.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
-                        "startOffset": 59,
+                        "startOffset": 56,
                         "endColumn": 46,
-                        "endOffset": 101
+                        "endOffset": 98
                     }
                 }
             },
@@ -467,13 +467,13 @@
                     "endOffset": 1607
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\strings.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/strings.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
-                        "startOffset": 161,
+                        "startOffset": 156,
                         "endColumn": 52,
-                        "endOffset": 209
+                        "endOffset": 204
                     }
                 }
             },
@@ -486,13 +486,13 @@
                     "endOffset": 1662
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\strings.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/strings.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
-                        "startOffset": 217,
+                        "startOffset": 210,
                         "endColumn": 54,
-                        "endOffset": 267
+                        "endOffset": 260
                     }
                 }
             },
@@ -505,13 +505,13 @@
                     "endOffset": 1712
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\strings.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/strings.xml",
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
-                        "startOffset": 337,
+                        "startOffset": 328,
                         "endColumn": 49,
-                        "endOffset": 382
+                        "endOffset": 373
                     }
                 }
             },
@@ -524,13 +524,13 @@
                     "endOffset": 1762
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\strings.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/strings.xml",
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,
-                        "startOffset": 388,
+                        "startOffset": 378,
                         "endColumn": 49,
-                        "endOffset": 433
+                        "endOffset": 423
                     }
                 }
             },
@@ -543,13 +543,13 @@
                     "endOffset": 1825
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\strings.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/strings.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
-                        "startOffset": 273,
+                        "startOffset": 265,
                         "endColumn": 62,
-                        "endOffset": 331
+                        "endOffset": 323
                     }
                 }
             },
@@ -563,14 +563,14 @@
                     "endOffset": 2116
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
-                        "startOffset": 192,
+                        "startOffset": 186,
                         "endLine": 12,
                         "endColumn": 12,
-                        "endOffset": 484
+                        "endOffset": 472
                     }
                 }
             },
@@ -584,14 +584,14 @@
                     "endOffset": 2276
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 15,
                         "startColumn": 4,
-                        "startOffset": 525,
+                        "startOffset": 510,
                         "endLine": 17,
                         "endColumn": 12,
-                        "endOffset": 682
+                        "endOffset": 665
                     }
                 }
             },
@@ -605,14 +605,14 @@
                     "endOffset": 2431
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 60,
                         "startColumn": 4,
-                        "startOffset": 2135,
+                        "startOffset": 2075,
                         "endLine": 62,
                         "endColumn": 12,
-                        "endOffset": 2289
+                        "endOffset": 2227
                     }
                 }
             },
@@ -626,14 +626,14 @@
                     "endOffset": 2638
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 55,
                         "startColumn": 4,
-                        "startOffset": 1920,
+                        "startOffset": 1865,
                         "endLine": 58,
                         "endColumn": 12,
-                        "endOffset": 2127
+                        "endOffset": 2069
                     }
                 }
             }

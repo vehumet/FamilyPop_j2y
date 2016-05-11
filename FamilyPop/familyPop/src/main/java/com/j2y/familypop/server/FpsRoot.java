@@ -1,10 +1,12 @@
 package com.j2y.familypop.server;
 
 import android.content.Context;
+import android.os.RemoteException;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -12,6 +14,7 @@ import com.j2y.familypop.MainActivity;
 import com.j2y.familypop.activity.Activity_clientMain;
 import com.j2y.familypop.activity.Activity_serverMain;
 import com.j2y.network.base.FpNetConstants;
+import com.j2y.network.base.FpNetIncomingMessage;
 import com.j2y.network.base.data.FpNetData_smileEvent;
 import com.j2y.network.server.FpNetFacade_server;
 import com.j2y.network.server.FpNetServer_client;
@@ -21,6 +24,12 @@ import com.nclab.sociophone.interfaces.EventDataListener;
 import com.nclab.sociophone.interfaces.TurnDataListener;
 
 import cps.mobilemaestro.library.MMDeviceLayout;
+import kr.ac.kaist.resl.cmsp.iotapp.library.IoTAppService;
+import kr.ac.kaist.resl.cmsp.iotapp.library.ThingServiceInfo;
+import kr.ac.kaist.resl.cmsp.iotapp.library.impl.AndroidIoTAppService;
+import kr.ac.kaist.resl.cmsp.iotappwrapper.FamilyPopService;
+import kr.ac.kaist.resl.cmsp.iotappwrapper.FamilyPopServiceImpl;
+import kr.ac.kaist.resl.cmsp.iotappwrapper.FpsUtil;
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
@@ -48,8 +57,19 @@ public class FpsRoot implements TurnDataListener, DisplayInterface, EventDataLis
     public boolean _exitServer;
     public static boolean _using_sociophone_voice = false;  // [페밀리 토크] 소시오폰 라이브러리 사용 또는 J2y에서 개발된 모드 사용
 
+    // For IoTApp
+    private static final String ID_HEADER_SERVER = "FamilyPop_Server_";
+    private static final String ID_HEADER_CLIENT= "FamilyPop_Client_";
+    public static String _myThingId = null;
+    //public static String _serverThingId = null;
+    public static IoTAppService _iotAppService;
+    public static FamilyPopService _fpService;
+
+    public Context _main_context;
+
+
     //------------------------------------------------------------------------------------------------------------------------------------------------------
-    public FpsRoot()
+    public FpsRoot(Context context)
     {
         Instance = this;
 
@@ -61,6 +81,10 @@ public class FpsRoot implements TurnDataListener, DisplayInterface, EventDataLis
 
         _exitServer = true;
 
+        _main_context = context;
+        _iotAppService = new AndroidIoTAppService(_main_context);
+        _iotAppService.connectPlatform(null);
+        _myThingId = ID_HEADER_SERVER + FpsUtil.getLocalIpAddress();
 
     }
 
@@ -69,14 +93,55 @@ public class FpsRoot implements TurnDataListener, DisplayInterface, EventDataLis
     // 서버
     //
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+    boolean client_searching = false;
     //------------------------------------------------------------------------------------------------------------------------------------------------------
     public void StartServer()
     {
 
         Log.i("[J2Y]", "FpsRoot:StartServer");
 
-        _server.StartServer(7778);
+        //_server.StartServer(7778);
+        _fpService = new FamilyPopServiceImpl(_main_context, _myThingId, FamilyPopService.class.getSimpleName(), _server);
+        (new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    _iotAppService.registerLocalServiceObject(FamilyPopService.class, _fpService);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+                _iotAppService.openSession();
+                client_searching = true;
+                while (client_searching) {
+                    try {
+                        Thread.sleep(1000);
+                        List<ThingServiceInfo> infos = null;
+                        try {
+                            infos = _iotAppService.getAvailableServicesNoScan(FamilyPopService.class);
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        }
+                        // Length of info is client_count + server_count(1)
+                        if (infos.size() > _server._clients_thing_ids.size() + 1) {
+                            for (ThingServiceInfo info : infos) {
+                                String thingId = info.getThingId();
+                                if (thingId.startsWith(ID_HEADER_SERVER))
+                                    continue;
+                                if (_server._clients_thing_ids_set.add(thingId)) {
+                                    _server._clients_thing_ids.add(thingId);
+                                    Log.d("IoTApp", "Client added: " + thingId);
+                                    FpNetIncomingMessage msg = new FpNetIncomingMessage();
+                                    msg._thingId = thingId;
+                                    _server._messageHandler.obtainMessage(FpNetConstants.ClientAccepted, msg).sendToTarget();
+                                }
+                            }
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        })).start();
 
         InitSocioPhone();
         InitLocalization();
@@ -93,7 +158,22 @@ public class FpsRoot implements TurnDataListener, DisplayInterface, EventDataLis
         DestroySocioPhone();
         DestroyLocalization();
 
-        _server.CloseServer();
+        // Stop the thread which checks client join
+        client_searching = false;
+        //_server.CloseServer();
+        (new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    _iotAppService.unregisterLocalServiceObject(_fpService);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+                _fpService = null;
+                _iotAppService.closeSession();
+            }
+        })).start();
+
         //MainActivity.Sleep(500);
         _room_user_names = "";
         _scenarioDirector.ChangeScenario(FpNetConstants.SCENARIO_NONE);

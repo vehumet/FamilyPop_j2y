@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- From: file:/D:/J2YSoft/familypop_16_02_04/FamilyPop_j2y/FamilyPop_j2y/FamilyPop/socioPhone_lib_dist/build/intermediates/bundles/debug/res/values-v14/values.xml -->
-    <eat-comment/>
-    <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        <!-- API 14 theme customizations can go here. -->
-    </style>
-</resources>

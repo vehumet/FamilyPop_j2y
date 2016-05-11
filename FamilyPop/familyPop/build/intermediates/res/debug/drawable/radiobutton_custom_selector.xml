@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:drawable="@drawable/image_check_select" android:state_checked="true"/>
-    <!--<item android:drawable="@drawable/check_non" android:state_checked="false"/>-->
-
-</selector><!-- From: file:/D:/J2YSoft/familypop_16_02_04/FamilyPop_j2y/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/drawable/radiobutton_custom_selector.xml -->

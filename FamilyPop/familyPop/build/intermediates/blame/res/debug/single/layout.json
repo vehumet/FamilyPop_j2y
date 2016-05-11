@@ -1,94 +1,94 @@
 [
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\activity_calibration.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\activity_calibration.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/activity_dialouge_playback.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/activity_dialouge_playback.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\activity_client.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\activity_client.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/activity_dialogue_start_role.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/activity_dialogue_start_role.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\list_item_history1.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\list_item_history1.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/activity_calibration_location.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/activity_calibration_location.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\activity_client_mode_interaction.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\activity_client_mode_interaction.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/activity_dialogue_start_server.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/activity_dialogue_start_server.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\activity_dialogue_history.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\activity_dialogue_history.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/activity_dialogue_history.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/activity_dialogue_history.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\custom_dialog.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\custom_dialog.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/activity_dialogue_start_client.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/activity_dialogue_start_client.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\activity_game.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\activity_game.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/list_item_history2.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/list_item_history2.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\activity_dialogue_start_client.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\activity_dialogue_start_client.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/activity_client_mode.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/activity_client_mode.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\popup_topmenu_role.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\popup_topmenu_role.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/listview_item_history_toponce.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/listview_item_history_toponce.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\activity_dialogue_start_locator_nowcalibrating.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\activity_dialogue_start_locator_nowcalibrating.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/activity_client.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/activity_client.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\activity_calibration_location.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\activity_calibration_location.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/activity_client_mode_interaction.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/activity_client_mode_interaction.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\activity_dialogue.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\activity_dialogue.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/activity_dialogue_start_locator_nowcalibrating.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/activity_dialogue_start_locator_nowcalibrating.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\activity_dialouge_playback.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\activity_dialouge_playback.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/listview_item_history.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/listview_item_history.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\listview_item_history_toponce.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\listview_item_history_toponce.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/activity_dialogue.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/activity_dialogue.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\activity_dialogue_start_server.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\activity_dialogue_start_server.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/list_item_history1.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/list_item_history1.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\activity_dialogue_start_locator_waitingforconnection.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\activity_dialogue_start_locator_waitingforconnection.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/activity_main.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/activity_main.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\activity_main.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/activity_calibration.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/activity_calibration.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\list_item_history2.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\list_item_history2.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/activity_dialogue_start_locator_waitingforconnection.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/activity_dialogue_start_locator_waitingforconnection.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\activity_client_mode.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\activity_client_mode.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/custom_dialog.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/custom_dialog.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\activity_dialogue_start_role.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\activity_dialogue_start_role.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/activity_dialogue_start_locator.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/activity_dialogue_start_locator.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\listview_item_history.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\listview_item_history.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/activity_game.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/activity_game.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\activity_dialogue_start_locator.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\activity_dialogue_start_locator.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/popup_topmenu_role.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/popup_topmenu_role.xml"
     },
     {
-        "merged": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\layout\\activity_title.xml",
-        "source": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\layout\\activity_title.xml"
+        "merged": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/layout/activity_title.xml",
+        "source": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/layout/activity_title.xml"
     }
 ]

@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\build\\intermediates\\res\\merged\\debug\\values-v14\\values-v14.xml",
+        "outputFile": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/build/intermediates/res/merged/debug/values-v14/values-v14.xml",
         "map": [
             {
                 "to": {
@@ -12,14 +12,14 @@
                     "endOffset": 201
                 },
                 "from": {
-                    "file": "D:\\J2YSoft\\familypop_16_02_04\\FamilyPop_j2y\\FamilyPop_j2y\\FamilyPop\\familyPop\\src\\main\\res\\values-v14\\styles.xml",
+                    "file": "/home/shheo/FamilyPop_j2y/FamilyPop/familyPop/src/main/res/values-v14/styles.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
-                        "startOffset": 225,
+                        "startOffset": 220,
                         "endLine": 9,
                         "endColumn": 12,
-                        "endOffset": 373
+                        "endOffset": 366
                     }
                 }
             }
